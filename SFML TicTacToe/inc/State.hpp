@@ -17,12 +17,7 @@ public:
     virtual void Pause()  {};
     virtual void Resume() {};
     
-};
     
+};
+
 }
-
-
-
-
-
- 
