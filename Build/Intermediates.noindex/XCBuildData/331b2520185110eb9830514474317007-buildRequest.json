@@ -1,0 +1,57 @@
+{
+  "_buildCommand2" : {
+    "command" : "build",
+    "skipDependencies" : false,
+    "style" : "buildAndRun"
+  },
+  "buildCommand" : "build",
+  "configuredTargets" : [
+    {
+      "guid" : "be8674026e4119fe8cf5f1245855e3ed2a529356a4605ff6a4778006379271bf"
+    }
+  ],
+  "containerPath" : "/Users/erykwojcik/Programowanie/xCode/SFML TicTacToe/SFML TicTacToe.xcodeproj",
+  "continueBuildingAfterErrors" : false,
+  "enableIndexBuildArena" : false,
+  "hideShellScriptEnvironment" : false,
+  "parameters" : {
+    "action" : "build",
+    "activeArchitecture" : "x86_64",
+    "activeRunDestination" : {
+      "disableOnlyActiveArch" : false,
+      "platform" : "macosx",
+      "sdk" : "macosx12.3",
+      "sdkVariant" : "macos",
+      "supportedArchitectures" : [
+        "x86_64h",
+        "x86_64"
+      ],
+      "targetArchitecture" : "x86_64"
+    },
+    "arenaInfo" : {
+      "buildIntermediatesPath" : "/Users/erykwojcik/Programowanie/xCode/SFML TicTacToe/Build/Intermediates.noindex",
+      "buildProductsPath" : "/Users/erykwojcik/Programowanie/xCode/SFML TicTacToe/Build/Files",
+      "derivedDataPath" : "/Users/erykwojcik/Library/Developer/Xcode/DerivedData",
+      "indexDataStoreFolderPath" : "/Users/erykwojcik/Library/Developer/Xcode/DerivedData/SFML_TicTacToe-ekwcowomiabsckccagfbliikfllm/Index/DataStore",
+      "indexEnableDataStore" : true,
+      "indexPCHPath" : "/Users/erykwojcik/Library/Developer/Xcode/DerivedData/SFML_TicTacToe-ekwcowomiabsckccagfbliikfllm/Index/PrecompiledHeaders",
+      "pchPath" : "/Users/erykwojcik/Programowanie/xCode/SFML TicTacToe/Build/Intermediates.noindex/PrecompiledHeaders"
+    },
+    "configurationName" : "Debug",
+    "overrides" : {
+      "synthesized" : {
+        "table" : {
+          "ENABLE_PREVIEWS" : "NO"
+        }
+      }
+    }
+  },
+  "schemeCommand" : "launch",
+  "schemeCommand2" : "launch",
+  "shouldCollectMetrics" : false,
+  "showNonLoggedProgress" : true,
+  "useDryRun" : false,
+  "useImplicitDependencies" : true,
+  "useLegacyBuildLocations" : false,
+  "useParallelTargets" : true
+}
