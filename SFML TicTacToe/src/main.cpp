@@ -24,6 +24,7 @@ int main(){
             }
         }
         int UsunMniePozniej = 0;
+        UsunMniePozniej = 0;
         window.clear();
         // draw the objects
         window.display();
