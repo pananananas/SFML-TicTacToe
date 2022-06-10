@@ -18,11 +18,12 @@ int main(){
                     window.close();
                     break;
                     
+                    
                 default:
                     break;
             }
         }
-        
+        int UsunMniePozniej = 0;
         window.clear();
         // draw the objects
         window.display();
