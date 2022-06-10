@@ -13,6 +13,8 @@
 		2512A05E2853415700AEE8BB /* libsfml-window.2.5.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2512A05A2853415700AEE8BB /* libsfml-window.2.5.1.dylib */; };
 		2512A05F2853415700AEE8BB /* libsfml-system.2.5.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2512A05B2853415700AEE8BB /* libsfml-system.2.5.1.dylib */; };
 		2512A0622853437000AEE8BB /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2512A0602853437000AEE8BB /* State.cpp */; };
+		2512A07A28536F0B00AEE8BB /* StateMachine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2512A07828536F0B00AEE8BB /* StateMachine.cpp */; };
+		2512A07D285377EA00AEE8BB /* AssetManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2512A07B285377EA00AEE8BB /* AssetManager.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -36,6 +38,10 @@
 		2512A05B2853415700AEE8BB /* libsfml-system.2.5.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libsfml-system.2.5.1.dylib"; path = "../../../../../usr/local/Cellar/sfml/2.5.1_1/lib/libsfml-system.2.5.1.dylib"; sourceTree = "<group>"; };
 		2512A0602853437000AEE8BB /* State.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
 		2512A0612853437000AEE8BB /* State.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = State.hpp; sourceTree = "<group>"; };
+		2512A07828536F0B00AEE8BB /* StateMachine.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = StateMachine.cpp; sourceTree = "<group>"; };
+		2512A07928536F0B00AEE8BB /* StateMachine.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = StateMachine.hpp; sourceTree = "<group>"; };
+		2512A07B285377EA00AEE8BB /* AssetManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AssetManager.cpp; sourceTree = "<group>"; };
+		2512A07C285377EA00AEE8BB /* AssetManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AssetManager.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +101,8 @@
 			children = (
 				2512A0502853404D00AEE8BB /* main.cpp */,
 				2512A0602853437000AEE8BB /* State.cpp */,
+				2512A07828536F0B00AEE8BB /* StateMachine.cpp */,
+				2512A07B285377EA00AEE8BB /* AssetManager.cpp */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -103,6 +111,8 @@
 			isa = PBXGroup;
 			children = (
 				2512A0612853437000AEE8BB /* State.hpp */,
+				2512A07928536F0B00AEE8BB /* StateMachine.hpp */,
+				2512A07C285377EA00AEE8BB /* AssetManager.hpp */,
 			);
 			path = inc;
 			sourceTree = "<group>";
@@ -164,8 +174,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2512A07D285377EA00AEE8BB /* AssetManager.cpp in Sources */,
 				2512A0512853404D00AEE8BB /* main.cpp in Sources */,
 				2512A0622853437000AEE8BB /* State.cpp in Sources */,
+				2512A07A28536F0B00AEE8BB /* StateMachine.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,5 +1,7 @@
 dependencies: \
-  /Users/erykwojcik/Programowanie/xCode/SFML\ TicTacToe/SFML\ TicTacToe/main.cpp \
+  /Users/erykwojcik/Programowanie/xCode/SFML\ TicTacToe/SFML\ TicTacToe/src/main.cpp \
+  /Users/erykwojcik/Programowanie/xCode/SFML\ TicTacToe/SFML\ TicTacToe/inc/StateMachine.hpp \
+  /Users/erykwojcik/Programowanie/xCode/SFML\ TicTacToe/SFML\ TicTacToe/inc/State.hpp \
   /usr/local/include/SFML/Graphics.hpp \
   /usr/local/include/SFML/Window.hpp /usr/local/include/SFML/System.hpp \
   /usr/local/include/SFML/Config.hpp \
