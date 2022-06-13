@@ -15,6 +15,9 @@
 		2512A0622853437000AEE8BB /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2512A0602853437000AEE8BB /* State.cpp */; };
 		2512A07A28536F0B00AEE8BB /* StateMachine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2512A07828536F0B00AEE8BB /* StateMachine.cpp */; };
 		2512A07D285377EA00AEE8BB /* AssetManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2512A07B285377EA00AEE8BB /* AssetManager.cpp */; };
+		25AF6B6D28538D900046BB85 /* InputManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 25AF6B6B28538D900046BB85 /* InputManager.cpp */; };
+		25AF6B70285390740046BB85 /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 25AF6B6E285390740046BB85 /* Game.cpp */; };
+		25AF6B912853A3A00046BB85 /* StateSplash.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 25AF6B8F2853A3A00046BB85 /* StateSplash.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -42,6 +45,34 @@
 		2512A07928536F0B00AEE8BB /* StateMachine.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = StateMachine.hpp; sourceTree = "<group>"; };
 		2512A07B285377EA00AEE8BB /* AssetManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AssetManager.cpp; sourceTree = "<group>"; };
 		2512A07C285377EA00AEE8BB /* AssetManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AssetManager.hpp; sourceTree = "<group>"; };
+		25AF6B6B28538D900046BB85 /* InputManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = InputManager.cpp; sourceTree = "<group>"; };
+		25AF6B6C28538D900046BB85 /* InputManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = InputManager.hpp; sourceTree = "<group>"; };
+		25AF6B6E285390740046BB85 /* Game.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Game.cpp; sourceTree = "<group>"; };
+		25AF6B6F285390740046BB85 /* Game.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Game.hpp; sourceTree = "<group>"; };
+		25AF6B7428539FE30046BB85 /* O Win.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "O Win.png"; sourceTree = "<group>"; };
+		25AF6B7528539FE40046BB85 /* Splash Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Splash Background.png"; sourceTree = "<group>"; };
+		25AF6B7628539FE40046BB85 /* Retry Button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Retry Button.png"; sourceTree = "<group>"; };
+		25AF6B7728539FE40046BB85 /* Achievements.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Achievements.png; sourceTree = "<group>"; };
+		25AF6B7828539FE40046BB85 /* Pause Button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pause Button.png"; sourceTree = "<group>"; };
+		25AF6B7928539FE40046BB85 /* Sound On.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sound On.png"; sourceTree = "<group>"; };
+		25AF6B7A28539FE40046BB85 /* Play Button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Play Button.png"; sourceTree = "<group>"; };
+		25AF6B7B28539FE40046BB85 /* Grid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Grid.png; sourceTree = "<group>"; };
+		25AF6B7C28539FE40046BB85 /* Game Title.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Game Title.png"; sourceTree = "<group>"; };
+		25AF6B7D28539FE40046BB85 /* Main Menu Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Main Menu Background.png"; sourceTree = "<group>"; };
+		25AF6B7E28539FE40046BB85 /* Sound Off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sound Off.png"; sourceTree = "<group>"; };
+		25AF6B7F28539FE40046BB85 /* Resume Button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Resume Button.png"; sourceTree = "<group>"; };
+		25AF6B8028539FE40046BB85 /* X Win.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "X Win.png"; sourceTree = "<group>"; };
+		25AF6B8128539FE40046BB85 /* Pause Window.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pause Window.png"; sourceTree = "<group>"; };
+		25AF6B8228539FE40046BB85 /* Home Button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Home Button.png"; sourceTree = "<group>"; };
+		25AF6B8328539FE40046BB85 /* O.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = O.png; sourceTree = "<group>"; };
+		25AF6B8428539FE40046BB85 /* Pause Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pause Background.png"; sourceTree = "<group>"; };
+		25AF6B8528539FE40046BB85 /* Play Button Outer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Play Button Outer.png"; sourceTree = "<group>"; };
+		25AF6B8628539FE40046BB85 /* X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = X.png; sourceTree = "<group>"; };
+		25AF6B8728539FF00046BB85 /* arial.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = arial.ttf; sourceTree = "<group>"; };
+		25AF6B8828539FF00046BB85 /* Marker Felt.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Marker Felt.ttf"; sourceTree = "<group>"; };
+		25AF6B8A2853A2350046BB85 /* Definitions.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = Definitions.hpp; path = "SFML TicTacToe/src/Definitions.hpp"; sourceTree = SOURCE_ROOT; };
+		25AF6B8F2853A3A00046BB85 /* StateSplash.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = StateSplash.cpp; sourceTree = "<group>"; };
+		25AF6B902853A3A00046BB85 /* StateSplash.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = StateSplash.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +112,7 @@
 			children = (
 				2512A06328534FC500AEE8BB /* src */,
 				2512A06428534FD400AEE8BB /* inc */,
+				25AF6B712853977D0046BB85 /* Resources */,
 			);
 			path = "SFML TicTacToe";
 			sourceTree = "<group>";
@@ -100,6 +132,9 @@
 			isa = PBXGroup;
 			children = (
 				2512A0502853404D00AEE8BB /* main.cpp */,
+				25AF6B8F2853A3A00046BB85 /* StateSplash.cpp */,
+				25AF6B6E285390740046BB85 /* Game.cpp */,
+				25AF6B6B28538D900046BB85 /* InputManager.cpp */,
 				2512A0602853437000AEE8BB /* State.cpp */,
 				2512A07828536F0B00AEE8BB /* StateMachine.cpp */,
 				2512A07B285377EA00AEE8BB /* AssetManager.cpp */,
@@ -110,11 +145,59 @@
 		2512A06428534FD400AEE8BB /* inc */ = {
 			isa = PBXGroup;
 			children = (
+				25AF6B8A2853A2350046BB85 /* Definitions.hpp */,
+				25AF6B6F285390740046BB85 /* Game.hpp */,
 				2512A0612853437000AEE8BB /* State.hpp */,
 				2512A07928536F0B00AEE8BB /* StateMachine.hpp */,
+				25AF6B902853A3A00046BB85 /* StateSplash.hpp */,
 				2512A07C285377EA00AEE8BB /* AssetManager.hpp */,
+				25AF6B6C28538D900046BB85 /* InputManager.hpp */,
 			);
 			path = inc;
+			sourceTree = "<group>";
+		};
+		25AF6B712853977D0046BB85 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				25AF6B7328539FC90046BB85 /* Fonts */,
+				25AF6B7228539FC10046BB85 /* UI */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		25AF6B7228539FC10046BB85 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				25AF6B7728539FE40046BB85 /* Achievements.png */,
+				25AF6B7C28539FE40046BB85 /* Game Title.png */,
+				25AF6B7B28539FE40046BB85 /* Grid.png */,
+				25AF6B8228539FE40046BB85 /* Home Button.png */,
+				25AF6B7D28539FE40046BB85 /* Main Menu Background.png */,
+				25AF6B7428539FE30046BB85 /* O Win.png */,
+				25AF6B8328539FE40046BB85 /* O.png */,
+				25AF6B8428539FE40046BB85 /* Pause Background.png */,
+				25AF6B7828539FE40046BB85 /* Pause Button.png */,
+				25AF6B8128539FE40046BB85 /* Pause Window.png */,
+				25AF6B8528539FE40046BB85 /* Play Button Outer.png */,
+				25AF6B7A28539FE40046BB85 /* Play Button.png */,
+				25AF6B7F28539FE40046BB85 /* Resume Button.png */,
+				25AF6B7628539FE40046BB85 /* Retry Button.png */,
+				25AF6B7E28539FE40046BB85 /* Sound Off.png */,
+				25AF6B7928539FE40046BB85 /* Sound On.png */,
+				25AF6B7528539FE40046BB85 /* Splash Background.png */,
+				25AF6B8028539FE40046BB85 /* X Win.png */,
+				25AF6B8628539FE40046BB85 /* X.png */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		25AF6B7328539FC90046BB85 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				25AF6B8728539FF00046BB85 /* arial.ttf */,
+				25AF6B8828539FF00046BB85 /* Marker Felt.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -176,8 +259,11 @@
 			files = (
 				2512A07D285377EA00AEE8BB /* AssetManager.cpp in Sources */,
 				2512A0512853404D00AEE8BB /* main.cpp in Sources */,
+				25AF6B912853A3A00046BB85 /* StateSplash.cpp in Sources */,
 				2512A0622853437000AEE8BB /* State.cpp in Sources */,
+				25AF6B70285390740046BB85 /* Game.cpp in Sources */,
 				2512A07A28536F0B00AEE8BB /* StateMachine.cpp in Sources */,
+				25AF6B6D28538D900046BB85 /* InputManager.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

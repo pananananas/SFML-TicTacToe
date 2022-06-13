@@ -1,7 +1,5 @@
 #include "AssetManager.hpp"
 
-namespace Game {
-
 void AssetManager::LoadTexture(std::string name, std::string fileName){
     
     sf::Texture tex;
@@ -26,5 +24,3 @@ sf::Font &AssetManager:: GetFont(std::string name){
     return this -> _fonts.at(name);
 }
 
-
-}

@@ -1,7 +1,9 @@
 dependencies: \
   /Users/erykwojcik/Programowanie/xCode/SFML\ TicTacToe/SFML\ TicTacToe/src/main.cpp \
+  /Users/erykwojcik/Programowanie/xCode/SFML\ TicTacToe/SFML\ TicTacToe/inc/Game.hpp \
   /Users/erykwojcik/Programowanie/xCode/SFML\ TicTacToe/SFML\ TicTacToe/inc/StateMachine.hpp \
   /Users/erykwojcik/Programowanie/xCode/SFML\ TicTacToe/SFML\ TicTacToe/inc/State.hpp \
+  /Users/erykwojcik/Programowanie/xCode/SFML\ TicTacToe/SFML\ TicTacToe/inc/AssetManager.hpp \
   /usr/local/include/SFML/Graphics.hpp \
   /usr/local/include/SFML/Window.hpp /usr/local/include/SFML/System.hpp \
   /usr/local/include/SFML/Config.hpp \
@@ -74,4 +76,6 @@ dependencies: \
   /usr/local/include/SFML/Graphics/Glsl.inl \
   /usr/local/include/SFML/Graphics/Sprite.hpp \
   /usr/local/include/SFML/Graphics/Text.hpp \
-  /usr/local/include/SFML/Graphics/VertexBuffer.hpp
+  /usr/local/include/SFML/Graphics/VertexBuffer.hpp \
+  /Users/erykwojcik/Programowanie/xCode/SFML\ TicTacToe/SFML\ TicTacToe/inc/InputManager.hpp \
+  /Users/erykwojcik/Programowanie/xCode/SFML\ TicTacToe/SFML\ TicTacToe/src/Definitions.hpp

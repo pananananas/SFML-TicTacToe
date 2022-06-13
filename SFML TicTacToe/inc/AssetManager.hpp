@@ -2,8 +2,6 @@
 #include <map>
 #include <SFML/Graphics.hpp>
 
-namespace Game {
-
 class AssetManager {        // For loading and storeing assets: fonts and textures
     
     std::map<std::string, sf::Texture> _textures;
@@ -21,4 +19,4 @@ public:
     sf::Font &GetFont(std::string name);
     
 };
-}
+
