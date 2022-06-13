@@ -1,10 +1,11 @@
 #include "StateGame.hpp"
 #include "StatePause.hpp"
+#include "StateEndGame.hpp"
 #include "Definitions.hpp"
 #include <iostream>
 #include <sstream>
 
-StateGame:: StateGame(GameDataRef data): _data( data ) { }
+StateGame:: StateGame(GameDataRef data, int size): _data( data ) { _size = size; }
 
 void StateGame:: Init() {
 
@@ -32,9 +33,12 @@ void StateGame:: HandleInput() {
         if (sf::Event::Closed == event.type)
             this -> _data -> window.close();
 
-        if ( this -> _data -> input.IsSpriteClicked(this -> _pauseButton, sf::Mouse::Left, this -> _data -> window) )
-            this -> _data -> machine.AddState(StateRef( new StatePause(_data) ), false); // Pause
+        if ( this -> _data -> input.IsSpriteClicked(this -> _pauseButton, sf::Mouse::Left, this -> _data -> window) ){
+            this -> _data -> machine.AddState(StateRef( new StatePause(_data, _size) ), false); // Pause
                                                                               // false cuz we dont want to replace current state, we only want to pause this one
+            
+//         this -> _data -> machine.AddState(StateRef( new StateEndGame(_data) ), true);  // End Game
+        }
     }
 }
 

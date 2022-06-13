@@ -28,7 +28,7 @@ void StateSplash::Update(float dt) {
     if (this -> _clock.getElapsedTime().asSeconds() > SPLASH_STATE_SHOW_TIME) {
         
         // Switch to the Main Menu
-        this -> _data -> machine.AddState(StateRef(new StateMainMenu(_data) ), true);
+        this -> _data -> machine.AddState(StateRef(new StateMainMenu(_data, 3) ), true);
     }
 }
 

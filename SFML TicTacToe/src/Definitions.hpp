@@ -11,13 +11,29 @@
 #define MAIN_MENU_TITLE_FILEPATH            "Resources/UI/Game Title.png"
 #define GAME_BACKGROUND_FILEPATH            "Resources/UI/Main Menu Background.png"
 #define PAUSE_BACKGROUND_FILEPATH           "Resources/UI/Main Menu Background.png"
+#define SETTINGS_BACKGROUND_FILEPATH        "Resources/UI/Main Menu Background.png"
 
 // Buttons UI
 #define MAIN_MENU_PLAY_BUTTON               "Resources/UI/Play Button.png"
 #define MAIN_MENU_PLAY_BUTTON_OUTER         "Resources/UI/Play Button Outer.png"
+#define MAIN_MENU_SETTINGS_BUTTON           "Resources/UI/Pause Button.png"
 #define PAUSE_BUTTON                        "Resources/UI/Pause Button.png"
 #define RESUME_BUTTON                       "Resources/UI/Resume Button.png"
 #define HOME_BUTTON                         "Resources/UI/Home Button.png"
+#define RETRY_BUTTON                        "Resources/UI/Retry Button.png"
+#define PLUS_BUTTON                         "Resources/UI/Pause Button.png"
+#define MINUS_BUTTON                        "Resources/UI/Pause Button.png"
+#define NUMBER_DISPLAY_2                    "Resources/UI/Play Button.png"
+#define NUMBER_DISPLAY_3                    "Resources/UI/Pause Button.png"
+#define NUMBER_DISPLAY_4                    "Resources/UI/Home Button.png"
+#define NUMBER_DISPLAY_5                    "Resources/UI/Resume Button.png"
+#define NUMBER_DISPLAY_6                    "Resources/UI/Pause Button.png"
+
+
+// Grid UI
+#define GRID_3x3_FILEPATH                   "Resources/UI/Grid.png"
+#define GRID_4x4_FILEPATH                   "Resources/UI/Grid.png"
+#define GRID_5x5_FILEPATH                   "Resources/UI/Grid.png"
 
 // Piece UI
 #define X_PIECE_FILEPATH                    "Resources/U/X.png"

@@ -4,21 +4,20 @@
 #include "StateMainMenu.hpp"
 
 
-class StateGame: public State {
+class StateSettings: public State {
     
     GameDataRef _data;
     sf::Sprite  _background;
-    sf::Sprite  _pauseButton;
-    sf::Sprite  _grid;
-    int          turn;
-    int          gameState;
-    sf::Sprite   gridPieces[3][3];
-    void InitGridPiece();
+    sf::Sprite  _plusButton;
+    sf::Sprite  _minusButton;
+    sf::Sprite  _homeButton;
+    sf::Sprite  _numberDisplay;
     
 public:
     
-    int  _size;
-    StateGame(GameDataRef data, int size);
+    int _size;
+    
+    StateSettings(GameDataRef data, int size);
     void Init();
     void HandleInput();
     void Update(float dt);

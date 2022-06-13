@@ -1,25 +1,26 @@
+#include "StateEndGame.hpp"
 #include "StatePause.hpp"
 #include "StateMainMenu.hpp"
 #include "Definitions.hpp"
 #include <iostream>
 #include <sstream>
 
-StatePause:: StatePause(GameDataRef data, int size): _data( data ) { _size = size; }
+StateEndGame:: StateEndGame(GameDataRef data): _data( data ) { }
 
-void StatePause:: Init() {
+void StateEndGame:: Init() {
 
-    this -> _data -> assets.LoadTexture("Pause Background", PAUSE_BACKGROUND_FILEPATH);
-    this -> _data -> assets.LoadTexture("Resume Button",    RESUME_BUTTON);
+    
+    this -> _data -> assets.LoadTexture("Retry Button",    RETRY_BUTTON);
     this -> _data -> assets.LoadTexture("Home Button",      HOME_BUTTON);
 
-    this -> _background.setTexture(   this -> _data -> assets.GetTexture("Pause Background"));
-    this -> _resumeButton.setTexture( this -> _data -> assets.GetTexture("Resume Button"));
+    
+    this -> _retryButton.setTexture( this -> _data -> assets.GetTexture("Retry Button"));
     this -> _homeButton.setTexture(   this -> _data -> assets.GetTexture("Home Button"));
 
-    this -> _resumeButton.setPosition( this -> _data -> window.getSize().x / 2
-                                     - this -> _resumeButton.getLocalBounds().width / 2 ,
+    this -> _retryButton.setPosition( this -> _data -> window.getSize().x / 2
+                                     - this -> _retryButton.getLocalBounds().width / 2 ,
                                        this -> _data -> window.getSize().y / 5 * 2
-                                     - this -> _resumeButton.getLocalBounds().height / 3);
+                                     - this -> _retryButton.getLocalBounds().height / 3);
 
     this -> _homeButton.setPosition( this -> _data -> window.getSize().x / 2
                                    - this -> _homeButton.getLocalBounds().width / 2 ,
@@ -28,7 +29,7 @@ void StatePause:: Init() {
 }
 
 
-void StatePause:: HandleInput() {
+void StateEndGame:: HandleInput() {
 
     sf::Event event;
 
@@ -37,25 +38,30 @@ void StatePause:: HandleInput() {
         if (sf::Event::Closed == event.type)
             this -> _data -> window.close();
 
-        if ( this -> _data -> input.IsSpriteClicked(this -> _resumeButton, sf::Mouse::Left, this -> _data -> window) )
-            this -> _data -> machine.RemoveState();
-
+        if ( this -> _data -> input.IsSpriteClicked(this -> _retryButton, sf::Mouse::Left, this -> _data -> window) ){
+            
+            this -> _data -> machine.AddState(StateRef(new StateGame(_data, _size)), true);
+            
+            
+        }
         if ( this -> _data -> input.IsSpriteClicked(this -> _homeButton, sf::Mouse::Left, this -> _data -> window) ) {
-            this -> _data -> machine.RemoveState();
+            
             this -> _data -> machine.AddState(StateRef(new StateMainMenu(_data, _size)), true);
         }
     }
 }
 
-void StatePause:: Update(float dt) {
+void StateEndGame:: Update(float dt) {
 
 }
 
-void StatePause:: Draw(float dt) {
+void StateEndGame:: Draw(float dt) {
 
-    this -> _data -> window.clear();
-    this -> _data -> window.draw( this -> _background);
-    this -> _data -> window.draw( this -> _resumeButton);
+    this -> _data -> window.clear( sf::Color::Red);
+    
+    this -> _data -> window.draw( this -> _retryButton);
     this -> _data -> window.draw( this -> _homeButton);
+    
     this -> _data -> window.display();
 }
+

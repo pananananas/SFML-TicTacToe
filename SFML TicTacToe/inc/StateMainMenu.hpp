@@ -10,11 +10,14 @@ class StateMainMenu: public State {
     sf::Sprite  _background;
     sf::Sprite  _playButton;
     sf::Sprite  _playButtonOuter;
+    sf::Sprite  _settingsButton;
     sf::Sprite  _title;
     
 public:
     
-    StateMainMenu(GameDataRef data);
+    int _size;
+    
+    StateMainMenu(GameDataRef data, int size);
     void Init();
     void HandleInput();
     void Update(float dt);
