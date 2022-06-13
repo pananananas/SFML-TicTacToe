@@ -47,7 +47,6 @@ void StateMainMenu:: HandleInput() {
 
             // Go to Game Screen
             this -> _data -> machine.AddState(StateRef( new StateGame(_data) ), true);
-
         }
     }
 }
