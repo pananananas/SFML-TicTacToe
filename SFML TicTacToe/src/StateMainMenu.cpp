@@ -1,5 +1,6 @@
 #include "StateMainMenu.hpp"
 #include "Definitions.hpp"
+#include "StateGame.hpp"
 #include <iostream>
 #include <sstream>
 
@@ -44,12 +45,9 @@ void StateMainMenu:: HandleInput() {
 
         if ( this -> _data -> input.IsSpriteClicked(this -> _playButton, sf::Mouse::Left, this -> _data -> window) ) {
 
-            
-            
-            
-            
-            
-            std:: cout << " Go to Game Screen";
+            // Go to Game Screen
+            this -> _data -> machine.AddState(StateRef( new StateGame(_data) ), true);
+
         }
     }
 }
