@@ -18,6 +18,7 @@
 		25AF6B6D28538D900046BB85 /* InputManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 25AF6B6B28538D900046BB85 /* InputManager.cpp */; };
 		25AF6B70285390740046BB85 /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 25AF6B6E285390740046BB85 /* Game.cpp */; };
 		25AF6B912853A3A00046BB85 /* StateSplash.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 25AF6B8F2853A3A00046BB85 /* StateSplash.cpp */; };
+		25AF6B942857B3890046BB85 /* StateMainMenu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 25AF6B922857B3890046BB85 /* StateMainMenu.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -73,6 +74,8 @@
 		25AF6B8A2853A2350046BB85 /* Definitions.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = Definitions.hpp; path = "SFML TicTacToe/src/Definitions.hpp"; sourceTree = SOURCE_ROOT; };
 		25AF6B8F2853A3A00046BB85 /* StateSplash.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = StateSplash.cpp; sourceTree = "<group>"; };
 		25AF6B902853A3A00046BB85 /* StateSplash.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = StateSplash.hpp; sourceTree = "<group>"; };
+		25AF6B922857B3890046BB85 /* StateMainMenu.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = StateMainMenu.cpp; sourceTree = "<group>"; };
+		25AF6B932857B3890046BB85 /* StateMainMenu.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = StateMainMenu.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +140,7 @@
 				25AF6B6B28538D900046BB85 /* InputManager.cpp */,
 				2512A0602853437000AEE8BB /* State.cpp */,
 				2512A07828536F0B00AEE8BB /* StateMachine.cpp */,
+				25AF6B922857B3890046BB85 /* StateMainMenu.cpp */,
 				2512A07B285377EA00AEE8BB /* AssetManager.cpp */,
 			);
 			path = src;
@@ -146,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				25AF6B8A2853A2350046BB85 /* Definitions.hpp */,
+				25AF6B932857B3890046BB85 /* StateMainMenu.hpp */,
 				25AF6B6F285390740046BB85 /* Game.hpp */,
 				2512A0612853437000AEE8BB /* State.hpp */,
 				2512A07928536F0B00AEE8BB /* StateMachine.hpp */,
@@ -262,6 +267,7 @@
 				25AF6B912853A3A00046BB85 /* StateSplash.cpp in Sources */,
 				2512A0622853437000AEE8BB /* State.cpp in Sources */,
 				25AF6B70285390740046BB85 /* Game.cpp in Sources */,
+				25AF6B942857B3890046BB85 /* StateMainMenu.cpp in Sources */,
 				2512A07A28536F0B00AEE8BB /* StateMachine.cpp in Sources */,
 				25AF6B6D28538D900046BB85 /* InputManager.cpp in Sources */,
 			);

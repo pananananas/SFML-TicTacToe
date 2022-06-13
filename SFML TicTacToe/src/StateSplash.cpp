@@ -1,4 +1,5 @@
 #include "StateSplash.hpp"
+#include "StateMainMenu.hpp"
 #include "Definitions.hpp"
 #include <iostream>
 #include <sstream>
@@ -24,8 +25,17 @@ void StateSplash::HandleInput() {
 
 void StateSplash::Update(float dt) {
     
-    if (this -> _clock.getElapsedTime().asSeconds() > SPLASH_STATE_SHOW_TIME)
-        std:: cout << " Go to the Main Menu" << std::endl;
+    if (this -> _clock.getElapsedTime().asSeconds() > SPLASH_STATE_SHOW_TIME) {
+        
+        // Switch to the Main Menu
+        
+        this -> _data -> machine.AddState(StateRef(new StateMainMenu(_data) ), true);
+        
+        
+
+        
+        
+    }
 }
 
 void StateSplash::Draw(float dt) {
