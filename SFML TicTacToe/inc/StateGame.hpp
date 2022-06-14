@@ -18,13 +18,9 @@ class StateGame: public State {
     void    InitGridPieces();
     void    PlacePiece();
     void    CheckIfPlayerWon(int turn);
-    void    Check3PiecesForMatch(int x1, int y1,
-                                 int x2, int y2,
-                                 int x3, int y3,
-                                 int pieceToCheck);
+    void    Check3PiecesForMatch(int x1, int y1, int x2, int y2, int x3, int y3, int pieceToCheck);
     
 public:
-    
     
     StateGame(GameDataRef data, int size);
     void Init();

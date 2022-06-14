@@ -106,7 +106,7 @@ void StateGame:: PlacePiece() {
 }
 
 void StateGame:: CheckIfPlayerWon(int turn) {
-                                // ROZPISZ TO SOBIE
+
     Check3PiecesForMatch(0, 0, 1, 0, 2, 0, turn);
     Check3PiecesForMatch(0, 1, 1, 1, 2, 1, turn);
     Check3PiecesForMatch(0, 2, 1, 2, 2, 2, turn);
@@ -116,36 +116,25 @@ void StateGame:: CheckIfPlayerWon(int turn) {
     Check3PiecesForMatch(0, 0, 1, 1, 2, 2, turn);
     Check3PiecesForMatch(0, 2, 1, 1, 2, 0, turn);
     
-    int emptyNum = _size * _size;
     
-    for (int i = 0; i < _size; ++i) {
-        for (int j = 0; j < _size; ++j) {
-            
-            if ( EMPTY_PIECE != gridArray[i][j]) {
-                --emptyNum;
-            }
-            
-        }
-    }
-    if ( (emptyNum == 0) && (STATE_WON != gameState) && (STATE_LOSE != gameState) ) {
-        
+    int emptyNum = _size * _size;
+    for ( int i = 0; i < _size; ++i )
+        for ( int j = 0; j < _size; ++j )
+            if ( EMPTY_PIECE != gridArray[i][j] )    emptyNum--;
+    
+    // Check if grid is full
+    if ( (emptyNum == 0) && (STATE_WON != gameState) && (STATE_LOSE != gameState) )
         gameState = STATE_DRAW;
-        
-    }
     
     if ( STATE_DRAW == gameState || STATE_LOSE == gameState || STATE_WON == gameState) {
         
         // GAME OVER
 //        this -> _data -> machine.AddState(StateRef( new StateEndGame(_data, _size) ), true);
     }
-    std::cout << gameState << std:: endl;
-    
+//    std::cout << gameState << std:: endl;
 }
 
-void StateGame:: Check3PiecesForMatch(int x1, int y1,
-                                      int x2, int y2,
-                                      int x3, int y3,
-                                      int pieceToCheck) {
+void StateGame:: Check3PiecesForMatch(int x1, int y1, int x2, int y2, int x3, int y3, int pieceToCheck) {
     if (pieceToCheck == gridArray[x1][y1] &&
         pieceToCheck == gridArray[x2][y2] &&
         pieceToCheck == gridArray[x3][y3])
