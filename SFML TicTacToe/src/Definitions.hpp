@@ -23,23 +23,22 @@
 #define RETRY_BUTTON                        "Resources/UI/Retry Button.png"
 #define PLUS_BUTTON                         "Resources/UI/Pause Button.png"
 #define MINUS_BUTTON                        "Resources/UI/Pause Button.png"
-#define NUMBER_DISPLAY_2                    "Resources/UI/Play Button.png"
 #define NUMBER_DISPLAY_3                    "Resources/UI/Pause Button.png"
 #define NUMBER_DISPLAY_4                    "Resources/UI/Home Button.png"
 #define NUMBER_DISPLAY_5                    "Resources/UI/Resume Button.png"
 #define NUMBER_DISPLAY_6                    "Resources/UI/Pause Button.png"
 
-
 // Grid UI
 #define GRID_3x3_FILEPATH                   "Resources/UI/Grid.png"
 #define GRID_4x4_FILEPATH                   "Resources/UI/Grid.png"
 #define GRID_5x5_FILEPATH                   "Resources/UI/Grid.png"
+#define GRID_6x6_FILEPATH                   "Resources/UI/Grid.png"
 
 // Piece UI
-#define X_PIECE_FILEPATH                    "Resources/U/X.png"
-#define O_PIECE_FILEPATH                    "Resources/U/O.png"
-#define X_WINNING_PIECE_FILEPATH            "Resources/U/X Win.png"
-#define O_WINNING_PIECE_FILEPATH            "Resources/U/O Win.png"
+#define X_PIECE_FILEPATH                    "Resources/UI/X.png"
+#define O_PIECE_FILEPATH                    "Resources/UI/O.png"
+#define X_WINNING_PIECE_FILEPATH            "Resources/UI/X Win.png"
+#define O_WINNING_PIECE_FILEPATH            "Resources/UI/O Win.png"
 
 // Piece numbers
 #define X_PIECE             8

@@ -14,7 +14,7 @@ public:
     
     int _size;
     
-    StateEndGame(GameDataRef data);
+    StateEndGame(GameDataRef data, int size);
     void Init();
     void HandleInput();
     void Update(float dt);

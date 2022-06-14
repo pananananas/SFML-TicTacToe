@@ -13,9 +13,6 @@ void StateSettings:: Init() {
     this -> _data -> assets.LoadTexture("Plus Button",      PLUS_BUTTON);
     this -> _data -> assets.LoadTexture("Minus Button",     MINUS_BUTTON);
     switch (_size) {
-        case 2:
-            this -> _data -> assets.LoadTexture("Number Display",   NUMBER_DISPLAY_2);
-            break;
         case 3:
             this -> _data -> assets.LoadTexture("Number Display",   NUMBER_DISPLAY_3);
             break;
@@ -78,7 +75,7 @@ void StateSettings:: HandleInput() {
             else            ++_size;
         }
         if ( this -> _data -> input.IsSpriteClicked(this -> _minusButton, sf::Mouse::Left, this -> _data -> window) ){
-            if (_size == 2 ) std::cout << " Za mały rozmiar! \n";
+            if (_size == 3 ) std::cout << " Za mały rozmiar! \n";
             else            --_size;
         }
         if ( this -> _data -> input.IsSpriteClicked(this -> _homeButton, sf::Mouse::Left, this -> _data -> window) ) {
@@ -96,9 +93,7 @@ void StateSettings:: Update(float dt) {
     this -> _data -> window.draw( this -> _minusButton);
     
     switch (_size) {
-        case 2:
-            this -> _data -> assets.LoadTexture("Number Display",   NUMBER_DISPLAY_2);
-            break;
+
         case 3:
             this -> _data -> assets.LoadTexture("Number Display",   NUMBER_DISPLAY_3);
             break;

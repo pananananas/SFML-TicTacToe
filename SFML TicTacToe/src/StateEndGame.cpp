@@ -5,14 +5,15 @@
 #include <iostream>
 #include <sstream>
 
-StateEndGame:: StateEndGame(GameDataRef data): _data( data ) { }
+StateEndGame:: StateEndGame(GameDataRef data, int size): _data( data ) { _size = size; }
 
 void StateEndGame:: Init() {
 
     
     this -> _data -> assets.LoadTexture("Retry Button",    RETRY_BUTTON);
     this -> _data -> assets.LoadTexture("Home Button",      HOME_BUTTON);
-
+    this -> _data -> assets.LoadTexture("Grid",      HOME_BUTTON);
+    
     
     this -> _retryButton.setTexture( this -> _data -> assets.GetTexture("Retry Button"));
     this -> _homeButton.setTexture(   this -> _data -> assets.GetTexture("Home Button"));

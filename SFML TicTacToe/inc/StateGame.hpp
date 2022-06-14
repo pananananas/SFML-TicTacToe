@@ -2,7 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "State.hpp"
 #include "StateMainMenu.hpp"
-
+static int _size;
 
 class StateGame: public State {
     
@@ -12,12 +12,14 @@ class StateGame: public State {
     sf::Sprite  _grid;
     int          turn;
     int          gameState;
-    sf::Sprite   gridPieces[3][3];
-    void InitGridPiece();
+    int         _size;
+    int          gridArray[6][6];
+    sf::Sprite   gridPieces[6][6];
+    void InitGridPieces();
     
 public:
     
-    int  _size;
+    
     StateGame(GameDataRef data, int size);
     void Init();
     void HandleInput();
