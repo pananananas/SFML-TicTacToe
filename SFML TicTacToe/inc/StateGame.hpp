@@ -15,7 +15,13 @@ class StateGame: public State {
     int         _size;
     int          gridArray[6][6];
     sf::Sprite   gridPieces[6][6];
-    void InitGridPieces();
+    void    InitGridPieces();
+    void    PlacePiece();
+    void    CheckIfPlayerWon(int turn);
+    void    Check3PiecesForMatch(int x1, int y1,
+                                 int x2, int y2,
+                                 int x3, int y3,
+                                 int pieceToCheck);
     
 public:
     
