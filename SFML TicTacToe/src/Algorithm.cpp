@@ -42,22 +42,33 @@ Algorithm:: Algorithm(int playerPiece, GameDataRef data, int size) {
     
 }
 
-void Algorithm::PlacePiece(int (*gridArray)[6][6], sf::Sprite gridPieces[6][6], int &turn) {
-    
-    
-    
-    
-    for (int i = 0; i < _size; ++i) {
-        for (int j = 0; j < _size; ++j) {
-            
-         
-            
-            
-            
-        }
-    }
-    
-    gridPieces[1][1].setTexture( this -> _data -> assets.GetTexture("O Piece"));
-    
-    turn = PLAYER_PIECE;
-}
+//void Algorithm::PlacePiece(int gridArray[6][6], sf::Sprite gridPieces[6][6], int &turn) {
+//    
+//    int col, row;
+//    
+//    
+//    for (int i = 0; i < _size; ++i) {
+//        for (int j = 0; j < _size; ++j) {
+//            
+//            if ( gridArray[i][j] == 0 ){
+//                
+//                int score = MiniMax(gridArray);
+//            }
+//            
+//            
+//            
+//        }
+//    }
+//    
+//    gridPieces[col][row].setTexture( this -> _data -> assets.GetTexture("O Piece"));
+//    gridPieces[col][row].setColor(sf::Color(255,255,255,255));
+//    turn = PLAYER_PIECE;
+//}
+//
+//int MiniMax(int (*gridArray)[6][6]) {
+//    
+//    
+//    
+//    
+//    return 1;
+//}

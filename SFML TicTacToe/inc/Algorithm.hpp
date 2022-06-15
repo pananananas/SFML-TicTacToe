@@ -20,6 +20,8 @@ public:
     Algorithm() {};
     Algorithm(int playerPiece, GameDataRef data, int size);
     
-    void PlacePiece( int(*gridArray)[6][6], sf::Sprite gridPieces[6][6], int &turn);
+//    void PlacePiece( int gridArray[6][6], sf::Sprite gridPieces[6][6], int &turn);
+//
+//    int MiniMax(int gridArray[6][6]);
     
 };

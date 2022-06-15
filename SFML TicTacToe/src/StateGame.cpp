@@ -4,6 +4,7 @@
 #include "Definitions.hpp"
 #include <iostream>
 #include <sstream>
+#include <cmath>
 
 StateGame:: StateGame(GameDataRef data, int size): _data( data ) { _size = size; }
 
@@ -19,6 +20,9 @@ void StateGame:: InitGridPieces() {
             gridPieces[i][j].setColor(sf::Color(255, 255, 255, 0));
         }                                                   // ^ Invisible grid elements
     }
+    for (int i = 0; i < _size ; ++i)
+        for (int j = 0; j < _size; ++j)
+            gridArray[i][j] = EMPTY_PIECE;
 }
 
 void StateGame:: PlacePiece() {
@@ -105,7 +109,7 @@ void StateGame:: PlacePiece() {
     }
 }
 
-void StateGame:: CheckIfGameWon(int turn) {
+bool StateGame:: CheckIfGameWon(int turn) {
 
     switch (_size) {
         case 3:
@@ -177,7 +181,9 @@ void StateGame:: CheckIfGameWon(int turn) {
         
         // GAME OVER
 //        this -> _data -> machine.AddState(StateRef( new StateEndGame(_data, _size) ), true);
+        return true;
     }
+    return false;
 }
 
 
@@ -219,15 +225,7 @@ void StateGame:: Init() {
                              _pauseButton.getPosition().y );
     _grid.setPosition( SCREEN_WIDTH / 2  - _grid.getGlobalBounds().width   / 2,
                        SCREEN_HEIGHT / 2  - _grid.getGlobalBounds().height  / 2 );
-
-    
     InitGridPieces();
-    for (int i = 0; i < _size ; ++i) {
-        for (int j = 0; j < _size; ++j) {
-            gridArray[i][j] = EMPTY_PIECE;
-            
-        }
-    }
 }
 
 void StateGame:: HandleInput() {
@@ -256,8 +254,8 @@ void StateGame:: HandleInput() {
             }
         }
         else if (turn == AI_PIECE) {
-            this -> AI.PlacePiece(&gridArray, gridPieces, turn);
-            this -> CheckIfGameWon(AI_PIECE);
+            this -> PlaceAIPiece(gridArray, gridPieces, turn);
+            
         }
         else
             std::cout << " TU JESTEM TERA! \n";
@@ -371,4 +369,109 @@ void StateGame:: Check6PiecesForMatch(int x1, int y1, int x2, int y2, int x3, in
         if (PLAYER_PIECE == pieceToCheck)   gameState = STATE_WON;
         else                                gameState = STATE_LOSE;
     }
+}
+
+
+
+
+void StateGame::PlaceAIPiece(int tmpGridArray[6][6], sf::Sprite gridPieces[6][6], int &turn) {
+    
+    int col = 0, row = 0;
+    int bestScore = -INF;
+    
+    for (int i = 0; i < _size; ++i) {
+        for (int j = 0; j < _size; ++j) {
+            
+            if ( tmpGridArray[i][j] == EMPTY_PIECE ) {
+                tmpGridArray[i][j] = AI_PIECE;
+                int score = MiniMax(tmpGridArray, 0, false );
+                tmpGridArray[i][j] = EMPTY_PIECE;
+                std:: cout << "\n Score: "<< score << "\n ";
+                if ( bestScore < score ) {
+                    
+                    bestScore = score;
+                    std:: cout << "\n Best Score: "<< bestScore << "\n ";
+                    col = i;
+                    row = j;
+                }
+                
+                
+                
+            }
+            
+            
+            
+        }
+    }
+    gridArray[col][row] = turn;
+    gridPieces[col][row].setTexture( this -> _data -> assets.GetTexture("O Piece"));
+    gridPieces[col][row].setColor(sf::Color(255,255,255,255));
+    this -> CheckIfGameWon(turn);
+    turn = PLAYER_PIECE;
+}
+
+int StateGame::MiniMax(int tmpGridArray[6][6], int depth , bool max) {
+    
+    int result = this -> checkWinner();
+    if (result != 0)     return result;
+    
+    
+    if (max) {
+        int bestScore = -INF;
+        for (int i = 0; i < _size; ++i) {
+            for (int j = 0; j < _size; ++j) {
+                if (tmpGridArray[i][j] == EMPTY_PIECE) {
+                    tmpGridArray[i][j] = AI_PIECE;
+                    bestScore = std::max(bestScore, MiniMax(tmpGridArray,depth + 1, !max));
+                    tmpGridArray[i][j] = EMPTY_PIECE;
+                }
+            }
+        }
+        return bestScore;
+    } else {
+        int bestScore = INF;
+        for (int i = 0; i < _size; ++i) {
+            for (int j = 0; j < _size; ++j) {
+                if (tmpGridArray[i][j] == EMPTY_PIECE) {
+                    tmpGridArray[i][j] = PLAYER_PIECE;
+                    bestScore = std::min(bestScore, MiniMax(tmpGridArray,depth + 1, !max));
+                    tmpGridArray[i][j] = EMPTY_PIECE;
+                }
+            }
+        }
+        return bestScore;
+    }
+    
+    
+    
+    
+    
+}
+
+int StateGame:: checkWinner() {
+    
+    int winner = 0;
+    
+    if (this -> isGridFull())       winner = TIE;   // Tie
+    
+    for (int i = 0; i < _size; ++i) {
+        if (gridArray[i][0] == gridArray[i][1] == gridArray[i][2])  winner = gridArray[i][0];
+        if (gridArray[0][i] == gridArray[1][i] == gridArray[2][i])  winner = gridArray[0][i];
+    }
+    
+    if (gridArray[0][0] == gridArray[1][1] == gridArray[2][2])  winner = gridArray[0][0];
+    if (gridArray[2][0] == gridArray[1][1] == gridArray[0][2])  winner = gridArray[2][0];
+    
+    return winner;
+}
+
+bool StateGame::isGridFull() {
+    
+    int tmp = _size * _size;
+    for ( int i = 0; i < _size; ++i )
+        for ( int j = 0; j < _size; ++j )
+            if ( EMPTY_PIECE != gridArray[i][j] )   tmp--;
+    
+    if ( tmp == 0 )     return true;
+    else                return false;
 }

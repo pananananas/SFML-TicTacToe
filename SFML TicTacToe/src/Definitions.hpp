@@ -43,9 +43,9 @@ const int INF = 2147483647;
 #define O_WINNING_PIECE_FILEPATH            "Resources/UI/O Win.png"
 
 // Piece numbers
-#define X_PIECE             8
-#define O_PIECE             0
-#define EMPTY_PIECE        -1
+#define X_PIECE             1
+#define O_PIECE            -1
+#define EMPTY_PIECE         2
 #define PLAYER_PIECE        X_PIECE
 #define AI_PIECE            O_PIECE
 
@@ -57,3 +57,10 @@ const int INF = 2147483647;
 #define STATE_PLACING_PIECE 94
 #define STATE_AI_PLAYING    93
 #define STATE_DRAW          92
+
+#define G_X_WON               1
+#define G_O_WON               2
+#define G_TIE                 3
+
+// Depth for MinMax
+#define TIE        0
