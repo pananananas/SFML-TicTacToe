@@ -17,13 +17,12 @@ void StateGame:: InitGridPieces() {
             gridPieces[i][j].setPosition(_grid.getPosition().x + tmpSize.x * i - 7,
                                          _grid.getPosition().y + tmpSize.y * j - 7);
             gridPieces[i][j].setColor(sf::Color(255, 255, 255, 0));
-        }
+        }                                                   // ^ Invisible grid elements
     }
 }
 
 void StateGame:: PlacePiece() {
     
-    //  Vector with 2 int
     sf::Vector2i touchPoint = this -> _data -> input.GetMousePosition( this -> _data -> window );
     sf::FloatRect gridSize  = _grid.getGlobalBounds();
     sf::Vector2f gapOutsideOfGrid  = sf::Vector2f((SCREEN_WIDTH  - gridSize.width)  / 2,
@@ -31,7 +30,7 @@ void StateGame:: PlacePiece() {
     sf::Vector2f gridLocalTouchPoz = sf::Vector2f( touchPoint.x  - gapOutsideOfGrid.x,
                                                    touchPoint.y  - gapOutsideOfGrid.y );
     sf::Vector2f gridSectionSize   = sf::Vector2f( gridSize.width  / _size,
-                                                  gridSize.height / _size );
+                                                   gridSize.height / _size );
     int col, row;
     switch (_size) {    // Checking what place was clicked for different sizes
         case 3:
@@ -89,40 +88,88 @@ void StateGame:: PlacePiece() {
 
     if ( gridArray[col-1][row-1] == EMPTY_PIECE ) {
         gridArray[col-1][row-1] = turn;
-        if ( PLAYER_PIECE == turn ) {
+        
+//        if ( PLAYER_PIECE == turn ) {
 
-            gridPieces[col-1][row-1].setTexture( this -> _data -> assets.GetTexture("X Piece"));
-            this -> CheckIfPlayerWon(turn);
-            turn = AI_PIECE;
-        }
-        else if ( AI_PIECE == turn ) {
-
-            gridPieces[col-1][row-1].setTexture( this -> _data -> assets.GetTexture("O Piece"));
-            this -> CheckIfPlayerWon(turn);
-            turn = PLAYER_PIECE;
-        }
+        gridPieces[col-1][row-1].setTexture( this -> _data -> assets.GetTexture("X Piece"));
+        this -> CheckIfGameWon(turn);
+        turn = AI_PIECE;
+//        }
+//        else if ( AI_PIECE == turn ) {
+//
+//            gridPieces[col-1][row-1].setTexture( this -> _data -> assets.GetTexture("O Piece"));
+//            this -> CheckIfPlayerWon(turn);
+//            turn = PLAYER_PIECE;
+//        }
         gridPieces[col-1][row-1].setColor(sf::Color(255,255,255,255));
     }
 }
 
-void StateGame:: CheckIfPlayerWon(int turn) {
+void StateGame:: CheckIfGameWon(int turn) {
 
-    Check3PiecesForMatch(0, 0, 1, 0, 2, 0, turn);
-    Check3PiecesForMatch(0, 1, 1, 1, 2, 1, turn);
-    Check3PiecesForMatch(0, 2, 1, 2, 2, 2, turn);
-    Check3PiecesForMatch(0, 0, 0, 1, 0, 2, turn);
-    Check3PiecesForMatch(1, 0, 1, 1, 1, 2, turn);
-    Check3PiecesForMatch(2, 0, 2, 1, 2, 2, turn);
-    Check3PiecesForMatch(0, 0, 1, 1, 2, 2, turn);
-    Check3PiecesForMatch(0, 2, 1, 1, 2, 0, turn);
+    switch (_size) {
+        case 3:
+            Check3PiecesForMatch(0, 0, 1, 0, 2, 0, turn);
+            Check3PiecesForMatch(0, 1, 1, 1, 2, 1, turn);
+            Check3PiecesForMatch(0, 2, 1, 2, 2, 2, turn);
+            Check3PiecesForMatch(0, 0, 0, 1, 0, 2, turn);
+            Check3PiecesForMatch(1, 0, 1, 1, 1, 2, turn);
+            Check3PiecesForMatch(2, 0, 2, 1, 2, 2, turn);
+            Check3PiecesForMatch(0, 0, 1, 1, 2, 2, turn);
+            Check3PiecesForMatch(0, 2, 1, 1, 2, 0, turn);
+            break;
+        case 4:
+            Check4PiecesForMatch(0, 0, 1, 0, 2, 0, 3, 0, turn);
+            Check4PiecesForMatch(0, 1, 1, 1, 2, 1, 3, 1, turn);
+            Check4PiecesForMatch(0, 2, 1, 2, 2, 2, 3, 2, turn);
+            Check4PiecesForMatch(0, 3, 1, 3, 2, 3, 3, 3, turn);
+            Check4PiecesForMatch(0, 0, 0, 1, 0, 2, 0, 3, turn);
+            Check4PiecesForMatch(1, 0, 1, 1, 1, 2, 1, 3, turn);
+            Check4PiecesForMatch(2, 0, 2, 1, 2, 2, 2, 3, turn);
+            Check4PiecesForMatch(3, 0, 3, 1, 3, 2, 3, 3, turn);
+            Check4PiecesForMatch(0, 0, 1, 1, 2, 2, 3, 3, turn);
+            Check4PiecesForMatch(0, 3, 1, 2, 2, 1, 3, 0, turn);
+            break;
+        case 5:
+            Check5PiecesForMatch(0, 0, 1, 0, 2, 0, 3, 0, 4, 0, turn);
+            Check5PiecesForMatch(0, 1, 1, 1, 2, 1, 3, 1, 4, 1, turn);
+            Check5PiecesForMatch(0, 2, 1, 2, 2, 2, 3, 2, 4, 2, turn);
+            Check5PiecesForMatch(0, 3, 1, 3, 2, 3, 3, 3, 4, 3, turn);
+            Check5PiecesForMatch(0, 4, 1, 4, 2, 4, 3, 4, 4, 4, turn);
+            Check5PiecesForMatch(0, 0, 0, 1, 0, 2, 0, 3, 0, 4, turn);
+            Check5PiecesForMatch(1, 0, 1, 1, 1, 2, 1, 3, 1, 4, turn);
+            Check5PiecesForMatch(2, 0, 2, 1, 2, 2, 2, 3, 2, 4, turn);
+            Check5PiecesForMatch(3, 0, 3, 1, 3, 2, 3, 3, 3, 4, turn);
+            Check5PiecesForMatch(4, 0, 4, 1, 4, 2, 4, 3, 4, 4, turn);
+            Check5PiecesForMatch(0, 0, 1, 1, 2, 2, 3, 3, 4, 4, turn);
+            Check5PiecesForMatch(0, 4, 1, 3, 2, 2, 3, 1, 4, 0, turn);
+            break;
+        case 6:
+            Check6PiecesForMatch(0, 0, 1, 0, 2, 0, 3, 0, 4, 0, 5, 0, turn);
+            Check6PiecesForMatch(0, 1, 1, 1, 2, 1, 3, 1, 4, 1, 5, 1, turn);
+            Check6PiecesForMatch(0, 2, 1, 2, 2, 2, 3, 2, 4, 2, 5, 2, turn);
+            Check6PiecesForMatch(0, 3, 1, 3, 2, 3, 3, 3, 4, 3, 5, 3, turn);
+            Check6PiecesForMatch(0, 4, 1, 4, 2, 4, 3, 4, 4, 4, 5, 4, turn);
+            Check6PiecesForMatch(0, 4, 1, 4, 2, 4, 3, 4, 4, 4, 5, 5, turn);
+            Check6PiecesForMatch(0, 0, 0, 1, 0, 2, 0, 3, 0, 4, 0, 5, turn);
+            Check6PiecesForMatch(1, 0, 1, 1, 1, 2, 1, 3, 1, 4, 1, 5, turn);
+            Check6PiecesForMatch(2, 0, 2, 1, 2, 2, 2, 3, 2, 4, 2, 5, turn);
+            Check6PiecesForMatch(3, 0, 3, 1, 3, 2, 3, 3, 3, 4, 3, 5, turn);
+            Check6PiecesForMatch(4, 0, 4, 1, 4, 2, 4, 3, 4, 4, 4, 5, turn);
+            Check6PiecesForMatch(4, 0, 4, 1, 4, 2, 4, 3, 4, 4, 5, 5, turn);
+            Check6PiecesForMatch(0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, turn);
+            Check6PiecesForMatch(0, 5, 1, 4, 2, 3, 3, 2, 4, 1, 5, 0, turn);
+            break;
+        default:
+            break;
+    }
     
-    
-    int emptyNum = _size * _size;
+    int emptyNum = _size * _size;       // Check if grid is full
     for ( int i = 0; i < _size; ++i )
         for ( int j = 0; j < _size; ++j )
             if ( EMPTY_PIECE != gridArray[i][j] )    emptyNum--;
     
-    // Check if grid is full
+    
     if ( (emptyNum == 0) && (STATE_WON != gameState) && (STATE_LOSE != gameState) )
         gameState = STATE_DRAW;
     
@@ -131,28 +178,9 @@ void StateGame:: CheckIfPlayerWon(int turn) {
         // GAME OVER
 //        this -> _data -> machine.AddState(StateRef( new StateEndGame(_data, _size) ), true);
     }
-//    std::cout << gameState << std:: endl;
 }
 
-void StateGame:: Check3PiecesForMatch(int x1, int y1, int x2, int y2, int x3, int y3, int pieceToCheck) {
-    if (pieceToCheck == gridArray[x1][y1] &&
-        pieceToCheck == gridArray[x2][y2] &&
-        pieceToCheck == gridArray[x3][y3])
-    {
-        
-        std::string winningPieceStr;
-        if (O_PIECE == pieceToCheck )   winningPieceStr = "O Piece Wins";
-        else                            winningPieceStr = "X Piece Wins";
-        
-        gridPieces[x1][y1].setTexture( this -> _data -> assets.GetTexture(winningPieceStr));
-        gridPieces[x2][y2].setTexture( this -> _data -> assets.GetTexture(winningPieceStr));
-        gridPieces[x3][y3].setTexture( this -> _data -> assets.GetTexture(winningPieceStr));
-        
-        
-        if (PLAYER_PIECE == pieceToCheck)   gameState = STATE_WON;
-        else                                gameState = STATE_LOSE;
-    }
-}
+
 
 void StateGame:: Init() {
 
@@ -161,7 +189,7 @@ void StateGame:: Init() {
 
     this -> _data -> assets.LoadTexture( "Game Background", PAUSE_BACKGROUND_FILEPATH);
     this -> _data -> assets.LoadTexture( "Pause Button", PAUSE_BUTTON );
-    switch (_size) {
+    switch (_size)   {
         case 3:
             this -> _data -> assets.LoadTexture("Grid",   GRID_3x3_FILEPATH);
             break;
@@ -211,38 +239,136 @@ void StateGame:: HandleInput() {
         if (sf::Event::Closed == event.type)
             this -> _data -> window.close();
 
-        if ( this -> _data -> input.IsSpriteClicked(this -> _pauseButton, sf::Mouse::Left, this -> _data -> window) ) {
-            this -> _data -> machine.AddState(StateRef( new StatePause(_data, _size) ), false); // Pause
-                // false cuz we dont want to replace current state, we only want to pause this one
+        if (turn == PLAYER_PIECE) {
+            
+            if ( this -> _data -> input.IsSpriteClicked(this -> _pauseButton, sf::Mouse::Left, this -> _data -> window) ) {
+                
+                this -> _data -> machine.AddState(StateRef( new StatePause(_data, _size) ), false); // Pause
+             // false cuz we dont want to replace current state, we only want to pause this one
             
 
-        } else if ( this -> _data -> input.IsSpriteClicked(this -> _grid, sf::Mouse::Left, this -> _data -> window) ) {
+            } else if ( this -> _data -> input.IsSpriteClicked(this -> _grid, sf::Mouse::Left, this -> _data -> window) ) {
             
-            if (STATE_PLAYING == gameState) {
-                this -> PlacePiece();
-            }
+//                if (STATE_PLAYING == gameState)
+                    this -> PlacePiece();
+
             //         this -> _data -> machine.AddState(StateRef( new StateEndGame(_data, _size) ), true);  // End Game
-            
+            }
         }
+        else if (turn == AI_PIECE) {
+            this -> AI.PlacePiece(&gridArray, gridPieces, turn);
+            this -> CheckIfGameWon(AI_PIECE);
+        }
+        else
+            std::cout << " TU JESTEM TERA! \n";
     }
 }
 
-void StateGame:: Update(float dt) {
-
-}
+void StateGame:: Update(float dt) { }
 
 void StateGame:: Draw(float dt) {
 
     this -> _data -> window.clear();
-    this -> _data -> window.draw( this -> _background);
-    this -> _data -> window.draw( this -> _pauseButton);
-    this -> _data -> window.draw( this -> _grid);
-    for (int i = 0; i < _size ; ++i) {
-        for (int j = 0; j < _size; ++j) {
+    this -> _data -> window.draw( this -> _background  );
+    this -> _data -> window.draw( this -> _pauseButton );
+    this -> _data -> window.draw( this -> _grid        );
+    for (int i = 0; i < _size ; ++i)
+        for (int j = 0; j < _size; ++j)
             this -> _data -> window.draw( this -> gridPieces[i][j]);
-        }
-    }
     this -> _data -> window.display();
 }
 
+void StateGame:: Check3PiecesForMatch(int x1, int y1, int x2,
+                                      int y2, int x3, int y3,
+                                      int pieceToCheck) {
+    if (pieceToCheck == gridArray[x1][y1] &&
+        pieceToCheck == gridArray[x2][y2] &&
+        pieceToCheck == gridArray[x3][y3])
+    {
+        
+        std::string winningPieceStr;
+        if (O_PIECE == pieceToCheck )   winningPieceStr = "O Piece Wins";
+        else                            winningPieceStr = "X Piece Wins";
+        
+        gridPieces[x1][y1].setTexture( this -> _data -> assets.GetTexture(winningPieceStr));
+        gridPieces[x2][y2].setTexture( this -> _data -> assets.GetTexture(winningPieceStr));
+        gridPieces[x3][y3].setTexture( this -> _data -> assets.GetTexture(winningPieceStr));
+        
+        
+        if (PLAYER_PIECE == pieceToCheck)   gameState = STATE_WON;
+        else                                gameState = STATE_LOSE;
+    }
+}
 
+void StateGame:: Check4PiecesForMatch(int x1, int y1, int x2, int y2,
+                                      int x3, int y3, int x4, int y4,
+                                      int pieceToCheck) {
+    if (pieceToCheck == gridArray[x1][y1] &&
+        pieceToCheck == gridArray[x2][y2] &&
+        pieceToCheck == gridArray[x3][y3] &&
+        pieceToCheck == gridArray[x4][y4])
+    {
+        
+        std::string winningPieceStr;
+        if (O_PIECE == pieceToCheck )   winningPieceStr = "O Piece Wins";
+        else                            winningPieceStr = "X Piece Wins";
+        
+        gridPieces[x1][y1].setTexture( this -> _data -> assets.GetTexture(winningPieceStr));
+        gridPieces[x2][y2].setTexture( this -> _data -> assets.GetTexture(winningPieceStr));
+        gridPieces[x3][y3].setTexture( this -> _data -> assets.GetTexture(winningPieceStr));
+        gridPieces[x4][y4].setTexture( this -> _data -> assets.GetTexture(winningPieceStr));
+        
+        if (PLAYER_PIECE == pieceToCheck)   gameState = STATE_WON;
+        else                                gameState = STATE_LOSE;
+    }
+}
+
+void StateGame:: Check5PiecesForMatch(int x1, int y1, int x2, int y2, int x3,
+                                      int y3, int x4, int y4, int x5, int y5,
+                                      int pieceToCheck) {
+    if (pieceToCheck == gridArray[x1][y1] &&
+        pieceToCheck == gridArray[x2][y2] &&
+        pieceToCheck == gridArray[x3][y3] &&
+        pieceToCheck == gridArray[x4][y4] &&
+        pieceToCheck == gridArray[x5][y5])
+    {
+        std::string winningPieceStr;
+        if (O_PIECE == pieceToCheck )   winningPieceStr = "O Piece Wins";
+        else                            winningPieceStr = "X Piece Wins";
+        
+        gridPieces[x1][y1].setTexture( this -> _data -> assets.GetTexture(winningPieceStr));
+        gridPieces[x2][y2].setTexture( this -> _data -> assets.GetTexture(winningPieceStr));
+        gridPieces[x3][y3].setTexture( this -> _data -> assets.GetTexture(winningPieceStr));
+        gridPieces[x4][y4].setTexture( this -> _data -> assets.GetTexture(winningPieceStr));
+        gridPieces[x5][y5].setTexture( this -> _data -> assets.GetTexture(winningPieceStr));
+        
+        if (PLAYER_PIECE == pieceToCheck)   gameState = STATE_WON;
+        else                                gameState = STATE_LOSE;
+    }
+}
+
+void StateGame:: Check6PiecesForMatch(int x1, int y1, int x2, int y2, int x3, int y3,
+                                      int x4, int y4, int x5, int y5, int x6, int y6,
+                                      int pieceToCheck) {
+    if (pieceToCheck == gridArray[x1][y1] &&
+        pieceToCheck == gridArray[x2][y2] &&
+        pieceToCheck == gridArray[x3][y3] &&
+        pieceToCheck == gridArray[x4][y4] &&
+        pieceToCheck == gridArray[x5][y5] &&
+        pieceToCheck == gridArray[x6][y6])
+    {
+        std::string winningPieceStr;
+        if (O_PIECE == pieceToCheck )   winningPieceStr = "O Piece Wins";
+        else                            winningPieceStr = "X Piece Wins";
+        
+        gridPieces[x1][y1].setTexture( this -> _data -> assets.GetTexture(winningPieceStr));
+        gridPieces[x2][y2].setTexture( this -> _data -> assets.GetTexture(winningPieceStr));
+        gridPieces[x3][y3].setTexture( this -> _data -> assets.GetTexture(winningPieceStr));
+        gridPieces[x4][y4].setTexture( this -> _data -> assets.GetTexture(winningPieceStr));
+        gridPieces[x5][y5].setTexture( this -> _data -> assets.GetTexture(winningPieceStr));
+        gridPieces[x6][y6].setTexture( this -> _data -> assets.GetTexture(winningPieceStr));
+        
+        if (PLAYER_PIECE == pieceToCheck)   gameState = STATE_WON;
+        else                                gameState = STATE_LOSE;
+    }
+}

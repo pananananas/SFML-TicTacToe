@@ -1,5 +1,7 @@
 #pragma once
 
+const int INF = 2147483647;
+
 #define SCREEN_WIDTH  768
 #define SCREEN_HEIGHT 1136
 

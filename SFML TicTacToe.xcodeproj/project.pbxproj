@@ -23,6 +23,7 @@
 		25AF6B9A2857C65A0046BB85 /* StatePause.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 25AF6B982857C65A0046BB85 /* StatePause.cpp */; };
 		25AF6B9D2857DD9F0046BB85 /* StateEndGame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 25AF6B9B2857DD9F0046BB85 /* StateEndGame.cpp */; };
 		25AF6BA02857E74B0046BB85 /* StateSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 25AF6B9E2857E74B0046BB85 /* StateSettings.cpp */; };
+		25B0201F285A00E60083C9F0 /* Algorithm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 25B0201D285A00E60083C9F0 /* Algorithm.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -88,6 +89,8 @@
 		25AF6B9C2857DD9F0046BB85 /* StateEndGame.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = StateEndGame.hpp; sourceTree = "<group>"; };
 		25AF6B9E2857E74B0046BB85 /* StateSettings.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = StateSettings.cpp; sourceTree = "<group>"; };
 		25AF6B9F2857E74B0046BB85 /* StateSettings.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = StateSettings.hpp; sourceTree = "<group>"; };
+		25B0201D285A00E60083C9F0 /* Algorithm.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Algorithm.cpp; sourceTree = "<group>"; };
+		25B0201E285A00E60083C9F0 /* Algorithm.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Algorithm.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +161,7 @@
 				25AF6B952857BD9E0046BB85 /* StateGame.cpp */,
 				25AF6B982857C65A0046BB85 /* StatePause.cpp */,
 				25AF6B9B2857DD9F0046BB85 /* StateEndGame.cpp */,
+				25B0201D285A00E60083C9F0 /* Algorithm.cpp */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -177,6 +181,7 @@
 				25AF6B962857BD9E0046BB85 /* StateGame.hpp */,
 				25AF6B992857C65A0046BB85 /* StatePause.hpp */,
 				25AF6B9C2857DD9F0046BB85 /* StateEndGame.hpp */,
+				25B0201E285A00E60083C9F0 /* Algorithm.hpp */,
 			);
 			path = inc;
 			sourceTree = "<group>";
@@ -294,6 +299,7 @@
 				2512A07A28536F0B00AEE8BB /* StateMachine.cpp in Sources */,
 				25AF6B9D2857DD9F0046BB85 /* StateEndGame.cpp in Sources */,
 				25AF6B6D28538D900046BB85 /* InputManager.cpp in Sources */,
+				25B0201F285A00E60083C9F0 /* Algorithm.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
