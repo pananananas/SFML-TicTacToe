@@ -137,9 +137,9 @@
 		2512A04F2853404D00AEE8BB /* SFML TicTacToe */ = {
 			isa = PBXGroup;
 			children = (
+				25AF6B712853977D0046BB85 /* Resources */,
 				2512A06328534FC500AEE8BB /* src */,
 				2512A06428534FD400AEE8BB /* inc */,
-				25AF6B712853977D0046BB85 /* Resources */,
 			);
 			path = "SFML TicTacToe";
 			sourceTree = "<group>";
