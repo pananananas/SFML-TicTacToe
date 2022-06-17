@@ -2,20 +2,28 @@
 
 const int INF = 2147483647;
 
+// Window size
 #define SCREEN_WIDTH  1000
 #define SCREEN_HEIGHT 1500
 
+// Time
 #define SPLASH_STATE_SHOW_TIME 0.7
 
 // Backgrounds
 #define SPLASH_SCENE_BACKGROUND_FILEPATH    "Resources/UI/Splash_back.png"
 #define MAIN_MENU_BACKGROUND_FILEPATH       "Resources/UI/Menu 2.png"
-#define MAIN_MENU_TITLE_FILEPATH            "Resources/UI/Title.png"
-#define PAUSE_TITLE_FILEPATH                "Resources/UI/Title_Pause.png"
-#define SETTINGS_TITLE_FILEPATH             "Resources/UI/Title_Settings.png"
 #define GAME_BACKGROUND_FILEPATH            "Resources/UI/Game 2.png"
 #define PAUSE_BACKGROUND_FILEPATH           "Resources/UI/Game.png"
 #define SETTINGS_BACKGROUND_FILEPATH        "Resources/UI/Menu.png"
+
+// Titles
+#define MAIN_MENU_TITLE_FILEPATH            "Resources/UI/Title.png"
+#define PAUSE_TITLE_FILEPATH                "Resources/UI/Title_Pause.png"
+#define SETTINGS_TITLE_FILEPATH             "Resources/UI/Title_Settings.png"
+#define GRID_SIZE_TITLE_FILEPATH            "Resources/UI/Title_Grid_Size.png"
+#define X_WINS_TITLE_FILEPATH               "Resources/UI/Title_X_Win.png"
+#define O_WINS_TITLE_FILEPATH               "Resources/UI/Title_O_Win.png"
+#define DRAW_TITLE_FILEPATH                 "Resources/UI/Title_Draw.png"
 
 // Buttons UI
 #define MAIN_MENU_PLAY_BUTTON               "Resources/UI/Play Button.png"
@@ -24,16 +32,16 @@ const int INF = 2147483647;
 #define PAUSE_BUTTON                        "Resources/UI/Pause_Button.png"
 #define RESUME_BUTTON                       "Resources/UI/Play Button.png"
 #define HOME_BUTTON                         "Resources/UI/Home Button.png"
-#define RETRY_BUTTON                        "Resources/UI/Retry Button.png"
+#define RETRY_BUTTON                        "Resources/UI/Replay_Button.png"
 #define PLUS_BUTTON                         "Resources/UI/Plus_Button.png"
 #define MINUS_BUTTON                        "Resources/UI/Minus_Button.png"
-#define NUMBER_DISPLAY_3                    "Resources/UI/Pause Button.png"
-#define NUMBER_DISPLAY_4                    "Resources/UI/Home Button.png"
-#define NUMBER_DISPLAY_5                    "Resources/UI/Resume Button.png"
-#define NUMBER_DISPLAY_6                    "Resources/UI/Pause Button.png"
+#define NUMBER_DISPLAY_3                    "Resources/UI/Display_3.png"
+#define NUMBER_DISPLAY_4                    "Resources/UI/Display_4.png"
+#define NUMBER_DISPLAY_5                    "Resources/UI/Display_5.png"
+#define NUMBER_DISPLAY_6                    "Resources/UI/Display_6.png"
 
 // Grid UI
-#define GRID_3x3_FILEPATH                   "Resources/UI/Grid.png"
+#define GRID_3x3_FILEPATH                   "Resources/UI/Grid 3.png"
 #define GRID_4x4_FILEPATH                   "Resources/UI/Grid 4.png"
 #define GRID_5x5_FILEPATH                   "Resources/UI/Grid 5.png"
 #define GRID_6x6_FILEPATH                   "Resources/UI/Grid 6.png"
@@ -51,15 +59,14 @@ const int INF = 2147483647;
 #define PLAYER_PIECE        X_PIECE
 #define AI_PIECE            O_PIECE
 
+
 // State numbers
 #define STATE_PLAYING       98
 #define STATE_PAUSED        97
-#define STATE_WON           96
-#define STATE_LOSE          95
+#define STATE_X_WON         96
+#define STATE_O_WON         95
 #define STATE_PLACING_PIECE 94
 #define STATE_AI_PLAYING    93
 #define STATE_DRAW          92
-
-
-// Depth for MinMax
-#define TIE        3
+#define END_GAME            91
+#define TIE                 3

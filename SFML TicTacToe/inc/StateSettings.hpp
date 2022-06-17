@@ -8,6 +8,7 @@ class StateSettings: public State {
     
     GameDataRef _data;
     sf::Sprite  _title;
+    sf::Sprite  _titleGS;
     sf::Sprite  _background;
     sf::Sprite  _plusButton;
     sf::Sprite  _minusButton;

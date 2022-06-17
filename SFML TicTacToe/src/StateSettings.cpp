@@ -13,6 +13,7 @@ void StateSettings:: Init() {
     this -> _data -> assets.LoadTexture("Plus Button",         PLUS_BUTTON);
     this -> _data -> assets.LoadTexture("Minus Button",        MINUS_BUTTON);
     this -> _data -> assets.LoadTexture("S Title",             SETTINGS_TITLE_FILEPATH);
+    this -> _data -> assets.LoadTexture("GS Title",            GRID_SIZE_TITLE_FILEPATH);
     switch (_size) {
         case 3:
             this -> _data -> assets.LoadTexture("Number Display",   NUMBER_DISPLAY_3);
@@ -38,6 +39,7 @@ void StateSettings:: Init() {
     this -> _numberDisplay.setTexture( this -> _data -> assets.GetTexture("Number Display"));
     this -> _homeButton.setTexture(    this -> _data -> assets.GetTexture("Home Button"));
     this -> _title.setTexture(         this -> _data -> assets.GetTexture("S Title"));
+    this -> _titleGS.setTexture(       this -> _data -> assets.GetTexture("GS Title"));
 
     
     
@@ -59,7 +61,8 @@ void StateSettings:: Init() {
                                   - (this -> _homeButton.getGlobalBounds().width / 2),
                                     (SCREEN_HEIGHT)
                                   - (this -> _homeButton.getGlobalBounds().height * 1.3));
-    this -> _title.setPosition((SCREEN_WIDTH/ 2) - (this -> _title.getGlobalBounds().width / 2), 0);
+    this -> _title.setPosition(0, 0);
+    this -> _titleGS.setPosition(0, 0);
 }
 
 
@@ -93,7 +96,8 @@ void StateSettings:: Update(float dt) {
     this -> _data -> window.draw( this -> _background);
     this -> _data -> window.draw( this -> _plusButton);
     this -> _data -> window.draw( this -> _minusButton);
-    
+    this -> _data -> window.draw( this -> _title);
+//    this -> _data -> window.draw( this -> _titleGS);
     switch (_size) {
 
         case 3:
@@ -123,10 +127,10 @@ void StateSettings:: Update(float dt) {
 }
 
 void StateSettings:: Draw(float dt) {
-
     this -> _data -> window.clear();
     this -> _data -> window.draw( this -> _background);
     this -> _data -> window.draw( this -> _title);
+//    this -> _data -> window.draw( this -> _titleGS);
     this -> _data -> window.draw( this -> _plusButton);
     this -> _data -> window.draw( this -> _minusButton);
     this -> _data -> window.draw( this -> _numberDisplay);

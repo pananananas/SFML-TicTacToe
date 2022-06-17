@@ -176,19 +176,19 @@ bool StateGame:: CheckIfGameWon(int turn) {
             if ( EMPTY_PIECE != gridArray[i][j] )    emptyNum--;
     
     
-    if ( isGridFull() && (STATE_WON != gameState) && (STATE_LOSE != gameState) )
+    if ( isGridFull() && (STATE_X_WON != gameState) && (STATE_O_WON != gameState) )
         gameState = STATE_DRAW;
     
-    if ( STATE_DRAW == gameState || STATE_LOSE == gameState || STATE_WON == gameState) {
+    if ( STATE_DRAW == gameState || STATE_X_WON == gameState || STATE_O_WON == gameState) {
         
         // GAME OVER
+        
+
 //        this -> _data -> machine.AddState(StateRef( new StateEndGame(_data, _size) ), true);
         return true;
     }
     return false;
 }
-
-
 
 void StateGame:: Init() {
 
@@ -197,6 +197,7 @@ void StateGame:: Init() {
 
     this -> _data -> assets.LoadTexture( "Game Background", GAME_BACKGROUND_FILEPATH);
     this -> _data -> assets.LoadTexture( "Pause Button", PAUSE_BUTTON );
+    this -> _data -> assets.LoadTexture( "Replay Button", RETRY_BUTTON );
     switch (_size)   {
         case 3:
             this -> _data -> assets.LoadTexture("Grid",   GRID_3x3_FILEPATH);
@@ -213,25 +214,35 @@ void StateGame:: Init() {
         default:
             break;
     }
+    this -> _data -> assets.LoadTexture("Title Draw", DRAW_TITLE_FILEPATH );
+    this -> _data -> assets.LoadTexture("Title X Win", X_WINS_TITLE_FILEPATH );
+    this -> _data -> assets.LoadTexture("Title O Win", O_WINS_TITLE_FILEPATH );
     this -> _data -> assets.LoadTexture("X Piece", X_PIECE_FILEPATH );
     this -> _data -> assets.LoadTexture("O Piece", O_PIECE_FILEPATH );
     this -> _data -> assets.LoadTexture("X Piece Wins", X_WINNING_PIECE_FILEPATH );
     this -> _data -> assets.LoadTexture("O Piece Wins", O_WINNING_PIECE_FILEPATH );
     
+    _title_Draw.setTexture  ( this -> _data -> assets.GetTexture("Title Draw") );
+    _title_O_Win.setTexture ( this -> _data -> assets.GetTexture("Title O Win") );
+    _title_X_Win.setTexture ( this -> _data -> assets.GetTexture("Title X Win") );
     _background.setTexture  ( this -> _data -> assets.GetTexture("Game Background") );
     _pauseButton.setTexture ( this -> _data -> assets.GetTexture("Pause Button") );
+    _replayButton.setTexture( this -> _data -> assets.GetTexture("Replay Button") );
     _grid.setTexture        ( this -> _data -> assets.GetTexture("Grid") );
     
     this -> _pauseButton.setPosition((SCREEN_WIDTH/2)
                                   - (this -> _pauseButton.getGlobalBounds().width / 2),
                                     (SCREEN_HEIGHT)
                                   - (this -> _pauseButton.getGlobalBounds().height * 1.1));
-    
-//    _pauseButton.setPosition( this -> _data -> window.getSize().x / 2
-//                           - _pauseButton.getLocalBounds().width  / 2,
-//                             _pauseButton.getPosition().y );
+    this -> _replayButton.setPosition((SCREEN_WIDTH/2)
+                                  - (this -> _pauseButton.getGlobalBounds().width / 2),
+                                    (SCREEN_HEIGHT)
+                                  - (this -> _pauseButton.getGlobalBounds().height * 1.1));
     _grid.setPosition( SCREEN_WIDTH  / 2  - _grid.getGlobalBounds().width   / 2,
                        SCREEN_HEIGHT / 2  - _grid.getGlobalBounds().height  / 2 );
+    this -> _title_X_Win.setPosition(0, 0);
+    this -> _title_O_Win.setPosition(0, 0);
+    this -> _title_Draw.setPosition(0, 0);
     InitGridPieces();
 }
 
@@ -257,29 +268,36 @@ void StateGame:: HandleInput() {
 //                if (STATE_PLAYING == gameState)
                     this -> PlacePiece();
 
-            //         this -> _data -> machine.AddState(StateRef( new StateEndGame(_data, _size) ), true);  // End Game
+            //
             }
         }
         else if (turn == AI_PIECE) {
             this -> PlaceAIPiece(gridArray,gridPieces);
             
         }
-        else
-            std::cout << " It's nobody's turn!!! :c \n";
+        else if (turn == END_GAME)
+            if ( this -> _data -> input.IsSpriteClicked(this -> _replayButton, sf::Mouse::Left, this -> _data -> window) )
+                this -> _data -> machine.AddState(StateRef( new StateGame(_data, _size) ), true);  // End Game
     }
 }
 
 void StateGame:: Update(float dt) { }
 
 void StateGame:: Draw(float dt) {
-
+    
     this -> _data -> window.clear();
-    this -> _data -> window.draw( this -> _background  );
-    this -> _data -> window.draw( this -> _pauseButton );
-    this -> _data -> window.draw( this -> _grid        );
+    this -> _data -> window.draw( this -> _background );
+    this -> _data -> window.draw( this -> _grid );
     for (int i = 0; i < _size ; ++i)
         for (int j = 0; j < _size; ++j)
             this -> _data -> window.draw( this -> gridPieces[i][j]);
+    
+    if (STATE_DRAW == gameState)        this -> _data -> window.draw( this -> _title_Draw  );
+    else if (STATE_X_WON == gameState)  this -> _data -> window.draw( this -> _title_X_Win );
+    else if (STATE_O_WON == gameState)  this -> _data -> window.draw( this -> _title_O_Win );
+    if (gameState != STATE_PLAYING )    this -> _data -> window.draw( this -> _replayButton);
+    else                                this -> _data -> window.draw( this -> _pauseButton );
+    
     this -> _data -> window.display();
 }
 
@@ -300,8 +318,8 @@ void StateGame:: Check3PiecesForMatch(int x1, int y1, int x2,
         gridPieces[x3][y3].setTexture( this -> _data -> assets.GetTexture(winningPieceStr));
         
         
-        if (PLAYER_PIECE == pieceToCheck)   gameState = STATE_WON;
-        else                                gameState = STATE_LOSE;
+        if (PLAYER_PIECE == pieceToCheck)   gameState = STATE_X_WON;
+        else                                gameState = STATE_O_WON;
     }
 }
 
@@ -323,8 +341,8 @@ void StateGame:: Check4PiecesForMatch(int x1, int y1, int x2, int y2,
         gridPieces[x3][y3].setTexture( this -> _data -> assets.GetTexture(winningPieceStr));
         gridPieces[x4][y4].setTexture( this -> _data -> assets.GetTexture(winningPieceStr));
         
-        if (PLAYER_PIECE == pieceToCheck)   gameState = STATE_WON;
-        else                                gameState = STATE_LOSE;
+        if (PLAYER_PIECE == pieceToCheck)   gameState = STATE_X_WON;
+        else                                gameState = STATE_O_WON;
     }
 }
 
@@ -347,8 +365,8 @@ void StateGame:: Check5PiecesForMatch(int x1, int y1, int x2, int y2, int x3,
         gridPieces[x4][y4].setTexture( this -> _data -> assets.GetTexture(winningPieceStr));
         gridPieces[x5][y5].setTexture( this -> _data -> assets.GetTexture(winningPieceStr));
         
-        if (PLAYER_PIECE == pieceToCheck)   gameState = STATE_WON;
-        else                                gameState = STATE_LOSE;
+        if (PLAYER_PIECE == pieceToCheck)   gameState = STATE_X_WON;
+        else                                gameState = STATE_O_WON;
     }
 }
 
@@ -373,12 +391,10 @@ void StateGame:: Check6PiecesForMatch(int x1, int y1, int x2, int y2, int x3, in
         gridPieces[x5][y5].setTexture( this -> _data -> assets.GetTexture(winningPieceStr));
         gridPieces[x6][y6].setTexture( this -> _data -> assets.GetTexture(winningPieceStr));
         
-        if (PLAYER_PIECE == pieceToCheck)   gameState = STATE_WON;
-        else                                gameState = STATE_LOSE;
+        if (PLAYER_PIECE == pieceToCheck)   gameState = STATE_X_WON;
+        else                                gameState = STATE_O_WON;
     }
 }
-
-
 
 
 void StateGame::PlaceAIPiece(int tmpGridArray[6][6], sf::Sprite gridPieces[6][6]) {
@@ -511,8 +527,12 @@ void StateGame::placeTrun(int col, int row) {
         gridPieces[col][row].setTexture( this -> _data -> assets.GetTexture("O Piece"));
     
     gridPieces[col][row].setColor(sf::Color(255,255,255,255));
-    this -> CheckIfGameWon(turn);
     
+    if (this -> CheckIfGameWon(turn))
+        
+        turn = END_GAME;
+    else {
     if (turn == PLAYER_PIECE)   turn = AI_PIECE;
     else                        turn = PLAYER_PIECE;
+    }
 }

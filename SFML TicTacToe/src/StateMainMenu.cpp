@@ -20,7 +20,7 @@ void StateMainMenu:: Init() {
     this -> _playButton.setTexture(     this -> _data -> assets.GetTexture("Play Button"));
     this -> _playButtonOuter.setTexture(this -> _data -> assets.GetTexture("Play Button Outer"));
     this -> _title.setTexture(          this -> _data -> assets.GetTexture("Game Title"));
-    this -> _settingsButton.setTexture(     this -> _data -> assets.GetTexture("Settings Button"));
+    this -> _settingsButton.setTexture( this -> _data -> assets.GetTexture("Settings Button"));
     
     
     // Positioning UI elements

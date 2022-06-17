@@ -10,7 +10,7 @@ StateEndGame:: StateEndGame(GameDataRef data, int size): _data( data ) { _size =
 void StateEndGame:: Init() {
 
     
-    this -> _data -> assets.LoadTexture("Retry Button",    RETRY_BUTTON);
+    this -> _data -> assets.LoadTexture("Retry Button",    MAIN_MENU_PLAY_BUTTON);
     this -> _data -> assets.LoadTexture("Home Button",      HOME_BUTTON);
     this -> _data -> assets.LoadTexture("Grid",      HOME_BUTTON);
     
