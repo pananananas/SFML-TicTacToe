@@ -5,27 +5,28 @@ const int INF = 2147483647;
 #define SCREEN_WIDTH  1000
 #define SCREEN_HEIGHT 1500
 
-#define SPLASH_STATE_SHOW_TIME 2
+#define SPLASH_STATE_SHOW_TIME 0.7
 
 // Backgrounds
 #define SPLASH_SCENE_BACKGROUND_FILEPATH    "Resources/UI/Splash_back.png"
-#define MAIN_MENU_BACKGROUND_FILEPATH       "Resources/UI/Menu.png"
+#define MAIN_MENU_BACKGROUND_FILEPATH       "Resources/UI/Menu 2.png"
 #define MAIN_MENU_TITLE_FILEPATH            "Resources/UI/Title.png"
 #define PAUSE_TITLE_FILEPATH                "Resources/UI/Title_Pause.png"
-#define GAME_BACKGROUND_FILEPATH            "Resources/UI/Game.png"
+#define SETTINGS_TITLE_FILEPATH             "Resources/UI/Title_Settings.png"
+#define GAME_BACKGROUND_FILEPATH            "Resources/UI/Game 2.png"
 #define PAUSE_BACKGROUND_FILEPATH           "Resources/UI/Game.png"
 #define SETTINGS_BACKGROUND_FILEPATH        "Resources/UI/Menu.png"
 
 // Buttons UI
 #define MAIN_MENU_PLAY_BUTTON               "Resources/UI/Play Button.png"
-#define MAIN_MENU_PLAY_BUTTON_OUTER         "Resources/UI/Play Button Outer.png"
-#define MAIN_MENU_SETTINGS_BUTTON           "Resources/UI/Pause Button.png"
-#define PAUSE_BUTTON                        "Resources/UI/Pause Button.png"
-#define RESUME_BUTTON                       "Resources/UI/Resume Button.png"
+#define MAIN_MENU_PLAY_BUTTON_OUTER         "Resources/UI/Play Button.png"
+#define MAIN_MENU_SETTINGS_BUTTON           "Resources/UI/Settings Button.png"
+#define PAUSE_BUTTON                        "Resources/UI/Pause_Button.png"
+#define RESUME_BUTTON                       "Resources/UI/Play Button.png"
 #define HOME_BUTTON                         "Resources/UI/Home Button.png"
 #define RETRY_BUTTON                        "Resources/UI/Retry Button.png"
-#define PLUS_BUTTON                         "Resources/UI/Pause Button.png"
-#define MINUS_BUTTON                        "Resources/UI/Pause Button.png"
+#define PLUS_BUTTON                         "Resources/UI/Plus_Button.png"
+#define MINUS_BUTTON                        "Resources/UI/Minus_Button.png"
 #define NUMBER_DISPLAY_3                    "Resources/UI/Pause Button.png"
 #define NUMBER_DISPLAY_4                    "Resources/UI/Home Button.png"
 #define NUMBER_DISPLAY_5                    "Resources/UI/Resume Button.png"

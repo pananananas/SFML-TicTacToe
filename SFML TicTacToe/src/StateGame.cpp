@@ -193,9 +193,9 @@ bool StateGame:: CheckIfGameWon(int turn) {
 void StateGame:: Init() {
 
     gameState = STATE_PLAYING;
-    turn      = PLAYER_PIECE;           // Kto zaczyna
+    turn      = PLAYER_PIECE;           // Starting player
 
-    this -> _data -> assets.LoadTexture( "Game Background", PAUSE_BACKGROUND_FILEPATH);
+    this -> _data -> assets.LoadTexture( "Game Background", GAME_BACKGROUND_FILEPATH);
     this -> _data -> assets.LoadTexture( "Pause Button", PAUSE_BUTTON );
     switch (_size)   {
         case 3:
@@ -222,9 +222,14 @@ void StateGame:: Init() {
     _pauseButton.setTexture ( this -> _data -> assets.GetTexture("Pause Button") );
     _grid.setTexture        ( this -> _data -> assets.GetTexture("Grid") );
     
-    _pauseButton.setPosition( this -> _data -> window.getSize().x / 2
-                           - _pauseButton.getLocalBounds().width  / 2,
-                             _pauseButton.getPosition().y );
+    this -> _pauseButton.setPosition((SCREEN_WIDTH/2)
+                                  - (this -> _pauseButton.getGlobalBounds().width / 2),
+                                    (SCREEN_HEIGHT)
+                                  - (this -> _pauseButton.getGlobalBounds().height * 1.1));
+    
+//    _pauseButton.setPosition( this -> _data -> window.getSize().x / 2
+//                           - _pauseButton.getLocalBounds().width  / 2,
+//                             _pauseButton.getPosition().y );
     _grid.setPosition( SCREEN_WIDTH  / 2  - _grid.getGlobalBounds().width   / 2,
                        SCREEN_HEIGHT / 2  - _grid.getGlobalBounds().height  / 2 );
     InitGridPieces();

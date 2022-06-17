@@ -10,8 +10,9 @@ StateSettings:: StateSettings(GameDataRef data, int size): _data( data ) { _size
 void StateSettings:: Init() {
 
     this -> _data -> assets.LoadTexture("Settings Background", SETTINGS_BACKGROUND_FILEPATH);
-    this -> _data -> assets.LoadTexture("Plus Button",      PLUS_BUTTON);
-    this -> _data -> assets.LoadTexture("Minus Button",     MINUS_BUTTON);
+    this -> _data -> assets.LoadTexture("Plus Button",         PLUS_BUTTON);
+    this -> _data -> assets.LoadTexture("Minus Button",        MINUS_BUTTON);
+    this -> _data -> assets.LoadTexture("S Title",             SETTINGS_TITLE_FILEPATH);
     switch (_size) {
         case 3:
             this -> _data -> assets.LoadTexture("Number Display",   NUMBER_DISPLAY_3);
@@ -31,11 +32,12 @@ void StateSettings:: Init() {
     this -> _data -> assets.LoadTexture("Number Display",   NUMBER_DISPLAY_3);
     this -> _data -> assets.LoadTexture("Home Button",      HOME_BUTTON);
 
-    this -> _background.setTexture(   this -> _data -> assets.GetTexture("Settings Background"));
-    this -> _plusButton.setTexture( this -> _data -> assets.GetTexture("Plus Button"));
-    this -> _minusButton.setTexture( this -> _data -> assets.GetTexture("Minus Button"));
+    this -> _background.setTexture(    this -> _data -> assets.GetTexture("Settings Background"));
+    this -> _plusButton.setTexture(    this -> _data -> assets.GetTexture("Plus Button"));
+    this -> _minusButton.setTexture(   this -> _data -> assets.GetTexture("Minus Button"));
     this -> _numberDisplay.setTexture( this -> _data -> assets.GetTexture("Number Display"));
-    this -> _homeButton.setTexture(   this -> _data -> assets.GetTexture("Home Button"));
+    this -> _homeButton.setTexture(    this -> _data -> assets.GetTexture("Home Button"));
+    this -> _title.setTexture(         this -> _data -> assets.GetTexture("S Title"));
 
     
     
@@ -53,11 +55,11 @@ void StateSettings:: Init() {
                                    - this -> _minusButton.getLocalBounds().width / 2 ,
                                      this -> _data -> window.getSize().y / 2
                                    - this -> _minusButton.getLocalBounds().height / 2);
-    
     this -> _homeButton.setPosition((SCREEN_WIDTH/2)
                                   - (this -> _homeButton.getGlobalBounds().width / 2),
-                                    (this -> _homeButton.getGlobalBounds().height * 0.1));
-    
+                                    (SCREEN_HEIGHT)
+                                  - (this -> _homeButton.getGlobalBounds().height * 1.3));
+    this -> _title.setPosition((SCREEN_WIDTH/ 2) - (this -> _title.getGlobalBounds().width / 2), 0);
 }
 
 
@@ -124,6 +126,7 @@ void StateSettings:: Draw(float dt) {
 
     this -> _data -> window.clear();
     this -> _data -> window.draw( this -> _background);
+    this -> _data -> window.draw( this -> _title);
     this -> _data -> window.draw( this -> _plusButton);
     this -> _data -> window.draw( this -> _minusButton);
     this -> _data -> window.draw( this -> _numberDisplay);
