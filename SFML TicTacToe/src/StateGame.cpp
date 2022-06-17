@@ -91,21 +91,23 @@ void StateGame:: PlacePiece() {
     }
 
     if ( gridArray[col-1][row-1] == EMPTY_PIECE ) {
-        gridArray[col-1][row-1] = turn;
+        this -> placeTrun(col-1, row-1);
         
-//        if ( PLAYER_PIECE == turn ) {
-
-        gridPieces[col-1][row-1].setTexture( this -> _data -> assets.GetTexture("X Piece"));
-        this -> CheckIfGameWon(turn);
-        turn = AI_PIECE;
-//        }
-//        else if ( AI_PIECE == turn ) {
+//        gridArray[col-1][row-1] = turn;
 //
-//            gridPieces[col-1][row-1].setTexture( this -> _data -> assets.GetTexture("O Piece"));
-//            this -> CheckIfPlayerWon(turn);
-//            turn = PLAYER_PIECE;
-//        }
-        gridPieces[col-1][row-1].setColor(sf::Color(255,255,255,255));
+////        if ( PLAYER_PIECE == turn ) {
+//
+//        gridPieces[col-1][row-1].setTexture( this -> _data -> assets.GetTexture("X Piece"));
+//        this -> CheckIfGameWon(turn);
+//        turn = AI_PIECE;
+////        }
+////        else if ( AI_PIECE == turn ) {
+////
+////            gridPieces[col-1][row-1].setTexture( this -> _data -> assets.GetTexture("O Piece"));
+////            this -> CheckIfPlayerWon(turn);
+////            turn = PLAYER_PIECE;
+////        }
+//        gridPieces[col-1][row-1].setColor(sf::Color(255,255,255,255));
     }
 }
 
@@ -174,13 +176,13 @@ bool StateGame:: CheckIfGameWon(int turn) {
             if ( EMPTY_PIECE != gridArray[i][j] )    emptyNum--;
     
     
-    if ( (emptyNum == 0) && (STATE_WON != gameState) && (STATE_LOSE != gameState) )
+    if ( isGridFull() && (STATE_WON != gameState) && (STATE_LOSE != gameState) )
         gameState = STATE_DRAW;
     
     if ( STATE_DRAW == gameState || STATE_LOSE == gameState || STATE_WON == gameState) {
         
         // GAME OVER
-//        this -> _data -> machine.AddState(StateRef( new StateEndGame(_data, _size) ), true);
+        this -> _data -> machine.AddState(StateRef( new StateEndGame(_data, _size) ), true);
         return true;
     }
     return false;
@@ -191,7 +193,7 @@ bool StateGame:: CheckIfGameWon(int turn) {
 void StateGame:: Init() {
 
     gameState = STATE_PLAYING;
-    turn      = PLAYER_PIECE;
+    turn      = PLAYER_PIECE;           // Kto zaczyna
 
     this -> _data -> assets.LoadTexture( "Game Background", PAUSE_BACKGROUND_FILEPATH);
     this -> _data -> assets.LoadTexture( "Pause Button", PAUSE_BUTTON );
@@ -216,14 +218,14 @@ void StateGame:: Init() {
     this -> _data -> assets.LoadTexture("X Piece Wins", X_WINNING_PIECE_FILEPATH );
     this -> _data -> assets.LoadTexture("O Piece Wins", O_WINNING_PIECE_FILEPATH );
     
-    _background.setTexture(  this -> _data -> assets.GetTexture("Game Background") );
-    _pauseButton.setTexture( this -> _data -> assets.GetTexture("Pause Button") );
-    _grid.setTexture(        this -> _data -> assets.GetTexture("Grid") );
+    _background.setTexture  ( this -> _data -> assets.GetTexture("Game Background") );
+    _pauseButton.setTexture ( this -> _data -> assets.GetTexture("Pause Button") );
+    _grid.setTexture        ( this -> _data -> assets.GetTexture("Grid") );
     
     _pauseButton.setPosition( this -> _data -> window.getSize().x / 2
                            - _pauseButton.getLocalBounds().width  / 2,
                              _pauseButton.getPosition().y );
-    _grid.setPosition( SCREEN_WIDTH / 2  - _grid.getGlobalBounds().width   / 2,
+    _grid.setPosition( SCREEN_WIDTH  / 2  - _grid.getGlobalBounds().width   / 2,
                        SCREEN_HEIGHT / 2  - _grid.getGlobalBounds().height  / 2 );
     InitGridPieces();
 }
@@ -254,11 +256,11 @@ void StateGame:: HandleInput() {
             }
         }
         else if (turn == AI_PIECE) {
-            this -> PlaceAIPiece(gridArray, gridPieces, turn);
+            this -> PlaceAIPiece(gridArray,gridPieces);
             
         }
         else
-            std::cout << " TU JESTEM TERA! \n";
+            std::cout << " It's nobody's turn!!! :c \n";
     }
 }
 
@@ -374,7 +376,7 @@ void StateGame:: Check6PiecesForMatch(int x1, int y1, int x2, int y2, int x3, in
 
 
 
-void StateGame::PlaceAIPiece(int tmpGridArray[6][6], sf::Sprite gridPieces[6][6], int &turn) {
+void StateGame::PlaceAIPiece(int tmpGridArray[6][6], sf::Sprite gridPieces[6][6]) {
     
     int col = 0, row = 0;
     int bestScore = -INF;
@@ -382,96 +384,133 @@ void StateGame::PlaceAIPiece(int tmpGridArray[6][6], sf::Sprite gridPieces[6][6]
     for (int i = 0; i < _size; ++i) {
         for (int j = 0; j < _size; ++j) {
             
-            if ( tmpGridArray[i][j] == EMPTY_PIECE ) {
-                tmpGridArray[i][j] = AI_PIECE;
-                int score = MiniMax(tmpGridArray, 0, false );
-                tmpGridArray[i][j] = EMPTY_PIECE;
-                std:: cout << "\n Score: "<< score << "\n ";
+            if ( gridArray[i][j] == EMPTY_PIECE ) {
+                gridArray[i][j] = AI_PIECE;
+                
+                int score = MiniMax(gridArray, 0, false );
+                gridArray[i][j] = EMPTY_PIECE;
+                std:: cout << "\n Score: "<< score << " At: "<<i<<","<<j << "\n ";
                 if ( bestScore < score ) {
                     
                     bestScore = score;
-                    std:: cout << "\n Best Score: "<< bestScore << "\n ";
+                    
                     col = i;
                     row = j;
+                    std:: cout << "\n col: "<< col;
+                    std:: cout << "\n row: "<< row << "\n ";
                 }
-                
-                
-                
             }
-            
-            
-            
         }
     }
-    gridArray[col][row] = turn;
-    gridPieces[col][row].setTexture( this -> _data -> assets.GetTexture("O Piece"));
-    gridPieces[col][row].setColor(sf::Color(255,255,255,255));
-    this -> CheckIfGameWon(turn);
-    turn = PLAYER_PIECE;
+    this -> placeTrun(col,row);
+    
+    std:: cout << "\n Best Score: " << bestScore ;
+    std:: cout << "\n BEST MOVE HERE:  " << col << "," << row;
+//    gridArray[col][row] = turn;
+//    gridPieces[col][row].setTexture( this -> _data -> assets.GetTexture("O Piece"));
+//    gridPieces[col][row].setColor(sf::Color(255,255,255,255));
+//    this -> CheckIfGameWon(turn);
+//    turn = PLAYER_PIECE;
 }
+
+
+//void StateGame::PlaceAIPiece() {
+//
+//    int Naj = -INF;
+//    int row = -1;
+//    int col = -1;
+//
+//    for (int i = 0; i < _size; i++)
+//        for (int j = 0; j < _size; j++)
+//            if (gridArray[i][j] == EMPTY_PIECE)
+//            {
+//                gridArray[i][j] = AI_PIECE;
+//                int Ruch = MiniMax(gridArray, 0, false);
+//                gridArray[i][j] = EMPTY_PIECE;
+//                if (Ruch > Naj) {
+//                    row = i;
+//                    col = j;
+//                    Naj = Ruch;
+//                }
+//            }
+//
+//
+//    this -> placeTrun(row,col);
+//}
 
 int StateGame::MiniMax(int tmpGridArray[6][6], int depth , bool max) {
     
     int result = this -> checkWinner();
-    if (result != 0)     return result;
+    if (result != 0)        return result;
+    if (isGridFull())       return 0;
     
-    
-    if (max) {
+    if (max) {      // Max
         int bestScore = -INF;
         for (int i = 0; i < _size; ++i) {
             for (int j = 0; j < _size; ++j) {
                 if (tmpGridArray[i][j] == EMPTY_PIECE) {
                     tmpGridArray[i][j] = AI_PIECE;
-                    bestScore = std::max(bestScore, MiniMax(tmpGridArray,depth + 1, !max));
+                    bestScore = std::max(bestScore, MiniMax(tmpGridArray,depth + 1, false));
                     tmpGridArray[i][j] = EMPTY_PIECE;
                 }
             }
         }
         return bestScore;
-    } else {
+    } else {        // Mini
         int bestScore = INF;
         for (int i = 0; i < _size; ++i) {
             for (int j = 0; j < _size; ++j) {
                 if (tmpGridArray[i][j] == EMPTY_PIECE) {
                     tmpGridArray[i][j] = PLAYER_PIECE;
-                    bestScore = std::min(bestScore, MiniMax(tmpGridArray,depth + 1, !max));
+                    bestScore = std::min(bestScore, MiniMax(tmpGridArray,depth + 1, true));
                     tmpGridArray[i][j] = EMPTY_PIECE;
                 }
             }
         }
         return bestScore;
     }
-    
-    
-    
-    
-    
 }
 
 int StateGame:: checkWinner() {
     
     int winner = 0;
     
-    if (this -> isGridFull())       winner = TIE;   // Tie
+    if (this -> isGridFull())       winner = 99;   // Tie
     
     for (int i = 0; i < _size; ++i) {
         if (gridArray[i][0] == gridArray[i][1] == gridArray[i][2])  winner = gridArray[i][0];
         if (gridArray[0][i] == gridArray[1][i] == gridArray[2][i])  winner = gridArray[0][i];
     }
     
-    if (gridArray[0][0] == gridArray[1][1] == gridArray[2][2])  winner = gridArray[0][0];
-    if (gridArray[2][0] == gridArray[1][1] == gridArray[0][2])  winner = gridArray[2][0];
-    
+    if (gridArray[0][0] == gridArray[1][1] == gridArray[2][2])      winner = gridArray[0][0];
+    if (gridArray[2][0] == gridArray[1][1] == gridArray[0][2])      winner = gridArray[2][0];
+//    std :: cout << " \n WINNERRRRRRRRRR = " << winner;
     return winner;
 }
 
 bool StateGame::isGridFull() {
     
     int tmp = _size * _size;
-    for ( int i = 0; i < _size; ++i )
-        for ( int j = 0; j < _size; ++j )
+    for (int i = 0; i < _size; ++i)
+        for (int j = 0; j < _size; ++j)
             if ( EMPTY_PIECE != gridArray[i][j] )   tmp--;
     
     if ( tmp == 0 )     return true;
     else                return false;
+}
+
+void StateGame::placeTrun(int col, int row) {
+    
+    gridArray[col][row] = turn;
+    
+    if (turn == PLAYER_PIECE)
+        gridPieces[col][row].setTexture( this -> _data -> assets.GetTexture("X Piece"));
+    else
+        gridPieces[col][row].setTexture( this -> _data -> assets.GetTexture("O Piece"));
+    
+    gridPieces[col][row].setColor(sf::Color(255,255,255,255));
+    this -> CheckIfGameWon(turn);
+    
+    if (turn == PLAYER_PIECE)   turn = AI_PIECE;
+    else                        turn = PLAYER_PIECE;
 }

@@ -34,9 +34,9 @@ class StateGame: public State {
     
     int checkWinner();
     bool isGridFull();
+    void placeTrun(int col, int row);
     
     
-    Algorithm   AI;
 public:
     
     
@@ -45,8 +45,8 @@ public:
     void HandleInput();
     void Update(float dt);
     void Draw(float dt);
-    
-    void PlaceAIPiece( int tmpGridArray[6][6], sf::Sprite gridPieces[6][6], int &turn);
+    void PlaceAIPiece();
+    void PlaceAIPiece( int tmpGridArray[6][6], sf::Sprite gridPieces[6][6]);
     int  MiniMax(    int tmpgridArray[6][6], int depth , bool max);
 };
 
@@ -57,8 +57,8 @@ public:
 //    int score = evaluate(board);
 //    if (score == 10)                return score;
 //    if (score == -10)               return score;
-////    if (isMovesLeft(board)==false)  return 0;
-// 
+//    if (isMovesLeft(board)==false)  return 0;
+//
 //    if (isMax) {
 //        int best = -1000;
 //        for (int i = 0; i<3; i++) {
@@ -77,7 +77,7 @@ public:
 //        for (int i = 0; i<3; i++) {
 //            for (int j = 0; j<3; j++) {
 //                if (board[i][j]=='_') {
-//                    
+//
 //                    board[i][j] = opponent;
 //                    best = min(best, minimax(board, depth+1, !isMax));
 //                    board[i][j] = '_';

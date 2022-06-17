@@ -58,9 +58,6 @@ const int INF = 2147483647;
 #define STATE_AI_PLAYING    93
 #define STATE_DRAW          92
 
-#define G_X_WON               1
-#define G_O_WON               2
-#define G_TIE                 3
 
 // Depth for MinMax
-#define TIE        0
+#define TIE        3
