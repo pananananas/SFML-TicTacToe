@@ -11,10 +11,12 @@ void StatePause:: Init() {
     this -> _data -> assets.LoadTexture("Pause Background", PAUSE_BACKGROUND_FILEPATH);
     this -> _data -> assets.LoadTexture("Resume Button",    RESUME_BUTTON);
     this -> _data -> assets.LoadTexture("Home Button",      HOME_BUTTON);
+    this -> _data -> assets.LoadTexture("P Title",            PAUSE_TITLE_FILEPATH);
 
     this -> _background.setTexture(   this -> _data -> assets.GetTexture("Pause Background"));
     this -> _resumeButton.setTexture( this -> _data -> assets.GetTexture("Resume Button"));
     this -> _homeButton.setTexture(   this -> _data -> assets.GetTexture("Home Button"));
+    this -> _title.setTexture(        this -> _data -> assets.GetTexture("P Title"));
 
     this -> _resumeButton.setPosition( this -> _data -> window.getSize().x / 2
                                      - this -> _resumeButton.getLocalBounds().width / 2 ,
@@ -25,6 +27,7 @@ void StatePause:: Init() {
                                    - this -> _homeButton.getLocalBounds().width / 2 ,
                                      this -> _data -> window.getSize().y / 5 * 3
                                    - this -> _homeButton.getLocalBounds().height / 2);
+    this -> _title.setPosition((SCREEN_WIDTH/ 2) - (this -> _title.getGlobalBounds().width / 2), 0);
 }
 
 
@@ -57,5 +60,6 @@ void StatePause:: Draw(float dt) {
     this -> _data -> window.draw( this -> _background);
     this -> _data -> window.draw( this -> _resumeButton);
     this -> _data -> window.draw( this -> _homeButton);
+    this -> _data -> window.draw( this -> _title);
     this -> _data -> window.display();
 }

@@ -2,18 +2,19 @@
 
 const int INF = 2147483647;
 
-#define SCREEN_WIDTH  768
-#define SCREEN_HEIGHT 1136
+#define SCREEN_WIDTH  1000
+#define SCREEN_HEIGHT 1500
 
-#define SPLASH_STATE_SHOW_TIME 0.5
+#define SPLASH_STATE_SHOW_TIME 2
 
 // Backgrounds
-#define SPLASH_SCENE_BACKGROUND_FILEPATH    "Resources/UI/Splash Background.png"
-#define MAIN_MENU_BACKGROUND_FILEPATH       "Resources/UI/Main Menu Background.png"
-#define MAIN_MENU_TITLE_FILEPATH            "Resources/UI/Game Title.png"
-#define GAME_BACKGROUND_FILEPATH            "Resources/UI/Main Menu Background.png"
-#define PAUSE_BACKGROUND_FILEPATH           "Resources/UI/Main Menu Background.png"
-#define SETTINGS_BACKGROUND_FILEPATH        "Resources/UI/Main Menu Background.png"
+#define SPLASH_SCENE_BACKGROUND_FILEPATH    "Resources/UI/Splash_back.png"
+#define MAIN_MENU_BACKGROUND_FILEPATH       "Resources/UI/Menu.png"
+#define MAIN_MENU_TITLE_FILEPATH            "Resources/UI/Title.png"
+#define PAUSE_TITLE_FILEPATH                "Resources/UI/Title_Pause.png"
+#define GAME_BACKGROUND_FILEPATH            "Resources/UI/Game.png"
+#define PAUSE_BACKGROUND_FILEPATH           "Resources/UI/Game.png"
+#define SETTINGS_BACKGROUND_FILEPATH        "Resources/UI/Menu.png"
 
 // Buttons UI
 #define MAIN_MENU_PLAY_BUTTON               "Resources/UI/Play Button.png"
@@ -32,15 +33,15 @@ const int INF = 2147483647;
 
 // Grid UI
 #define GRID_3x3_FILEPATH                   "Resources/UI/Grid.png"
-#define GRID_4x4_FILEPATH                   "Resources/UI/Grid.png"
-#define GRID_5x5_FILEPATH                   "Resources/UI/Grid.png"
-#define GRID_6x6_FILEPATH                   "Resources/UI/Grid.png"
+#define GRID_4x4_FILEPATH                   "Resources/UI/Grid 4.png"
+#define GRID_5x5_FILEPATH                   "Resources/UI/Grid 5.png"
+#define GRID_6x6_FILEPATH                   "Resources/UI/Grid 6.png"
 
 // Piece UI
 #define X_PIECE_FILEPATH                    "Resources/UI/X.png"
 #define O_PIECE_FILEPATH                    "Resources/UI/O.png"
-#define X_WINNING_PIECE_FILEPATH            "Resources/UI/X Win.png"
-#define O_WINNING_PIECE_FILEPATH            "Resources/UI/O Win.png"
+#define X_WINNING_PIECE_FILEPATH            "Resources/UI/X_Win.png"
+#define O_WINNING_PIECE_FILEPATH            "Resources/UI/O_Win.png"
 
 // Piece numbers
 #define X_PIECE             1

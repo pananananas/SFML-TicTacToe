@@ -182,7 +182,7 @@ bool StateGame:: CheckIfGameWon(int turn) {
     if ( STATE_DRAW == gameState || STATE_LOSE == gameState || STATE_WON == gameState) {
         
         // GAME OVER
-        this -> _data -> machine.AddState(StateRef( new StateEndGame(_data, _size) ), true);
+//        this -> _data -> machine.AddState(StateRef( new StateEndGame(_data, _size) ), true);
         return true;
     }
     return false;
@@ -446,27 +446,24 @@ int StateGame::MiniMax(int tmpGridArray[6][6], int depth , bool max) {
     
     if (max) {      // Max
         int bestScore = -INF;
-        for (int i = 0; i < _size; ++i) {
-            for (int j = 0; j < _size; ++j) {
+        for (int i = 0; i < _size; ++i)
+            for (int j = 0; j < _size; ++j)
                 if (tmpGridArray[i][j] == EMPTY_PIECE) {
                     tmpGridArray[i][j] = AI_PIECE;
                     bestScore = std::max(bestScore, MiniMax(tmpGridArray,depth + 1, false));
                     tmpGridArray[i][j] = EMPTY_PIECE;
                 }
-            }
-        }
         return bestScore;
-    } else {        // Mini
+    }
+    else {          // Mini
         int bestScore = INF;
-        for (int i = 0; i < _size; ++i) {
-            for (int j = 0; j < _size; ++j) {
+        for (int i = 0; i < _size; ++i)
+            for (int j = 0; j < _size; ++j)
                 if (tmpGridArray[i][j] == EMPTY_PIECE) {
                     tmpGridArray[i][j] = PLAYER_PIECE;
                     bestScore = std::min(bestScore, MiniMax(tmpGridArray,depth + 1, true));
                     tmpGridArray[i][j] = EMPTY_PIECE;
                 }
-            }
-        }
         return bestScore;
     }
 }
