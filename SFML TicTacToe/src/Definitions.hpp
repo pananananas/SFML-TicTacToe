@@ -12,8 +12,14 @@ const int INF = 2147483647;
 // Default values
 #define DEFAULT_SIZE            3
 #define DEFAULT_WIN_SIZE        3
-#define DEFAULT_IS_PLAYER_X     false
+#define DEFAULT_IS_PLAYER_X     true
 #define DEFAULT_VS_AI           true
+
+// Depth values for grid sizes
+#define DEFAULT_DEPTH_3X3       9
+#define DEFAULT_DEPTH_4X4       5
+#define DEFAULT_DEPTH_5X5       4
+#define DEFAULT_DEPTH_6X6       3
 
 // Backgrounds
 #define SPLASH_SCENE_BACKGROUND_FILEPATH    "Resources/UI/Splash_back.png"

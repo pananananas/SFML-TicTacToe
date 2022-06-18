@@ -20,16 +20,16 @@ StateGame:: StateGame(GameDataRef data, int size, int winSize, bool isPlayerX, b
     
     switch (_size) {
         case 3:
-            _depth = 10;
+            _depth = DEFAULT_DEPTH_3X3;
             break;
         case 4:
-            _depth = 5;
+            _depth = DEFAULT_DEPTH_4X4;
             break;
         case 5:
-            _depth = 5;
+            _depth = DEFAULT_DEPTH_5X5;
             break;
         case 6:
-            _depth = 3;
+            _depth = DEFAULT_DEPTH_6X6;
             break;
         default:
             break;
@@ -286,7 +286,7 @@ int  StateGame::MiniMax(int tmpGridArray[6][6], int depth , bool max, int alfa, 
                     bestScore = std::max(bestScore, score);
                     tmpGridArray[i][j] = EMPTY_PIECE;
                     alfa = std::max(score, alfa);
-                    if (beta <= alfa)   break;      // Ciecie alfa beta
+//                    if (beta <= alfa)   break;      // Ciecie alfa beta
                 }
         return bestScore;
     }
@@ -300,7 +300,7 @@ int  StateGame::MiniMax(int tmpGridArray[6][6], int depth , bool max, int alfa, 
                     bestScore = std::min(bestScore, score );
                     tmpGridArray[i][j] = EMPTY_PIECE;
                     beta = std::min(score, beta);
-                    if (beta <= alfa)   break;      // Ciecie alfa beta
+//                    if (beta <= alfa)   break;      // Ciecie alfa beta
                 }
         return bestScore;
     }

@@ -168,12 +168,12 @@ void StateSettings:: HandleInput() {
         if ( this -> _data -> input.IsSpriteClicked(this -> _XPiece, sf::Mouse::Left, this -> _data -> window) ) {
             if (_isPlayerX) _isPlayerX = false;
             else            _isPlayerX = true;
-            std:: cout << "\n ZMIANA, teraz jestem " << _isPlayerX;
+            std:: cout << "\n ZMIANA, teraz jestes X: " << _isPlayerX;
         }
         if ( this -> _data -> input.IsSpriteClicked(this -> _AIPiece, sf::Mouse::Left, this -> _data -> window) ) {
             if (_VSAI)      _VSAI = false;
             else            _VSAI = true;
-            std:: cout << "\n ZMIANA, teraz jestem " << _VSAI;
+            std:: cout << "\n ZMIANA, teraz grasz z AI: " << _VSAI;
         }
     }
 }
