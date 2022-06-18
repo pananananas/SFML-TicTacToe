@@ -10,9 +10,9 @@ const int INF = 2147483647;
 #define SPLASH_STATE_SHOW_TIME 1
 
 // Default values
-#define DEFAULT_SIZE               3
-#define DEFAULT_WIN_SIZE           3
-#define DEFAULT_IS_PLAYER_X     true
+#define DEFAULT_SIZE            3
+#define DEFAULT_WIN_SIZE        3
+#define DEFAULT_IS_PLAYER_X     false
 #define DEFAULT_VS_AI           true
 
 // Backgrounds

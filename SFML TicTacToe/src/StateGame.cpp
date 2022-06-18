@@ -26,7 +26,7 @@ StateGame:: StateGame(GameDataRef data, int size, int winSize, bool isPlayerX, b
             _depth = 5;
             break;
         case 5:
-            _depth = 4;
+            _depth = 5;
             break;
         case 6:
             _depth = 3;
@@ -240,124 +240,6 @@ void StateGame:: PlacePiece() {
     }
 }
 
-bool StateGame:: CheckIfGameWon(int turn, bool End) {
-    
-    int flag = 0;
-    switch (_size) {
-        case 3: {
-            
-            for (int i = 0; i < _size; ++i) {
-                int Tab[12]{0, i, 1, i, 2, i};
-                if (CheckPieces(Tab, turn, End))    flag++;
-            }
-            for (int i = 0; i < _size; ++i) {
-                int Tab[12]{i, 0, i, 1, i, 2};
-                if (CheckPieces(Tab, turn, End))    flag++;
-            }
-            int Tab1[12]{0, 0, 1, 1, 2, 2};
-            if (CheckPieces(Tab1, turn, End))       flag++;
-            int Tab2[12]{0, 2, 1, 1, 2, 0};
-            if (CheckPieces(Tab2, turn, End))       flag++;
-            break;
-        }
-        case 4: {
-            for (int i = 0; i < _size; ++i) {
-                int Tab[12]{0, i, 1, i, 2, i, 3, i};
-                if (CheckPieces(Tab, turn, End))    flag++;
-            }
-            for (int i = 0; i < _size; ++i) {
-                int Tab[12]{i, 0, i, 1, i, 2, i, 3};
-                if (CheckPieces(Tab, turn, End))    flag++;
-            }
-            int Tab1[12]{0, 0, 1, 1, 2, 2, 3, 3};
-            if (CheckPieces(Tab1, turn, End))       flag++;
-            int Tab2[12]{0, 3, 1, 2, 2, 1, 3, 0};
-            if (CheckPieces(Tab2, turn, End))       flag++;
-            break;
-        }
-        case 5: {
-            for (int i = 0; i < _size; ++i) {
-                int Tab[12]{0, i, 1, i, 2, i, 3, i, 4, i};
-                if (CheckPieces(Tab, turn, End))    flag++;
-            }
-            for (int i = 0; i < _size; ++i) {
-                int Tab[12]{i, 0, i, 1, i, 2, i, 3, i, 4};
-                if (CheckPieces(Tab, turn, End))    flag++;
-            }
-            int Tab1[12]{0, 0, 1, 1, 2, 2, 3, 3, 4, 4};
-            if (CheckPieces(Tab1, turn, End))       flag++;
-            int Tab2[12]{0, 4, 1, 3, 2, 2, 3, 1, 4, 0};
-            if (CheckPieces(Tab2, turn, End))       flag++;
-            
-            break;
-        }
-        case 6: {
-            for (int i = 0; i < _size; ++i) {
-                int Tab[12]{0, i, 1, i, 2, i, 3, i, 4, i, 5, i};
-                if (CheckPieces(Tab, turn, End))    flag++;
-            }
-            for (int i = 0; i < _size; ++i) {
-                int Tab[12]{i, 0, i, 1, i, 2, i, 3, i, 4, i, 5};
-                if (CheckPieces(Tab, turn, End))    flag++;
-            }
-            int Tab1[12]{0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5};
-            if (CheckPieces(Tab1, turn, End))       flag++;
-            int Tab2[12]{0, 5, 1, 4, 2, 3, 3, 2, 4, 1, 5, 0};
-            if (CheckPieces(Tab2, turn, End))       flag++;
-            break;
-        }
-    }
-    if (End == true)
-        if ( isGridFull() && (STATE_X_WON != gameState) && (STATE_O_WON != gameState) )
-            gameState = STATE_DRAW;
-    
-    if (flag != 0 || STATE_DRAW == gameState || STATE_X_WON == gameState || STATE_O_WON == gameState)
-        return true;
-    
-    return false;
-}
-
-bool StateGame:: CheckPieces(int Tab[12], int piece, bool End) {
-
-    switch (_size) {
-        case 3:
-            if (piece == gridArray[Tab[0]][Tab[1]] && piece == gridArray[Tab[2]][Tab[3]] &&
-                piece == gridArray[Tab[4]][Tab[5]]) {
-                
-                if (End == true)   DrawWinningPieces(Tab, piece);
-                return true;
-            }
-            break;
-        case 4:
-            if (piece == gridArray[Tab[0]][Tab[1]] && piece == gridArray[Tab[2]][Tab[3]] &&
-                piece == gridArray[Tab[4]][Tab[5]] && piece == gridArray[Tab[6]][Tab[7]]) {
-                
-                if (End == true)   DrawWinningPieces(Tab, piece);
-                return true;
-            }
-            break;
-        case 5:
-            if (piece == gridArray[Tab[0]][Tab[1]] && piece == gridArray[Tab[2]][Tab[3]] &&
-                piece == gridArray[Tab[4]][Tab[5]] && piece == gridArray[Tab[6]][Tab[7]] &&
-                piece == gridArray[Tab[8]][Tab[9]]) {
-                
-                if (End == true)   DrawWinningPieces(Tab, piece);
-                return true;
-            }
-            break;
-        case 6:
-            if (piece == gridArray[Tab[0]][Tab[1]] && piece == gridArray[Tab[2]][Tab[3]] &&
-                piece == gridArray[Tab[4]][Tab[5]] && piece == gridArray[Tab[6]][Tab[7]] &&
-                piece == gridArray[Tab[8]][Tab[9]] && piece == gridArray[Tab[10]][Tab[11]]) {
-                
-                if (End == true)   DrawWinningPieces(Tab, piece);
-                return true;
-            }
-            break;
-    }
-    return false;
-}
-
 void StateGame::PlaceAIPiece() {
     
     int col = -1, row = -1;
@@ -388,7 +270,7 @@ void StateGame::PlaceAIPiece() {
     this -> placeTrun(col,row);
 }
 
-int StateGame::MiniMax(int tmpGridArray[6][6], int depth , bool max, int alfa, int beta) {
+int  StateGame::MiniMax(int tmpGridArray[6][6], int depth , bool max, int alfa, int beta) {
     
     if (CheckIfGameWon(AIPiece, false))        return  10 - depth;
     if (CheckIfGameWon(PlayerPiece, false))    return -10 + depth;
@@ -404,7 +286,7 @@ int StateGame::MiniMax(int tmpGridArray[6][6], int depth , bool max, int alfa, i
                     bestScore = std::max(bestScore, score);
                     tmpGridArray[i][j] = EMPTY_PIECE;
                     alfa = std::max(score, alfa);
-//                    if (beta <= alfa)   break; // Ciecie alfa beta
+                    if (beta <= alfa)   break;      // Ciecie alfa beta
                 }
         return bestScore;
     }
@@ -418,7 +300,7 @@ int StateGame::MiniMax(int tmpGridArray[6][6], int depth , bool max, int alfa, i
                     bestScore = std::min(bestScore, score );
                     tmpGridArray[i][j] = EMPTY_PIECE;
                     beta = std::min(score, beta);
-//                    if (beta <= alfa)   break; // Ciecie alfa beta
+                    if (beta <= alfa)   break;      // Ciecie alfa beta
                 }
         return bestScore;
     }
@@ -461,24 +343,24 @@ void StateGame::DrawWinningPieces(int Tab[12], int winner) {
     std::string name;
     if (O_PIECE == winner )   name = "O Piece Wins";
     else                      name = "X Piece Wins";
-    switch (_size) {
+    switch (_winSize) {
         case 3:
-            gridPieces[Tab[0]][Tab[1]].setTexture( this -> _data -> assets.GetTexture(name));
-            gridPieces[Tab[2]][Tab[3]].setTexture( this -> _data -> assets.GetTexture(name));
-            gridPieces[Tab[4]][Tab[5]].setTexture( this -> _data -> assets.GetTexture(name));
+            gridPieces[Tab[6]][Tab[7]].setTexture( this -> _data -> assets.GetTexture(name));
+            gridPieces[Tab[8]][Tab[9]].setTexture( this -> _data -> assets.GetTexture(name));
+            gridPieces[Tab[10]][Tab[11]].setTexture( this -> _data -> assets.GetTexture(name));
             break;
         case 4:
-            gridPieces[Tab[0]][Tab[1]].setTexture( this -> _data -> assets.GetTexture(name));
-            gridPieces[Tab[2]][Tab[3]].setTexture( this -> _data -> assets.GetTexture(name));
             gridPieces[Tab[4]][Tab[5]].setTexture( this -> _data -> assets.GetTexture(name));
             gridPieces[Tab[6]][Tab[7]].setTexture( this -> _data -> assets.GetTexture(name));
+            gridPieces[Tab[8]][Tab[9]].setTexture( this -> _data -> assets.GetTexture(name));
+            gridPieces[Tab[10]][Tab[11]].setTexture( this -> _data -> assets.GetTexture(name));
             break;
         case 5:
-            gridPieces[Tab[0]][Tab[1]].setTexture( this -> _data -> assets.GetTexture(name));
             gridPieces[Tab[2]][Tab[3]].setTexture( this -> _data -> assets.GetTexture(name));
             gridPieces[Tab[4]][Tab[5]].setTexture( this -> _data -> assets.GetTexture(name));
             gridPieces[Tab[6]][Tab[7]].setTexture( this -> _data -> assets.GetTexture(name));
             gridPieces[Tab[8]][Tab[9]].setTexture( this -> _data -> assets.GetTexture(name));
+            gridPieces[Tab[10]][Tab[11]].setTexture( this -> _data -> assets.GetTexture(name));
             break;
         case 6:
             gridPieces[Tab[0]][Tab[1]].setTexture( this -> _data -> assets.GetTexture(name));
@@ -496,3 +378,225 @@ void StateGame::DrawWinningPieces(int Tab[12], int winner) {
     else                            if (_isPlayerX)     gameState = STATE_O_WON;
                                     else                gameState = STATE_X_WON;
 }
+
+bool StateGame::CheckIfGameWon(int turn, bool End) {
+    
+    int won = 0;
+    
+    for (int i = 0; i < _size; i++)
+        for (int j = 0; j < _size; j++) {
+            
+            for (int l = 0; l < _winSize; l++) {            // Poziom
+                if (gridArray[i + l][j] == turn) {
+                    if (l == _winSize - 1) {
+                        won = turn;
+                        if (End == true) {
+                            int Tab[12]{i+l-5, j, i+l-4, j, i+l-3, j, i+l-2, j, i+l-1, j, i+l, j};
+                            DrawWinningPieces(Tab, turn);
+                        }
+                    }
+                } else break;
+            }
+            
+            for (int l = 0; l < _winSize; l++) {            // Pion
+                if (gridArray[i][j + l] == turn) {
+                    if (l == _winSize - 1) {
+                        won = turn;
+                        if (End == true) {
+                            int Tab[12]{i, j+l-5, i, j+l-4, i, j+l-3, i, j+l-2, i, j+l-1, i, j+l};
+                            DrawWinningPieces(Tab, turn);
+                        }
+                    }
+                } else break;
+            }
+            for (int l = 0; l < _winSize; l++) {            // Skos
+                if (gridArray[i + l][j + l] == turn) {
+                    if (l == _winSize - 1) {
+                        won = turn;
+                        if (End == true) {
+                            int Tab[12]{i+l-5, j+l-5, i+l-4, j+l-4, i+l-3, j+l-3, i+l-2, j+l-2, i+l-1, j+l-1, i+l, j+l};
+                            DrawWinningPieces(Tab, turn);
+                        }
+                    }
+                } else break;
+            }
+            for (int l = 0; l < _winSize; l++) {            // Skos2
+                if (gridArray[i + l][j - l] == turn) {
+                    if (l == _winSize - 1) {
+                        won = turn;
+                        if (End == true) {
+                            int Tab[12]{i+l-5, j-l+5, i+l-4, j-l+4, i+l-3, j-l+3, i+l-2, j-l+2, i+l-1, j-l+1, i+l, j-l};
+                            DrawWinningPieces(Tab, turn);
+                        }
+                    }
+                } else break;
+            }
+        }
+    
+    if (End == true)
+        if ( isGridFull() && (STATE_X_WON != gameState) && (STATE_O_WON != gameState) )
+            gameState = STATE_DRAW;
+    
+    if (won != 0 || STATE_DRAW == gameState || STATE_X_WON == gameState || STATE_O_WON == gameState)
+        return true;
+    
+    return false;
+}
+
+//bool StateGame:: CheckIfGameWonOld(int turn, bool End) {
+//
+//    int flag = 0;
+//    switch (_size) {
+//        case 3: {
+//
+//            for (int i = 0; i < _size; ++i) {
+//                int Tab[12]{0, i, 1, i, 2, i};
+//                if (CheckPieces(Tab, turn, End))    flag++;
+//            }
+//            for (int i = 0; i < _size; ++i) {
+//                int Tab[12]{i, 0, i, 1, i, 2};
+//                if (CheckPieces(Tab, turn, End))    flag++;
+//            }
+//            int Tab1[12]{0, 0, 1, 1, 2, 2};
+//            if (CheckPieces(Tab1, turn, End))       flag++;
+//            int Tab2[12]{0, 2, 1, 1, 2, 0};
+//            if (CheckPieces(Tab2, turn, End))       flag++;
+//            break;
+//        }
+//        case 4: {
+//            for (int i = 0; i < _size; ++i) {
+//                int Tab[12]{0, i, 1, i, 2, i, 3, i};
+//                if (CheckPieces(Tab, turn, End))    flag++;
+//            }
+//            for (int i = 0; i < _size; ++i) {
+//                int Tab[12]{i, 0, i, 1, i, 2, i, 3};
+//                if (CheckPieces(Tab, turn, End))    flag++;
+//            }
+//            int Tab1[12]{0, 0, 1, 1, 2, 2, 3, 3};
+//            if (CheckPieces(Tab1, turn, End))       flag++;
+//            int Tab2[12]{0, 3, 1, 2, 2, 1, 3, 0};
+//            if (CheckPieces(Tab2, turn, End))       flag++;
+//            break;
+//        }
+//        case 5: {
+//            for (int i = 0; i < _size; ++i) {
+//                int Tab[12]{0, i, 1, i, 2, i, 3, i, 4, i};
+//                if (CheckPieces(Tab, turn, End))    flag++;
+//            }
+//            for (int i = 0; i < _size; ++i) {
+//                int Tab[12]{i, 0, i, 1, i, 2, i, 3, i, 4};
+//                if (CheckPieces(Tab, turn, End))    flag++;
+//            }
+//            int Tab1[12]{0, 0, 1, 1, 2, 2, 3, 3, 4, 4};
+//            if (CheckPieces(Tab1, turn, End))       flag++;
+//            int Tab2[12]{0, 4, 1, 3, 2, 2, 3, 1, 4, 0};
+//            if (CheckPieces(Tab2, turn, End))       flag++;
+//
+//            break;
+//        }
+//        case 6: {
+//            for (int i = 0; i < _size; ++i) {
+//                int Tab[12]{0, i, 1, i, 2, i, 3, i, 4, i, 5, i};
+//                if (CheckPieces(Tab, turn, End))    flag++;
+//            }
+//            for (int i = 0; i < _size; ++i) {
+//                int Tab[12]{i, 0, i, 1, i, 2, i, 3, i, 4, i, 5};
+//                if (CheckPieces(Tab, turn, End))    flag++;
+//            }
+//            int Tab1[12]{0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5};
+//            if (CheckPieces(Tab1, turn, End))       flag++;
+//            int Tab2[12]{0, 5, 1, 4, 2, 3, 3, 2, 4, 1, 5, 0};
+//            if (CheckPieces(Tab2, turn, End))       flag++;
+//            break;
+//        }
+//    }
+//    if (End == true)
+//        if ( isGridFull() && (STATE_X_WON != gameState) && (STATE_O_WON != gameState) )
+//            gameState = STATE_DRAW;
+//
+//    if (flag != 0 || STATE_DRAW == gameState || STATE_X_WON == gameState || STATE_O_WON == gameState)
+//        return true;
+//
+//    return false;
+//}
+//
+//bool StateGame:: CheckPieces(int Tab[12], int piece, bool End) {
+//
+//    switch (_size) {
+//        case 3:
+//            if (piece == gridArray[Tab[0]][Tab[1]] && piece == gridArray[Tab[2]][Tab[3]] &&
+//                piece == gridArray[Tab[4]][Tab[5]]) {
+//
+//                if (End == true)   DrawWinningPieces(Tab, piece);
+//                return true;
+//            }
+//            break;
+//        case 4:
+//            if (piece == gridArray[Tab[0]][Tab[1]] && piece == gridArray[Tab[2]][Tab[3]] &&
+//                piece == gridArray[Tab[4]][Tab[5]] && piece == gridArray[Tab[6]][Tab[7]]) {
+//
+//                if (End == true)   DrawWinningPieces(Tab, piece);
+//                return true;
+//            }
+//            break;
+//        case 5:
+//            if (piece == gridArray[Tab[0]][Tab[1]] && piece == gridArray[Tab[2]][Tab[3]] &&
+//                piece == gridArray[Tab[4]][Tab[5]] && piece == gridArray[Tab[6]][Tab[7]] &&
+//                piece == gridArray[Tab[8]][Tab[9]]) {
+//
+//                if (End == true)   DrawWinningPieces(Tab, piece);
+//                return true;
+//            }
+//            break;
+//        case 6:
+//            if (piece == gridArray[Tab[0]][Tab[1]] && piece == gridArray[Tab[2]][Tab[3]] &&
+//                piece == gridArray[Tab[4]][Tab[5]] && piece == gridArray[Tab[6]][Tab[7]] &&
+//                piece == gridArray[Tab[8]][Tab[9]] && piece == gridArray[Tab[10]][Tab[11]]) {
+//
+//                if (End == true)   DrawWinningPieces(Tab, piece);
+//                return true;
+//            }
+//            break;
+//    }
+//    return false;
+//}
+//
+//void StateGame::DrawWinningPieces(int Tab[12], int winner) {
+//    std::string name;
+//    if (O_PIECE == winner )   name = "O Piece Wins";
+//    else                      name = "X Piece Wins";
+//    switch (_size) {
+//        case 3:
+//            gridPieces[Tab[0]][Tab[1]].setTexture( this -> _data -> assets.GetTexture(name));
+//            gridPieces[Tab[2]][Tab[3]].setTexture( this -> _data -> assets.GetTexture(name));
+//            gridPieces[Tab[4]][Tab[5]].setTexture( this -> _data -> assets.GetTexture(name));
+//            break;
+//        case 4:
+//            gridPieces[Tab[0]][Tab[1]].setTexture( this -> _data -> assets.GetTexture(name));
+//            gridPieces[Tab[2]][Tab[3]].setTexture( this -> _data -> assets.GetTexture(name));
+//            gridPieces[Tab[4]][Tab[5]].setTexture( this -> _data -> assets.GetTexture(name));
+//            gridPieces[Tab[6]][Tab[7]].setTexture( this -> _data -> assets.GetTexture(name));
+//            break;
+//        case 5:
+//            gridPieces[Tab[0]][Tab[1]].setTexture( this -> _data -> assets.GetTexture(name));
+//            gridPieces[Tab[2]][Tab[3]].setTexture( this -> _data -> assets.GetTexture(name));
+//            gridPieces[Tab[4]][Tab[5]].setTexture( this -> _data -> assets.GetTexture(name));
+//            gridPieces[Tab[6]][Tab[7]].setTexture( this -> _data -> assets.GetTexture(name));
+//            gridPieces[Tab[8]][Tab[9]].setTexture( this -> _data -> assets.GetTexture(name));
+//            break;
+//        case 6:
+//            gridPieces[Tab[0]][Tab[1]].setTexture( this -> _data -> assets.GetTexture(name));
+//            gridPieces[Tab[2]][Tab[3]].setTexture( this -> _data -> assets.GetTexture(name));
+//            gridPieces[Tab[4]][Tab[5]].setTexture( this -> _data -> assets.GetTexture(name));
+//            gridPieces[Tab[6]][Tab[7]].setTexture( this -> _data -> assets.GetTexture(name));
+//            gridPieces[Tab[8]][Tab[9]].setTexture( this -> _data -> assets.GetTexture(name));
+//            gridPieces[Tab[10]][Tab[11]].setTexture( this -> _data -> assets.GetTexture(name));
+//            break;
+//        default:
+//            break;
+//    }
+//    if (PlayerPiece == winner)      if (_isPlayerX)     gameState = STATE_X_WON;
+//                                    else                gameState = STATE_O_WON;
+//    else                            if (_isPlayerX)     gameState = STATE_O_WON;
+//                                    else                gameState = STATE_X_WON;
+//}
