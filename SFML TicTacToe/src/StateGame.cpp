@@ -407,19 +407,23 @@ void StateGame::PlaceAIPiece() {
     
     int col = -1, row = -1;
     int bestScore = -INF;
-    int score = 0;
-    
+    int alfa      = -INF;
+    int beta      =  INF;
+    int score     = 0;
+
     for (int i = 0; i < _size; ++i) {
         for (int j = 0; j < _size; ++j) {
             
             if ( gridArray[i][j] == EMPTY_PIECE ) {
                 gridArray[i][j] = AI_PIECE;
-                score = MiniMax(gridArray, _depth, false );
-                
+                score = MiniMax(gridArray, _depth, false, alfa, beta);
+                std:: cout << "\n Score: "<< score << " At: "<<i<<","<<j << "\n ";
                 if ( bestScore < score ) {
                     bestScore = score;
                     col = i;
                     row = j;
+                    std:: cout << "\n col: "<< col;
+                    std:: cout << "\n row: "<< row << "\n ";
                 }
                 gridArray[i][j] = EMPTY_PIECE;
             }
@@ -429,11 +433,11 @@ void StateGame::PlaceAIPiece() {
 }
 
 
-int StateGame::MiniMax(int tmpGridArray[6][6], int depth , bool max) {
+int StateGame::MiniMax(int tmpGridArray[6][6], int depth , bool max, int alfa, int beta) {
     
     if (CheckIfGameWon(AI_PIECE, false))        return  10 - depth;
     if (CheckIfGameWon(PLAYER_PIECE, false))    return -10 + depth;
-    if (isGridFull() || (depth == 0))           return 0;
+    if (isGridFull() || (depth == 0))           return   0;
     
     if (max) {      // Max
         int bestScore = -INF;
@@ -441,8 +445,11 @@ int StateGame::MiniMax(int tmpGridArray[6][6], int depth , bool max) {
             for (int j = 0; j < _size; ++j)
                 if (tmpGridArray[i][j] == EMPTY_PIECE) {
                     tmpGridArray[i][j] = AI_PIECE;
-                    bestScore = std::max(bestScore, MiniMax(tmpGridArray,depth - 1, false));
+                    int score = MiniMax(tmpGridArray,depth - 1, false, alfa, beta);
+                    bestScore = std::max(bestScore, score);
                     tmpGridArray[i][j] = EMPTY_PIECE;
+                    alfa = std::max(score, alfa);
+//                    if (beta <= alfa)   break; // Ciecie alfa beta
                 }
         return bestScore;
     }
@@ -452,8 +459,11 @@ int StateGame::MiniMax(int tmpGridArray[6][6], int depth , bool max) {
             for (int j = 0; j < _size; ++j)
                 if (tmpGridArray[i][j] == EMPTY_PIECE) {
                     tmpGridArray[i][j] = PLAYER_PIECE;
-                    bestScore = std::min(bestScore, MiniMax(tmpGridArray,depth - 1, true));
+                    int score = MiniMax(tmpGridArray,depth - 1, true, alfa, beta);
+                    bestScore = std::min(bestScore, score );
                     tmpGridArray[i][j] = EMPTY_PIECE;
+                    beta = std::min(score, beta);
+//                    if (beta <= alfa)   break; // Ciecie alfa beta
                 }
         return bestScore;
     }
@@ -487,15 +497,6 @@ void StateGame::placeTrun(int col, int row) {
 }
 
 void StateGame::DrawWinningPieces(int Tab[12], int winner) {
-    
-    std :: cout << "\n x1 = " << Tab[0];
-    std :: cout << "\n y1 = " << Tab[1];
-    std :: cout << "\n x2 = " << Tab[2];
-    std :: cout << "\n y2 = " << Tab[3];
-    std :: cout << "\n x3 = " << Tab[4];
-    std :: cout << "\n y3 = " << Tab[5];
-    std :: cout << "\n W  = " << winner;
-    
     std::string name;
     if (O_PIECE == winner )   name = "O Piece Wins";
     else                      name = "X Piece Wins";

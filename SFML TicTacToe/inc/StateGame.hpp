@@ -26,7 +26,7 @@ class StateGame: public State {
     bool isGridFull();
     void PlaceAIPiece();
     void placeTrun(int col, int row);
-    int  MiniMax(int tmpgridArray[6][6], int depth , bool max);
+    int  MiniMax(int tmpgridArray[6][6], int depth , bool max, int alfa, int beta);
     void DrawWinningPieces(int Tab[12], int winner);
     
 public:

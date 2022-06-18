@@ -7,7 +7,7 @@ const int INF = 2147483647;
 #define SCREEN_HEIGHT 1500
 
 // Time
-#define SPLASH_STATE_SHOW_TIME 0.7
+#define SPLASH_STATE_SHOW_TIME 1
 
 // Backgrounds
 #define SPLASH_SCENE_BACKGROUND_FILEPATH    "Resources/UI/Splash_back.png"
