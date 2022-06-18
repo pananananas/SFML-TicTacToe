@@ -6,8 +6,25 @@
 #include <cmath>
 
 StateGame:: StateGame(GameDataRef data, int size): _data( data ) {
+    
     _size = size;
-    _depth = 5;
+    
+    switch (_size) {
+        case 3:
+            _depth = 7;
+            break;
+        case 4:
+            _depth = 4;
+            break;
+        case 5:
+            _depth = 3;
+            break;
+        case 6:
+            _depth = 2;
+            break;
+        default:
+            break;
+    }
 }
 
 void StateGame:: Init() {
@@ -61,9 +78,15 @@ void StateGame:: Init() {
                                   - (this -> _pauseButton.getGlobalBounds().height * 1.1));
     _grid.setPosition( SCREEN_WIDTH  / 2  - _grid.getGlobalBounds().width   / 2,
                        SCREEN_HEIGHT / 2  - _grid.getGlobalBounds().height  / 2 );
-    this -> _title_X_Win.setPosition(0, 0);
-    this -> _title_O_Win.setPosition(0, 0);
-    this -> _title_Draw.setPosition(0, 0);
+    if (_size == 6) {
+        this -> _title_X_Win.setPosition(0, -70);
+        this -> _title_O_Win.setPosition(0, -70);
+        this -> _title_Draw.setPosition(0, -70);
+    } else {
+        this -> _title_X_Win.setPosition(0, 0);
+        this -> _title_O_Win.setPosition(0, 0);
+        this -> _title_Draw.setPosition(0, 0);
+    }
     InitGridPieces();
 }
 
@@ -184,10 +207,11 @@ void StateGame:: PlacePiece() {
             else if ( gridLocalTouchPoz.x < gridSectionSize.x * 4 )  col = 4;
             else if ( gridLocalTouchPoz.x < gridSectionSize.x * 5 )  col = 5;
             else                                                     col = 6;
+            
             if      ( gridLocalTouchPoz.y < gridSectionSize.y )      row = 1;    // Rows
             else if ( gridLocalTouchPoz.y < gridSectionSize.y * 2 )  row = 2;
             else if ( gridLocalTouchPoz.y < gridSectionSize.y * 3 )  row = 3;
-            if      ( gridLocalTouchPoz.y < gridSectionSize.y * 4 )  row = 4;
+            else if ( gridLocalTouchPoz.y < gridSectionSize.y * 4 )  row = 4;
             else if ( gridLocalTouchPoz.y < gridSectionSize.y * 5 )  row = 5;
             else                                                     row = 6;
             break;
@@ -409,7 +433,7 @@ void StateGame::PlaceAIPiece() {
     int bestScore = -INF;
     int alfa      = -INF;
     int beta      =  INF;
-    int score     = 0;
+    int score     =    0;
 
     for (int i = 0; i < _size; ++i) {
         for (int j = 0; j < _size; ++j) {
@@ -417,11 +441,12 @@ void StateGame::PlaceAIPiece() {
             if ( gridArray[i][j] == EMPTY_PIECE ) {
                 gridArray[i][j] = AI_PIECE;
                 score = MiniMax(gridArray, _depth, false, alfa, beta);
-                std:: cout << "\n Score: "<< score << " At: "<<i<<","<<j << "\n ";
+                std:: cout << "\n Score: "<< score << " At: "<< i << "," << j << "\n ";
                 if ( bestScore < score ) {
                     bestScore = score;
                     col = i;
                     row = j;
+                    std:: cout << "\n Best score update: " << bestScore;
                     std:: cout << "\n col: "<< col;
                     std:: cout << "\n row: "<< row << "\n ";
                 }
