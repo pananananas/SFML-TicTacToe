@@ -32,9 +32,6 @@ class StateGame: public State {
     bool CheckIfGameWon(int turn, bool End);
     void DrawWinningPieces(int Tab[12], int winner);
     int  MiniMax(int tmpgridArray[6][6], int depth , bool max, int alfa, int beta);
-//    bool CheckPieces(int Tab[12], int piece, bool End);
-//    void DrawWinningPieces(int Tab[12], int winner);
-//    bool CheckIfGameWonOld(int turn, bool End);
     
 public:
     StateGame(GameDataRef data, int size, int winSize, bool isPlayerX, bool VSAI);
