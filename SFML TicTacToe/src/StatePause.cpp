@@ -4,7 +4,10 @@
 #include <iostream>
 #include <sstream>
 
-StatePause:: StatePause(GameDataRef data, int size): _data( data ) { _size = size; }
+StatePause:: StatePause(GameDataRef data, int size, int winSize, bool isPlayerX, bool VSAI): _data( data ) {
+    _winSize  = winSize;
+    _VSAI     = VSAI;
+    _size = size; _isPlayerX = isPlayerX; }
 
 void StatePause:: Init() {
 
@@ -45,7 +48,7 @@ void StatePause:: HandleInput() {
 
         if ( this -> _data -> input.IsSpriteClicked(this -> _homeButton, sf::Mouse::Left, this -> _data -> window) ) {
             this -> _data -> machine.RemoveState();
-            this -> _data -> machine.AddState(StateRef(new StateMainMenu(_data, _size)), true);
+            this -> _data -> machine.AddState(StateRef(new StateMainMenu(_data, _size,_winSize, _isPlayerX, _VSAI)), true);
         }
     }
 }

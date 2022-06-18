@@ -19,18 +19,23 @@ class StateGame: public State {
     int   turn;
     int  _size;
     int  _depth;
+    int  _winSize;
+    bool _VSAI;
+    bool _isPlayerX;
+    int   PlayerPiece;
+    int   AIPiece;
     void InitGridPieces();
-    void PlacePiece();
-    bool CheckIfGameWon(int turn,bool End);
-    bool CheckPieces(int Tab[12], int piece, bool End);
     bool isGridFull();
+    void PlacePiece();
     void PlaceAIPiece();
     void placeTrun(int col, int row);
+    bool CheckIfGameWon(int turn,bool End);
+    bool CheckPieces(int Tab[12], int piece, bool End);
     int  MiniMax(int tmpgridArray[6][6], int depth , bool max, int alfa, int beta);
     void DrawWinningPieces(int Tab[12], int winner);
     
 public:
-    StateGame(GameDataRef data, int size);
+    StateGame(GameDataRef data, int size, int winSize, bool isPlayerX, bool VSAI);
     void Init();
     void HandleInput();
     void Update(float dt);

@@ -14,9 +14,11 @@ class StatePause: public State {
     
 public:
     
-    int _size;
-    
-    StatePause(GameDataRef data, int size);
+    int  _size;
+    bool _isPlayerX;
+    int  _winSize;
+    bool _VSAI;
+    StatePause(GameDataRef data, int size, int winSize, bool isPlayerX, bool VSAI);
     void Init();
     void HandleInput();
     void Update(float dt);

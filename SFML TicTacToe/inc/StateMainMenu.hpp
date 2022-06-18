@@ -16,8 +16,10 @@ class StateMainMenu: public State {
 public:
     
     int _size;
-    
-    StateMainMenu(GameDataRef data, int size);
+    bool _isPlayerX;
+    int  _winSize;
+    bool _VSAI;
+    StateMainMenu(GameDataRef data, int size, int winSize, bool isPlayerX, bool VSAI);
     void Init();
     void HandleInput();
     void Update(float dt);

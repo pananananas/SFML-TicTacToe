@@ -5,8 +5,17 @@
 #include <sstream>
 #include <cmath>
 
-StateGame:: StateGame(GameDataRef data, int size): _data( data ) {
-    
+StateGame:: StateGame(GameDataRef data, int size, int winSize, bool isPlayerX, bool VSAI): _data( data ) {
+    _winSize  = winSize;
+    _VSAI     = VSAI;
+    _isPlayerX = isPlayerX;
+    if (_isPlayerX) {
+        PlayerPiece = X_PIECE;
+        AIPiece     = O_PIECE;
+    } else {
+        PlayerPiece = O_PIECE;
+        AIPiece     = X_PIECE;
+    }
     _size = size;
     
     switch (_size) {
@@ -14,7 +23,7 @@ StateGame:: StateGame(GameDataRef data, int size): _data( data ) {
             _depth = 10;
             break;
         case 4:
-            _depth = 6;
+            _depth = 5;
             break;
         case 5:
             _depth = 4;
@@ -30,8 +39,8 @@ StateGame:: StateGame(GameDataRef data, int size): _data( data ) {
 void StateGame:: Init() {
 
     gameState = STATE_PLAYING;
-    turn      = PLAYER_PIECE;           // Starting player
-    
+    if (_isPlayerX)     turn = PlayerPiece;           // Starting player
+    else                turn = AIPiece;
     
     this -> _data -> assets.LoadTexture( "Game Background", GAME_BACKGROUND_FILEPATH);
     this -> _data -> assets.LoadTexture( "Pause Button", PAUSE_BUTTON );
@@ -99,10 +108,10 @@ void StateGame:: HandleInput() {
         if (sf::Event::Closed == event.type)
             this -> _data -> window.close();
 
-        if (turn == PLAYER_PIECE) {
+        if (turn == PlayerPiece) {
             
             if ( this -> _data -> input.IsSpriteClicked(this -> _pauseButton, sf::Mouse::Left, this -> _data -> window) ) {
-                this -> _data -> machine.AddState(StateRef( new StatePause(_data, _size) ), false);
+                this -> _data -> machine.AddState(StateRef( new StatePause(_data, _size,_winSize, _isPlayerX, _VSAI) ), false);
                 
                 
             } else if ( this -> _data -> input.IsSpriteClicked(this -> _grid, sf::Mouse::Left, this -> _data -> window) ) {
@@ -110,12 +119,18 @@ void StateGame:: HandleInput() {
                 this -> PlacePiece();
             }
         }
-        else if (turn == AI_PIECE) {
-            this -> PlaceAIPiece();
+        else if (turn == AIPiece) {
+            if (_VSAI) {
+                this -> PlaceAIPiece();
+            } else {
+                if (this ->_data -> input.IsSpriteClicked(this ->_grid, sf::Mouse::Left, this ->_data -> window))
+                    this -> PlacePiece();
+            }
+
         }
         else if (turn == END_GAME)
             if ( this -> _data -> input.IsSpriteClicked(this -> _replayButton, sf::Mouse::Left, this -> _data -> window) )
-                this -> _data -> machine.AddState(StateRef( new StateGame(_data, _size) ), true);  // End Game
+                this -> _data -> machine.AddState(StateRef( new StateGame(_data, _size,_winSize, _isPlayerX, _VSAI) ), true);  // End Game
     }
 }
 
@@ -231,150 +246,67 @@ bool StateGame:: CheckIfGameWon(int turn, bool End) {
     switch (_size) {
         case 3: {
             
-//            int Tab1[12]{0, 0, 1, 0, 2, 0};
-//            if (CheckPieces(Tab1, turn, End))    flag++;
-//            int Tab2[12]{0, 1, 1, 1, 2, 1};
-//            if (CheckPieces(Tab2, turn, End))    flag++;
-//            int Tab3[12]{0, 2, 1, 2, 2, 2};
-//            if (CheckPieces(Tab3, turn, End))    flag++;
-            
             for (int i = 0; i < _size; ++i) {
                 int Tab[12]{0, i, 1, i, 2, i};
                 if (CheckPieces(Tab, turn, End))    flag++;
             }
-            
-//            int Tab4[12]{0, 0, 0, 1, 0, 2};
-//            if (CheckPieces(Tab4, turn, End))    flag++;
-//            int Tab5[12]{1, 0, 1, 1, 1, 2};
-//            if (CheckPieces(Tab5, turn, End))    flag++;
-//            int Tab6[12]{2, 0, 2, 1, 2, 2};
-//            if (CheckPieces(Tab6, turn, End))    flag++;
-            
             for (int i = 0; i < _size; ++i) {
                 int Tab[12]{i, 0, i, 1, i, 2};
                 if (CheckPieces(Tab, turn, End))    flag++;
             }
-            
             int Tab1[12]{0, 0, 1, 1, 2, 2};
-            if (CheckPieces(Tab1, turn, End))    flag++;
+            if (CheckPieces(Tab1, turn, End))       flag++;
             int Tab2[12]{0, 2, 1, 1, 2, 0};
-            if (CheckPieces(Tab2, turn, End))    flag++;
-            
-//            if (Check3PiecesForMatch(0, 0, 1, 0, 2, 0, turn, End)) flag++;
-//            if (Check3PiecesForMatch(0, 1, 1, 1, 2, 1, turn, End)) flag++;
-//            if (Check3PiecesForMatch(0, 2, 1, 2, 2, 2, turn, End)) flag++;
-//            if (Check3PiecesForMatch(0, 0, 0, 1, 0, 2, turn, End)) flag++;
-//            if (Check3PiecesForMatch(1, 0, 1, 1, 1, 2, turn, End)) flag++;
-//            if (Check3PiecesForMatch(2, 0, 2, 1, 2, 2, turn, End)) flag++;
-//            if (Check3PiecesForMatch(0, 0, 1, 1, 2, 2, turn, End)) flag++;
-//            if (Check3PiecesForMatch(0, 2, 1, 1, 2, 0, turn, End)) flag++;
+            if (CheckPieces(Tab2, turn, End))       flag++;
             break;
         }
         case 4: {
-//            Check4PiecesForMatch(0, 0, 1, 0, 2, 0, 3, 0, turn);
-//            Check4PiecesForMatch(0, 1, 1, 1, 2, 1, 3, 1, turn);
-//            Check4PiecesForMatch(0, 2, 1, 2, 2, 2, 3, 2, turn);
-//            Check4PiecesForMatch(0, 3, 1, 3, 2, 3, 3, 3, turn);
-            
             for (int i = 0; i < _size; ++i) {
                 int Tab[12]{0, i, 1, i, 2, i, 3, i};
                 if (CheckPieces(Tab, turn, End))    flag++;
             }
-            
-//            Check4PiecesForMatch(0, 0, 0, 1, 0, 2, 0, 3, turn);
-//            Check4PiecesForMatch(1, 0, 1, 1, 1, 2, 1, 3, turn);
-//            Check4PiecesForMatch(2, 0, 2, 1, 2, 2, 2, 3, turn);
-//            Check4PiecesForMatch(3, 0, 3, 1, 3, 2, 3, 3, turn);
-            
             for (int i = 0; i < _size; ++i) {
                 int Tab[12]{i, 0, i, 1, i, 2, i, 3};
                 if (CheckPieces(Tab, turn, End))    flag++;
             }
-            
-//            Check4PiecesForMatch(0, 0, 1, 1, 2, 2, 3, 3, turn);
-//            Check4PiecesForMatch(0, 3, 1, 2, 2, 1, 3, 0, turn);
-            
             int Tab1[12]{0, 0, 1, 1, 2, 2, 3, 3};
-            if (CheckPieces(Tab1, turn, End))    flag++;
+            if (CheckPieces(Tab1, turn, End))       flag++;
             int Tab2[12]{0, 3, 1, 2, 2, 1, 3, 0};
-            if (CheckPieces(Tab2, turn, End))    flag++;
+            if (CheckPieces(Tab2, turn, End))       flag++;
             break;
         }
         case 5: {
-//            Check5PiecesForMatch(0, 0, 1, 0, 2, 0, 3, 0, 4, 0, turn);
-//            Check5PiecesForMatch(0, 1, 1, 1, 2, 1, 3, 1, 4, 1, turn);
-//            Check5PiecesForMatch(0, 2, 1, 2, 2, 2, 3, 2, 4, 2, turn);
-//            Check5PiecesForMatch(0, 3, 1, 3, 2, 3, 3, 3, 4, 3, turn);
-//            Check5PiecesForMatch(0, 4, 1, 4, 2, 4, 3, 4, 4, 4, turn);
-            
             for (int i = 0; i < _size; ++i) {
                 int Tab[12]{0, i, 1, i, 2, i, 3, i, 4, i};
                 if (CheckPieces(Tab, turn, End))    flag++;
             }
-            
-//            Check5PiecesForMatch(0, 0, 0, 1, 0, 2, 0, 3, 0, 4, turn);
-//            Check5PiecesForMatch(1, 0, 1, 1, 1, 2, 1, 3, 1, 4, turn);
-//            Check5PiecesForMatch(2, 0, 2, 1, 2, 2, 2, 3, 2, 4, turn);
-//            Check5PiecesForMatch(3, 0, 3, 1, 3, 2, 3, 3, 3, 4, turn);
-//            Check5PiecesForMatch(4, 0, 4, 1, 4, 2, 4, 3, 4, 4, turn);
-            
             for (int i = 0; i < _size; ++i) {
                 int Tab[12]{i, 0, i, 1, i, 2, i, 3, i, 4};
                 if (CheckPieces(Tab, turn, End))    flag++;
             }
-            
-//            Check5PiecesForMatch(0, 0, 1, 1, 2, 2, 3, 3, 4, 4, turn);
-//            Check5PiecesForMatch(0, 4, 1, 3, 2, 2, 3, 1, 4, 0, turn);
-            
             int Tab1[12]{0, 0, 1, 1, 2, 2, 3, 3, 4, 4};
-            if (CheckPieces(Tab1, turn, End))    flag++;
+            if (CheckPieces(Tab1, turn, End))       flag++;
             int Tab2[12]{0, 4, 1, 3, 2, 2, 3, 1, 4, 0};
-            if (CheckPieces(Tab2, turn, End))    flag++;
+            if (CheckPieces(Tab2, turn, End))       flag++;
             
             break;
         }
         case 6: {
-//            Check6PiecesForMatch(0, 0, 1, 0, 2, 0, 3, 0, 4, 0, 5, 0, turn);
-//            Check6PiecesForMatch(0, 1, 1, 1, 2, 1, 3, 1, 4, 1, 5, 1, turn);
-//            Check6PiecesForMatch(0, 2, 1, 2, 2, 2, 3, 2, 4, 2, 5, 2, turn);
-//            Check6PiecesForMatch(0, 3, 1, 3, 2, 3, 3, 3, 4, 3, 5, 3, turn);
-//            Check6PiecesForMatch(0, 4, 1, 4, 2, 4, 3, 4, 4, 4, 5, 4, turn);
-//            Check6PiecesForMatch(0, 4, 1, 4, 2, 4, 3, 4, 4, 4, 5, 5, turn);
-            
             for (int i = 0; i < _size; ++i) {
                 int Tab[12]{0, i, 1, i, 2, i, 3, i, 4, i, 5, i};
                 if (CheckPieces(Tab, turn, End))    flag++;
             }
-            
-//            Check6PiecesForMatch(0, 0, 0, 1, 0, 2, 0, 3, 0, 4, 0, 5, turn);
-//            Check6PiecesForMatch(1, 0, 1, 1, 1, 2, 1, 3, 1, 4, 1, 5, turn);
-//            Check6PiecesForMatch(2, 0, 2, 1, 2, 2, 2, 3, 2, 4, 2, 5, turn);
-//            Check6PiecesForMatch(3, 0, 3, 1, 3, 2, 3, 3, 3, 4, 3, 5, turn);
-//            Check6PiecesForMatch(4, 0, 4, 1, 4, 2, 4, 3, 4, 4, 4, 5, turn);
-//            Check6PiecesForMatch(4, 0, 4, 1, 4, 2, 4, 3, 4, 4, 5, 5, turn);
-            
             for (int i = 0; i < _size; ++i) {
                 int Tab[12]{i, 0, i, 1, i, 2, i, 3, i, 4, i, 5};
                 if (CheckPieces(Tab, turn, End))    flag++;
             }
-            
-//            Check6PiecesForMatch(0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, turn);
-//            Check6PiecesForMatch(0, 5, 1, 4, 2, 3, 3, 2, 4, 1, 5, 0, turn);
-            
             int Tab1[12]{0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5};
-            if (CheckPieces(Tab1, turn, End))    flag++;
+            if (CheckPieces(Tab1, turn, End))       flag++;
             int Tab2[12]{0, 5, 1, 4, 2, 3, 3, 2, 4, 1, 5, 0};
-            if (CheckPieces(Tab2, turn, End))    flag++;
-            
+            if (CheckPieces(Tab2, turn, End))       flag++;
             break;
         }
     }
-    
-//    int emptyNum = _size * _size;       // Check if grid is full
-//    for ( int i = 0; i < _size; ++i )
-//        for ( int j = 0; j < _size; ++j )
-//            if ( EMPTY_PIECE != gridArray[i][j] )    emptyNum--;
-    
     if (End == true)
         if ( isGridFull() && (STATE_X_WON != gameState) && (STATE_O_WON != gameState) )
             gameState = STATE_DRAW;
@@ -438,7 +370,7 @@ void StateGame::PlaceAIPiece() {
         for (int j = 0; j < _size; ++j) {
             
             if ( gridArray[i][j] == EMPTY_PIECE ) {
-                gridArray[i][j] = AI_PIECE;
+                gridArray[i][j] = AIPiece;
                 score = MiniMax(gridArray, _depth, false, alfa, beta);
                 std:: cout << "\n Score: "<< score << " At: "<< i << "," << j << "\n ";
                 if ( bestScore < score ) {
@@ -456,11 +388,10 @@ void StateGame::PlaceAIPiece() {
     this -> placeTrun(col,row);
 }
 
-
 int StateGame::MiniMax(int tmpGridArray[6][6], int depth , bool max, int alfa, int beta) {
     
-    if (CheckIfGameWon(AI_PIECE, false))        return  10 - depth;
-    if (CheckIfGameWon(PLAYER_PIECE, false))    return -10 + depth;
+    if (CheckIfGameWon(AIPiece, false))        return  10 - depth;
+    if (CheckIfGameWon(PlayerPiece, false))    return -10 + depth;
     if (isGridFull() || (depth == 0))           return   0;
     
     if (max) {      // Max
@@ -468,7 +399,7 @@ int StateGame::MiniMax(int tmpGridArray[6][6], int depth , bool max, int alfa, i
         for (int i = 0; i < _size; ++i)
             for (int j = 0; j < _size; ++j)
                 if (tmpGridArray[i][j] == EMPTY_PIECE) {
-                    tmpGridArray[i][j] = AI_PIECE;
+                    tmpGridArray[i][j] = AIPiece;
                     int score = MiniMax(tmpGridArray,depth - 1, false, alfa, beta);
                     bestScore = std::max(bestScore, score);
                     tmpGridArray[i][j] = EMPTY_PIECE;
@@ -482,7 +413,7 @@ int StateGame::MiniMax(int tmpGridArray[6][6], int depth , bool max, int alfa, i
         for (int i = 0; i < _size; ++i)
             for (int j = 0; j < _size; ++j)
                 if (tmpGridArray[i][j] == EMPTY_PIECE) {
-                    tmpGridArray[i][j] = PLAYER_PIECE;
+                    tmpGridArray[i][j] = PlayerPiece;
                     int score = MiniMax(tmpGridArray,depth - 1, true, alfa, beta);
                     bestScore = std::min(bestScore, score );
                     tmpGridArray[i][j] = EMPTY_PIECE;
@@ -507,16 +438,22 @@ bool StateGame::isGridFull() {
 void StateGame::placeTrun(int col, int row) {
     
     gridArray[col][row] = turn;
-    if (turn == PLAYER_PIECE)
-        gridPieces[col][row].setTexture( this -> _data -> assets.GetTexture("X Piece"));
+    if (turn == PlayerPiece)
+        if (_isPlayerX)
+            gridPieces[col][row].setTexture( this -> _data -> assets.GetTexture("X Piece"));
+        else
+            gridPieces[col][row].setTexture( this -> _data -> assets.GetTexture("O Piece"));
     else
-        gridPieces[col][row].setTexture( this -> _data -> assets.GetTexture("O Piece"));
+        if (_isPlayerX)
+            gridPieces[col][row].setTexture( this -> _data -> assets.GetTexture("O Piece"));
+        else
+            gridPieces[col][row].setTexture( this -> _data -> assets.GetTexture("X Piece"));
     
     gridPieces[col][row].setColor(sf::Color(255,255,255,255));
     
     if (this -> CheckIfGameWon(turn, true))     turn = END_GAME;
-    else            if (turn == PLAYER_PIECE)   turn = AI_PIECE;
-                    else                        turn = PLAYER_PIECE;
+    else            if (turn == PlayerPiece)    turn = AIPiece;
+                    else                        turn = PlayerPiece;
     
 }
 
@@ -554,6 +491,8 @@ void StateGame::DrawWinningPieces(int Tab[12], int winner) {
         default:
             break;
     }
-    if (PLAYER_PIECE == winner)   gameState = STATE_X_WON;
-    else                          gameState = STATE_O_WON;
+    if (PlayerPiece == winner)      if (_isPlayerX)     gameState = STATE_X_WON;
+                                    else                gameState = STATE_O_WON;
+    else                            if (_isPlayerX)     gameState = STATE_O_WON;
+                                    else                gameState = STATE_X_WON;
 }

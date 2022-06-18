@@ -14,12 +14,16 @@ class StateSettings: public State {
     sf::Sprite  _minusButton;
     sf::Sprite  _homeButton;
     sf::Sprite  _numberDisplay;
+    sf::Sprite  _XPiece;
+    sf::Sprite  _OPiece;
     
 public:
     
     int _size;
-    
-    StateSettings(GameDataRef data, int size);
+    bool _isPlayerX;
+    int  _winSize;
+    bool _VSAI;
+    StateSettings(GameDataRef data, int size, int winSize, bool isPlayerX, bool VSAI);
     void Init();
     void HandleInput();
     void Update(float dt);

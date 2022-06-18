@@ -5,7 +5,12 @@
 #include <iostream>
 #include <sstream>
 
-StateSettings:: StateSettings(GameDataRef data, int size): _data( data ) { _size = size; }
+StateSettings:: StateSettings(GameDataRef data, int size, int winSize, bool isPlayerX, bool VSAI): _data( data ) {
+    _winSize  = winSize;
+    _VSAI     = VSAI;
+    _size = size;
+    _isPlayerX = isPlayerX;
+}
 
 void StateSettings:: Init() {
 
@@ -32,6 +37,9 @@ void StateSettings:: Init() {
     }
     this -> _data -> assets.LoadTexture("Number Display",   NUMBER_DISPLAY_3);
     this -> _data -> assets.LoadTexture("Home Button",      HOME_BUTTON);
+    this -> _data -> assets.LoadTexture("X Piece",           X_WINNING_PIECE_FILEPATH);
+    this -> _data -> assets.LoadTexture("O Piece",           O_WINNING_PIECE_FILEPATH);
+    
 
     this -> _background.setTexture(    this -> _data -> assets.GetTexture("Settings Background"));
     this -> _plusButton.setTexture(    this -> _data -> assets.GetTexture("Plus Button"));
@@ -40,7 +48,8 @@ void StateSettings:: Init() {
     this -> _homeButton.setTexture(    this -> _data -> assets.GetTexture("Home Button"));
     this -> _title.setTexture(         this -> _data -> assets.GetTexture("S Title"));
     this -> _titleGS.setTexture(       this -> _data -> assets.GetTexture("GS Title"));
-
+    this -> _XPiece.setTexture(        this -> _data -> assets.GetTexture("X Piece"));
+    this -> _OPiece.setTexture(        this -> _data -> assets.GetTexture("O Piece"));
     
     
     this -> _plusButton.setPosition( this -> _data -> window.getSize().x * 3 / 4
@@ -61,6 +70,14 @@ void StateSettings:: Init() {
                                   - (this -> _homeButton.getGlobalBounds().width / 2),
                                     (SCREEN_HEIGHT)
                                   - (this -> _homeButton.getGlobalBounds().height * 1.3));
+    this -> _XPiece.setPosition((SCREEN_WIDTH/2)
+                                  - (this -> _XPiece.getGlobalBounds().width / 2),
+                                    (SCREEN_HEIGHT/4*3)
+                                  - (this -> _XPiece.getGlobalBounds().height * 0.5));
+    this -> _OPiece.setPosition((SCREEN_WIDTH/2)
+                                  - (this -> _OPiece.getGlobalBounds().width / 2),
+                                    (SCREEN_HEIGHT/4*3)
+                                  - (this -> _OPiece.getGlobalBounds().height * 0.5));
     this -> _title.setPosition(0, 0);
     this -> _titleGS.setPosition(0, 0);
 }
@@ -85,8 +102,18 @@ void StateSettings:: HandleInput() {
         }
         if ( this -> _data -> input.IsSpriteClicked(this -> _homeButton, sf::Mouse::Left, this -> _data -> window) ) {
             this -> _data -> machine.RemoveState();
-            this -> _data -> machine.AddState(StateRef(new StateMainMenu(_data, _size)), true);
+            this -> _data -> machine.AddState(StateRef(new StateMainMenu(_data, _size,_winSize, _isPlayerX, _VSAI)), true);
         }
+        if ( this -> _data -> input.IsSpriteClicked(this -> _XPiece, sf::Mouse::Left, this -> _data -> window) ) {
+            if (_isPlayerX) _isPlayerX = false;
+            else            _isPlayerX = true;
+            std:: cout << "\n ZMIANA, teraz jestem " << _isPlayerX;
+        }
+//        if ( this -> _data -> input.IsSpriteClicked(this -> _OPiece, sf::Mouse::Left, this -> _data -> window) ) {
+//            if (_isPlayerX) _isPlayerX = false;
+//            else            _isPlayerX = true;
+//            std:: cout << "\n ZMIANA, teraz jestem " << _isPlayerX;
+//        }
     }
 }
 
@@ -121,6 +148,9 @@ void StateSettings:: Update(float dt) {
                                      this -> _data -> window.getSize().y / 2
                                    - this -> _numberDisplay.getLocalBounds().height / 2);
     
+    if (_isPlayerX)     this -> _data -> window.draw( this -> _XPiece);
+    else                this -> _data -> window.draw( this -> _OPiece);
+    
     this -> _data -> window.draw( this -> _numberDisplay);
     this -> _data -> window.draw( this -> _homeButton);
     this -> _data -> window.display();
@@ -135,5 +165,9 @@ void StateSettings:: Draw(float dt) {
     this -> _data -> window.draw( this -> _minusButton);
     this -> _data -> window.draw( this -> _numberDisplay);
     this -> _data -> window.draw( this -> _homeButton);
+    
+    if (_isPlayerX)     this -> _data -> window.draw( this -> _XPiece);
+    else                this -> _data -> window.draw( this -> _OPiece);
+    
     this -> _data -> window.display();
 }

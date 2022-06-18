@@ -9,6 +9,12 @@ const int INF = 2147483647;
 // Time
 #define SPLASH_STATE_SHOW_TIME 1
 
+// Default values
+#define DEFAULT_SIZE               3
+#define DEFAULT_WIN_SIZE           3
+#define DEFAULT_IS_PLAYER_X     true
+#define DEFAULT_VS_AI           true
+
 // Backgrounds
 #define SPLASH_SCENE_BACKGROUND_FILEPATH    "Resources/UI/Splash_back.png"
 #define MAIN_MENU_BACKGROUND_FILEPATH       "Resources/UI/Menu 2.png"
@@ -56,9 +62,8 @@ const int INF = 2147483647;
 #define X_PIECE             1
 #define O_PIECE             2   // wczesniej -1
 #define EMPTY_PIECE         0   // wczesniej  8
-#define PLAYER_PIECE        X_PIECE
-#define AI_PIECE            O_PIECE
-
+//#define PLAYER_PIECE        X_PIECE
+//#define AI_PIECE            O_PIECE
 
 // State numbers
 #define STATE_PLAYING       98
@@ -69,4 +74,4 @@ const int INF = 2147483647;
 #define STATE_AI_PLAYING    93
 #define STATE_DRAW          92
 #define END_GAME            91
-#define TIE                 3
+#define TIE                  3
