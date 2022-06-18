@@ -54,8 +54,8 @@ const int INF = 2147483647;
 
 // Piece numbers
 #define X_PIECE             1
-#define O_PIECE            -1
-#define EMPTY_PIECE         2
+#define O_PIECE             2   // wczesniej -1
+#define EMPTY_PIECE         0   // wczesniej  8
 #define PLAYER_PIECE        X_PIECE
 #define AI_PIECE            O_PIECE
 
