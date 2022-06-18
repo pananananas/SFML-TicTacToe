@@ -11,16 +11,16 @@ StateGame:: StateGame(GameDataRef data, int size): _data( data ) {
     
     switch (_size) {
         case 3:
-            _depth = 7;
+            _depth = 10;
             break;
         case 4:
-            _depth = 4;
+            _depth = 6;
             break;
         case 5:
-            _depth = 3;
+            _depth = 4;
             break;
         case 6:
-            _depth = 2;
+            _depth = 3;
             break;
         default:
             break;
@@ -112,7 +112,6 @@ void StateGame:: HandleInput() {
         }
         else if (turn == AI_PIECE) {
             this -> PlaceAIPiece();
-            
         }
         else if (turn == END_GAME)
             if ( this -> _data -> input.IsSpriteClicked(this -> _replayButton, sf::Mouse::Left, this -> _data -> window) )
