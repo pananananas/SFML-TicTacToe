@@ -3,6 +3,7 @@
 #include "Definitions.hpp"
 #include <iostream>
 #include <sstream>
+#include <unistd.h>
 #include <cmath>
 
 StateGame:: StateGame(GameDataRef data, int size, int winSize, bool isPlayerX, bool VSAI): _data( data ) {
@@ -107,30 +108,28 @@ void StateGame:: HandleInput() {
 
         if (sf::Event::Closed == event.type)
             this -> _data -> window.close();
-
-        if (turn == PlayerPiece) {
+        // if Pause button is clicked
+        if (this ->_data ->input.IsSpriteClicked(this->_pauseButton,sf::Mouse::Left,this->_data ->window)) {
+            usleep(50000);
+            this -> _data -> machine.AddState(StateRef( new StatePause(_data, _size,_winSize, _isPlayerX, _VSAI) ), false);
             
-            if ( this -> _data -> input.IsSpriteClicked(this -> _pauseButton, sf::Mouse::Left, this -> _data -> window) ) {
-                this -> _data -> machine.AddState(StateRef( new StatePause(_data, _size,_winSize, _isPlayerX, _VSAI) ), false);
-                
-                
-            } else if ( this -> _data -> input.IsSpriteClicked(this -> _grid, sf::Mouse::Left, this -> _data -> window) ) {
-                
+        }
+        if (turn == PlayerPiece) {
+            // if Grid is clicked
+             if (this ->_data->input.IsSpriteClicked(this->_grid,sf::Mouse::Left,this->_data->window)) {
                 this -> PlacePiece();
             }
         }
         else if (turn == AIPiece) {
-            if (_VSAI) {
+            if (_VSAI)     // if you play VS AI or VS another player
                 this -> PlaceAIPiece();
-            } else {
-                if (this ->_data -> input.IsSpriteClicked(this ->_grid, sf::Mouse::Left, this ->_data -> window))
+             else     // if Grid is clicked
+                if (this ->_data->input.IsSpriteClicked(this ->_grid,sf::Mouse::Left,this->_data ->window))
                     this -> PlacePiece();
-            }
-
         }
         else if (turn == END_GAME)
-            if ( this -> _data -> input.IsSpriteClicked(this -> _replayButton, sf::Mouse::Left, this -> _data -> window) )
-                this -> _data -> machine.AddState(StateRef( new StateGame(_data, _size,_winSize, _isPlayerX, _VSAI) ), true);  // End Game
+            if (this->_data->input.IsSpriteClicked(this->_replayButton,sf::Mouse::Left,this->_data->window))
+                this->_data->machine.AddState(StateRef(new StateGame(_data, _size, _winSize, _isPlayerX, _VSAI)), true);
     }
 }
 
@@ -236,7 +235,7 @@ void StateGame:: PlacePiece() {
     }
 
     if ( gridArray[col-1][row-1] == EMPTY_PIECE ) {
-        this -> placeTrun(col-1, row-1);
+        this -> DrawTurn(col-1, row-1);
     }
 }
 
@@ -267,7 +266,7 @@ void StateGame::PlaceAIPiece() {
             }
         }
     }
-    this -> placeTrun(col,row);
+    this -> DrawTurn(col,row);
 }
 
 int  StateGame::MiniMax(int tmpGridArray[6][6], int depth , bool max, int alfa, int beta) {
@@ -317,7 +316,7 @@ bool StateGame::isGridFull() {
     else                return false;
 }
 
-void StateGame::placeTrun(int col, int row) {
+void StateGame::DrawTurn(int col, int row) {
     
     gridArray[col][row] = turn;
     if (turn == PlayerPiece)
@@ -354,6 +353,11 @@ void StateGame::DrawWinningPieces(int Tab[12], int winner) {
             gridPieces[Tab[6]][Tab[7]].setTexture( this -> _data -> assets.GetTexture(name));
             gridPieces[Tab[8]][Tab[9]].setTexture( this -> _data -> assets.GetTexture(name));
             gridPieces[Tab[10]][Tab[11]].setTexture( this -> _data -> assets.GetTexture(name));
+//            std:: cout << "\n x1 = " << Tab[4] << ", y1 = " << Tab[5];
+//            std:: cout << "\n x2 = " << Tab[6] << ", y2 = " << Tab[7];
+//            std:: cout << "\n x3 = " << Tab[8] << ", y3 = " << Tab[9];
+//            std:: cout << "\n x4 = " << Tab[10] << ", y4 = " << Tab[11];
+            
             break;
         case 5:
             gridPieces[Tab[2]][Tab[3]].setTexture( this -> _data -> assets.GetTexture(name));

@@ -2,6 +2,7 @@
 #include "StateMainMenu.hpp"
 #include "Definitions.hpp"
 #include <iostream>
+#include <unistd.h>
 #include <sstream>
 
 StatePause:: StatePause(GameDataRef data, int size, int winSize, bool isPlayerX, bool VSAI): _data( data ) {
@@ -51,15 +52,18 @@ void StatePause:: HandleInput() {
         if (sf::Event::Closed == event.type)
             this -> _data -> window.close();
 
-        if ( this -> _data -> input.IsSpriteClicked(this -> _resumeButton, sf::Mouse::Left, this -> _data -> window) )
+        if ( this -> _data -> input.IsSpriteClicked(this -> _resumeButton, sf::Mouse::Left, this -> _data -> window) ) {
+            usleep(50000);
             this -> _data -> machine.RemoveState();
-
+        }
         if ( this -> _data -> input.IsSpriteClicked(this -> _homeButton, sf::Mouse::Left, this -> _data -> window) ) {
             this -> _data -> machine.RemoveState();
             this -> _data -> machine.AddState(StateRef(new StateMainMenu(_data, _size,_winSize, _isPlayerX, _VSAI)), true);
         }
-        if ( this -> _data -> input.IsSpriteClicked(this -> _retryButton, sf::Mouse::Left, this -> _data -> window) )
+        if ( this -> _data -> input.IsSpriteClicked(this -> _retryButton, sf::Mouse::Left, this -> _data -> window) ) {
+            usleep(50000);
             this -> _data -> machine.AddState(StateRef( new StateGame(_data, _size,_winSize, _isPlayerX, _VSAI) ), true);  // End Game
+        }
     }
 }
 

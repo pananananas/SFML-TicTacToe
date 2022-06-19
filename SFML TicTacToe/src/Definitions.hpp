@@ -15,10 +15,10 @@ const int INF = 2147483647;
 #define DEFAULT_IS_PLAYER_X     true
 #define DEFAULT_VS_AI           true
 
-// Depth values for grid sizes
+// Best depth values for grid sizes
 #define DEFAULT_DEPTH_3X3       9
-#define DEFAULT_DEPTH_4X4       5
-#define DEFAULT_DEPTH_5X5       6
+#define DEFAULT_DEPTH_4X4       7
+#define DEFAULT_DEPTH_5X5       8
 #define DEFAULT_DEPTH_6X6       3
 
 // Backgrounds

@@ -3,6 +3,7 @@
 #include "StateMainMenu.hpp"
 #include "Definitions.hpp"
 #include <iostream>
+#include <unistd.h>
 #include <sstream>
 
 StateSettings:: StateSettings(GameDataRef data, int size, int winSize, bool isPlayerX, bool VSAI): _data( data ) {
@@ -153,10 +154,12 @@ void StateSettings:: HandleInput() {
             this -> _data -> window.close();
 
         if ( this -> _data -> input.IsSpriteClicked(this -> _plusButton, sf::Mouse::Left, this -> _data -> window) ) {
+            usleep(50000);
             if (_size == 6 ) std::cout << " Za duży rozmiar! \n";
             else            ++_size;
         }
         if ( this -> _data -> input.IsSpriteClicked(this -> _minusButton, sf::Mouse::Left, this -> _data -> window) ){
+            usleep(50000);
             if (_size == 3 ) std::cout << " Za mały rozmiar! \n";
             else {
                 --_size;
@@ -166,24 +169,29 @@ void StateSettings:: HandleInput() {
         }
         
         if ( this -> _data -> input.IsSpriteClicked(this -> _plusButton2, sf::Mouse::Left, this -> _data -> window) ) {
+            usleep(50000);
             if (_winSize == _size ) std::cout << " Za duży rozmiar! \n";
             else            ++_winSize;
         }
         if ( this -> _data -> input.IsSpriteClicked(this -> _minusButton2, sf::Mouse::Left, this -> _data -> window) ){
+            usleep(50000);
             if (_winSize == 3 ) std::cout << " Za mały rozmiar! \n";
             else            --_winSize;
         }
         
         if ( this -> _data -> input.IsSpriteClicked(this -> _homeButton, sf::Mouse::Left, this -> _data -> window) ) {
+            usleep(50000);
             this -> _data -> machine.RemoveState();
             this -> _data -> machine.AddState(StateRef(new StateMainMenu(_data, _size,_winSize, _isPlayerX, _VSAI)), true);
         }
         if ( this -> _data -> input.IsSpriteClicked(this -> _XPiece, sf::Mouse::Left, this -> _data -> window) ) {
+            usleep(50000);
             if (_isPlayerX) _isPlayerX = false;
             else            _isPlayerX = true;
             std:: cout << "\n ZMIANA, teraz jestes X: " << _isPlayerX;
         }
         if ( this -> _data -> input.IsSpriteClicked(this -> _AIPiece, sf::Mouse::Left, this -> _data -> window) ) {
+            usleep(50000);
             if (_VSAI)      _VSAI = false;
             else            _VSAI = true;
             std:: cout << "\n ZMIANA, teraz grasz z AI: " << _VSAI;

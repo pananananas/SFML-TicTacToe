@@ -28,7 +28,7 @@ class StateGame: public State {
     bool isGridFull();
     void PlacePiece();
     void PlaceAIPiece();
-    void placeTrun(int col, int row);
+    void DrawTurn(int col, int row);
     bool CheckIfGameWon(int turn, bool End);
     void DrawWinningPieces(int Tab[12], int winner);
     int  MiniMax(int tmpgridArray[6][6], int depth , bool max, int alfa, int beta);

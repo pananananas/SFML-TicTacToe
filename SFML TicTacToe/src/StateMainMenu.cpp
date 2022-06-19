@@ -3,6 +3,7 @@
 #include "StateGame.hpp"
 #include "StateSettings.hpp"
 #include <iostream>
+#include <unistd.h>
 #include <sstream>
 
 StateMainMenu:: StateMainMenu(GameDataRef data, int size, int winSize, bool isPlayerX, bool VSAI): _data( data ) {
@@ -52,12 +53,12 @@ void StateMainMenu:: HandleInput() {
             this -> _data -> window.close();
 
         if ( this -> _data -> input.IsSpriteClicked(this -> _playButton, sf::Mouse::Left, this -> _data -> window) ) {
-
+            usleep(50000);
             // Go to Game Screen
             this -> _data -> machine.AddState(StateRef( new StateGame(_data, _size,_winSize, _isPlayerX, _VSAI) ), true);
         }
         if ( this -> _data -> input.IsSpriteClicked(this -> _settingsButton, sf::Mouse::Left, this -> _data -> window) ) {
-            
+            usleep(50000);
             // Go to Settings
             this -> _data -> machine.AddState(StateRef( new StateSettings(_data, _size,_winSize, _isPlayerX, _VSAI) ), true);
         }
