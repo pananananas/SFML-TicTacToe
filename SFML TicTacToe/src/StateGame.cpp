@@ -110,8 +110,8 @@ void StateGame:: HandleInput() {
             this -> _data -> window.close();
         // if Pause button is clicked
         if (this ->_data ->input.IsSpriteClicked(this->_pauseButton,sf::Mouse::Left,this->_data ->window)) {
-            usleep(50000);
-            this -> _data -> machine.AddState(StateRef( new StatePause(_data, _size,_winSize, _isPlayerX, _VSAI) ), false);
+            
+            this->_data-> machine.AddState(StateRef(new StatePause(_data,_size,_winSize,_isPlayerX,_VSAI)), false);
             
         }
         if (turn == PlayerPiece) {
