@@ -274,7 +274,7 @@ int  StateGame::MiniMax(int tmpGridArray[6][6], int depth , bool max, int alfa, 
     
     if (CheckIfGameWon(AIPiece, false))        return  10 - depth;
     if (CheckIfGameWon(PlayerPiece, false))    return -10 + depth;
-    if (isGridFull() || (depth == 0))           return   0;
+    if (isGridFull() || (depth == 0))          return   0;
     
     if (max) {      // Max
         int bestScore = -INF;
@@ -285,8 +285,8 @@ int  StateGame::MiniMax(int tmpGridArray[6][6], int depth , bool max, int alfa, 
                     int score = MiniMax(tmpGridArray,depth - 1, false, alfa, beta);
                     bestScore = std::max(bestScore, score);
                     tmpGridArray[i][j] = EMPTY_PIECE;
-                    alfa = std::max(score, alfa);
-//                    if (beta <= alfa)   break;      // Ciecie alfa beta
+                    alfa = std::max(bestScore, alfa);
+                    if (beta <= alfa)   break;      // Ciecie alfa beta
                 }
         return bestScore;
     }
@@ -299,8 +299,8 @@ int  StateGame::MiniMax(int tmpGridArray[6][6], int depth , bool max, int alfa, 
                     int score = MiniMax(tmpGridArray,depth - 1, true, alfa, beta);
                     bestScore = std::min(bestScore, score );
                     tmpGridArray[i][j] = EMPTY_PIECE;
-                    beta = std::min(score, beta);
-//                    if (beta <= alfa)   break;      // Ciecie alfa beta
+                    beta = std::min(bestScore, beta);
+                    if (beta <= alfa)   break;      // Ciecie alfa beta
                 }
         return bestScore;
     }

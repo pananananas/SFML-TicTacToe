@@ -97,6 +97,20 @@
 		25B77F06285D04A300C6E43F /* Display_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Display_4.png; sourceTree = "<group>"; };
 		25B77F07285D059100C6E43F /* Replay_Button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Replay_Button.png; sourceTree = "<group>"; };
 		25B77F08285D071500C6E43F /* Grid 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Grid 3.png"; sourceTree = "<group>"; };
+		25BBEA76285F4F0300870ABC /* P Player.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "P Player.png"; sourceTree = "<group>"; };
+		25BBEA77285F4F0300870ABC /* Choose O.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Choose O.png"; sourceTree = "<group>"; };
+		25BBEA78285F4F0300870ABC /* AI Player.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AI Player.png"; sourceTree = "<group>"; };
+		25BBEA79285F4F0300870ABC /* Choose X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Choose X.png"; sourceTree = "<group>"; };
+		25BBEA7A285F504F00870ABC /* AI Player 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AI Player 2.png"; sourceTree = "<group>"; };
+		25BBEA7B285F504F00870ABC /* Choose X 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Choose X 2.png"; sourceTree = "<group>"; };
+		25BBEA7C285F504F00870ABC /* Choose O 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Choose O 2.png"; sourceTree = "<group>"; };
+		25BBEA7D285F504F00870ABC /* P Player 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "P Player 2.png"; sourceTree = "<group>"; };
+		25BBEA7E285F51C900870ABC /* Button Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Button Background.png"; sourceTree = "<group>"; };
+		25BBEA7F285F53EA00870ABC /* Button Background 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Button Background 2.png"; sourceTree = "<group>"; };
+		25BBEA80285F54F500870ABC /* Win_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Win_3.png; sourceTree = "<group>"; };
+		25BBEA81285F54F500870ABC /* Win_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Win_4.png; sourceTree = "<group>"; };
+		25BBEA82285F54F500870ABC /* Win_5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Win_5.png; sourceTree = "<group>"; };
+		25BBEA83285F54F500870ABC /* Win_6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Win_6.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -202,6 +216,20 @@
 			children = (
 				25B77EFC285CE44D00C6E43F /* Minus_Button.png */,
 				25B77EFB285CE44D00C6E43F /* Plus_Button.png */,
+				25BBEA78285F4F0300870ABC /* AI Player.png */,
+				25BBEA77285F4F0300870ABC /* Choose O.png */,
+				25BBEA79285F4F0300870ABC /* Choose X.png */,
+				25BBEA76285F4F0300870ABC /* P Player.png */,
+				25BBEA7A285F504F00870ABC /* AI Player 2.png */,
+				25BBEA7C285F504F00870ABC /* Choose O 2.png */,
+				25BBEA7B285F504F00870ABC /* Choose X 2.png */,
+				25BBEA7D285F504F00870ABC /* P Player 2.png */,
+				25BBEA7E285F51C900870ABC /* Button Background.png */,
+				25BBEA7F285F53EA00870ABC /* Button Background 2.png */,
+				25BBEA80285F54F500870ABC /* Win_3.png */,
+				25BBEA81285F54F500870ABC /* Win_4.png */,
+				25BBEA82285F54F500870ABC /* Win_5.png */,
+				25BBEA83285F54F500870ABC /* Win_6.png */,
 				25B77F03285D032400C6E43F /* Display_3.png */,
 				25B77F06285D04A300C6E43F /* Display_4.png */,
 				25B77F07285D059100C6E43F /* Replay_Button.png */,

@@ -10,6 +10,8 @@ class StateSettings: public State {
     sf::Sprite  _title;
     sf::Sprite  _titleGS;
     sf::Sprite  _background;
+    sf::Sprite  _buttonBackground;
+    sf::Sprite  _buttonBackground2;
     sf::Sprite  _plusButton;
     sf::Sprite  _minusButton;
     sf::Sprite  _plusButton2;
@@ -21,7 +23,6 @@ class StateSettings: public State {
     sf::Sprite  _PPiece;
     sf::Sprite  _XPiece;
     sf::Sprite  _OPiece;
-    
     
 public:
     

@@ -18,7 +18,7 @@ const int INF = 2147483647;
 // Depth values for grid sizes
 #define DEFAULT_DEPTH_3X3       9
 #define DEFAULT_DEPTH_4X4       5
-#define DEFAULT_DEPTH_5X5       4
+#define DEFAULT_DEPTH_5X5       6
 #define DEFAULT_DEPTH_6X6       3
 
 // Backgrounds
@@ -38,6 +38,7 @@ const int INF = 2147483647;
 #define DRAW_TITLE_FILEPATH                 "Resources/UI/Title_Draw.png"
 
 // Buttons UI
+#define BUTTON_BACKGROUND                   "Resources/UI/Button Background 2.png"
 #define MAIN_MENU_PLAY_BUTTON               "Resources/UI/Play Button.png"
 #define MAIN_MENU_PLAY_BUTTON_OUTER         "Resources/UI/Play Button.png"
 #define MAIN_MENU_SETTINGS_BUTTON           "Resources/UI/Settings Button.png"
@@ -47,10 +48,18 @@ const int INF = 2147483647;
 #define RETRY_BUTTON                        "Resources/UI/Replay_Button.png"
 #define PLUS_BUTTON                         "Resources/UI/Plus_Button.png"
 #define MINUS_BUTTON                        "Resources/UI/Minus_Button.png"
+#define AI_BUTTON                           "Resources/UI/AI Player 2.png"
+#define P_BUTTON                            "Resources/UI/P Player 2.png"
+#define X_BUTTON                            "Resources/UI/Choose X 2.png"
+#define O_BUTTON                            "Resources/UI/Choose O 2.png"
 #define NUMBER_DISPLAY_3                    "Resources/UI/Display_3.png"
 #define NUMBER_DISPLAY_4                    "Resources/UI/Display_4.png"
 #define NUMBER_DISPLAY_5                    "Resources/UI/Display_5.png"
 #define NUMBER_DISPLAY_6                    "Resources/UI/Display_6.png"
+#define WIN_DISPLAY_3                       "Resources/UI/Win_3.png"
+#define WIN_DISPLAY_4                       "Resources/UI/Win_4.png"
+#define WIN_DISPLAY_5                       "Resources/UI/Win_5.png"
+#define WIN_DISPLAY_6                       "Resources/UI/Win_6.png"
 
 // Grid UI
 #define GRID_3x3_FILEPATH                   "Resources/UI/Grid 3.png"
