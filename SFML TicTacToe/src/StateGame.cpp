@@ -255,20 +255,20 @@ void StateGame::PlaceAIPiece() {
                 score = MiniMax(gridArray, _depth, false, alfa, beta);
                                                 // ^ Next turn is Player's. so we're minimizing
                 
-//                std:: cout << "\n At: "<< i << "," << j << ". Score: "<< score ;
+                std:: cout << "\n At: "<< i << "," << j << ". Score: "<< score ;
                 if ( bestScore < score ) {
                     bestScore = score;
                     col = i;
                     row = j;
-//                    std:: cout << "\n Best score update: " << bestScore;
-//                    std:: cout << "\n col: "<< col;
-//                    std:: cout << "\n row: "<< row << "\n ";
+                    std:: cout << "\n Best score update: " << bestScore;
+                    std:: cout << "\n col: "<< col;
+                    std:: cout << "\n row: "<< row << "\n ";
                 }
                 gridArray[i][j] = EMPTY_PIECE;  // Undo the simulation
             }
         }
     }
-//    std:: cout << "\n Move at: "<< col << "," << row << "\n ";
+    std:: cout << "\n Move at: "<< col << "," << row << "\n ";
     this -> DrawTurn(col,row);
 }
 
