@@ -241,31 +241,34 @@ void StateGame:: PlacePiece() {
 
 void StateGame::PlaceAIPiece() {
     
-    int col = -1, row = -1;
-    int bestScore = -INF;
-    int alfa      = -INF;
-    int beta      =  INF;
+    int col = -1, row = -1; // Impossible move
+    int bestScore = -INF;   // Worst possible
+    int alfa      = -INF;   // Worst possible for Max
+    int beta      =  INF;   // Worst possible for Min
     int score     =    0;
 
     for (int i = 0; i < _size; ++i) {
         for (int j = 0; j < _size; ++j) {
             
             if ( gridArray[i][j] == EMPTY_PIECE ) {
-                gridArray[i][j] = AIPiece;
+                gridArray[i][j] = AIPiece;      // Simulating AI's turn
                 score = MiniMax(gridArray, _depth, false, alfa, beta);
-                std:: cout << "\n Score: "<< score << " At: "<< i << "," << j << "\n ";
+                                                // ^ Next turn is Player's. so we're minimizing
+                
+//                std:: cout << "\n At: "<< i << "," << j << ". Score: "<< score ;
                 if ( bestScore < score ) {
                     bestScore = score;
                     col = i;
                     row = j;
-                    std:: cout << "\n Best score update: " << bestScore;
-                    std:: cout << "\n col: "<< col;
-                    std:: cout << "\n row: "<< row << "\n ";
+//                    std:: cout << "\n Best score update: " << bestScore;
+//                    std:: cout << "\n col: "<< col;
+//                    std:: cout << "\n row: "<< row << "\n ";
                 }
-                gridArray[i][j] = EMPTY_PIECE;
+                gridArray[i][j] = EMPTY_PIECE;  // Undo the simulation
             }
         }
     }
+//    std:: cout << "\n Move at: "<< col << "," << row << "\n ";
     this -> DrawTurn(col,row);
 }
 
@@ -276,32 +279,32 @@ int  StateGame::MiniMax(int tmpGridArray[6][6], int depth , bool max, int alfa, 
     if (isGridFull() || (depth == 0))          return   0;
     
     if (max) {      // Max
-        int bestScore = -INF;
+        int maxScore = -INF;
         for (int i = 0; i < _size; ++i)
             for (int j = 0; j < _size; ++j)
-                if (tmpGridArray[i][j] == EMPTY_PIECE) {
-                    tmpGridArray[i][j] = AIPiece;
-                    int score = MiniMax(tmpGridArray,depth - 1, false, alfa, beta);
-                    bestScore = std::max(bestScore, score);
-                    tmpGridArray[i][j] = EMPTY_PIECE;
-                    alfa = std::max(bestScore, alfa);
+                if (tmpGridArray[i][j] == EMPTY_PIECE) {        // Is spot available
+                    tmpGridArray[i][j] = AIPiece;                   // Simulating AI's turn
+                    int score = MiniMax(tmpGridArray,depth - 1, false, alfa, beta); // Recursive MinMax
+                    maxScore = std::max(maxScore, score);       // Check is new score higher
+                    tmpGridArray[i][j] = EMPTY_PIECE;               // Undo the simulation
+                    alfa = std::max(maxScore, alfa);            // Assigning value to alpha
                     if (beta <= alfa)   break;      // Ciecie alfa beta
                 }
-        return bestScore;
+        return maxScore;
     }
     else {          // Mini
-        int bestScore = INF;
+        int minScore = INF;
         for (int i = 0; i < _size; ++i)
             for (int j = 0; j < _size; ++j)
                 if (tmpGridArray[i][j] == EMPTY_PIECE) {
                     tmpGridArray[i][j] = PlayerPiece;
                     int score = MiniMax(tmpGridArray,depth - 1, true, alfa, beta);
-                    bestScore = std::min(bestScore, score );
+                    minScore = std::min(minScore, score );
                     tmpGridArray[i][j] = EMPTY_PIECE;
-                    beta = std::min(bestScore, beta);
+                    beta = std::min(minScore, beta);
                     if (beta <= alfa)   break;      // Ciecie alfa beta
                 }
-        return bestScore;
+        return minScore;
     }
 }
 
@@ -353,11 +356,6 @@ void StateGame::DrawWinningPieces(int Tab[12], int winner) {
             gridPieces[Tab[6]][Tab[7]].setTexture( this -> _data -> assets.GetTexture(name));
             gridPieces[Tab[8]][Tab[9]].setTexture( this -> _data -> assets.GetTexture(name));
             gridPieces[Tab[10]][Tab[11]].setTexture( this -> _data -> assets.GetTexture(name));
-//            std:: cout << "\n x1 = " << Tab[4] << ", y1 = " << Tab[5];
-//            std:: cout << "\n x2 = " << Tab[6] << ", y2 = " << Tab[7];
-//            std:: cout << "\n x3 = " << Tab[8] << ", y3 = " << Tab[9];
-//            std:: cout << "\n x4 = " << Tab[10] << ", y4 = " << Tab[11];
-            
             break;
         case 5:
             gridPieces[Tab[2]][Tab[3]].setTexture( this -> _data -> assets.GetTexture(name));

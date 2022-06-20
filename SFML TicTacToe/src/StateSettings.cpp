@@ -155,8 +155,8 @@ void StateSettings:: HandleInput() {
 
         if ( this -> _data -> input.IsSpriteClicked(this -> _plusButton, sf::Mouse::Left, this -> _data -> window) ) {
             usleep(50000);
-            if (_size == 6 ) std::cout << " Za duży rozmiar! \n";
-            else            ++_size;
+            if (_size == 5 ) std::cout << " Za duży rozmiar! \n";
+            else             ++_size;
         }
         if ( this -> _data -> input.IsSpriteClicked(this -> _minusButton, sf::Mouse::Left, this -> _data -> window) ){
             usleep(50000);

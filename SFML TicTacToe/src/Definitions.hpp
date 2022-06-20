@@ -12,8 +12,8 @@ const int INF = 2147483647;
 // Default values
 #define DEFAULT_SIZE            3
 #define DEFAULT_WIN_SIZE        3
-#define DEFAULT_IS_PLAYER_X     false
-#define DEFAULT_VS_AI           false
+#define DEFAULT_IS_PLAYER_X     true
+#define DEFAULT_VS_AI           true
 
 // Best depth values for grid sizes
 #define DEFAULT_DEPTH_3X3       9
